@@ -3,6 +3,7 @@
     "name": "Jogabilista",
     "slug": "Jogabilista",
     "version": "1.0.0",
+    "scheme": "Jogabilista",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

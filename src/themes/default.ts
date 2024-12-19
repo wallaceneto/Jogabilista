@@ -18,4 +18,5 @@ export const defaultTheme: IDefaultTheme = {
   baseBlack: '#000000',
   baseGrey: '#F2F2F2',
   baseWhite: '#FFFFFF',
+  opacityWhite: 'rgba(255,255,255,0.65)',
 };

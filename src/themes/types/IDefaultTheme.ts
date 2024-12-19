@@ -16,4 +16,5 @@ export type IDefaultTheme = {
   baseBlack: string,
   baseGrey: string,
   baseWhite: string,
+  opacityWhite: string,
 };

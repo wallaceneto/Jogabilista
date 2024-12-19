@@ -13,7 +13,6 @@ const useStyles = () => {
       borderEndEndRadius: 58,
     },
     title: {
-      color: colors.commonColors.baseWhite,
       fontSize: 36,
       marginLeft: 12,
     },

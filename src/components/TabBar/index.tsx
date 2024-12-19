@@ -5,9 +5,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import useStyles from './style';
 import TextComponent from '../Text';
 import Button from '../Button';
-import { router } from 'expo-router';
 import { ITabBarProps } from './types';
 import selectedStyle from './selectedStyle';
+import { toggleTab } from './lib';
 
 const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
   const style = useStyles();
@@ -19,7 +19,7 @@ const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
 
         <Button
           style={style.tabButton} 
-          onPress={() => router.replace(`/Home`)}
+          onPress={() => toggleTab(0, '/Home', tab)}
         >
           <Ionicons
             name='home-sharp'
@@ -61,7 +61,7 @@ const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
         
         <Button
           style={style.tabButton} 
-          onPress={() => router.replace(`/Settings`)}
+          onPress={() => toggleTab(3, '/Settings', tab)}
         >
           <Ionicons
             name='settings-outline'

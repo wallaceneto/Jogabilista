@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 
 import useStyles from './styles';
 import { ITextComponentProps } from './types';

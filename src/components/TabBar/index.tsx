@@ -6,12 +6,10 @@ import useStyles from './style';
 import TextComponent from '../Text';
 import Button from '../Button';
 import { ITabBarProps } from './types';
-import selectedStyle from './selectedStyle';
 import { toggleTab } from './lib';
 
 const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
   const style = useStyles();
-  const selected = selectedStyle;
 
   return (
     <View style={style.container}>
@@ -24,21 +22,28 @@ const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
           <Ionicons
             name='home-sharp'
             size={38}
-            style={selected(tab === 0).buttonColor}
+            style={tab === 0 ? style.selectedTab : style.unselectedTab}
           />
-          <TextComponent style={selected(tab === 0).buttonColor}>
+          <TextComponent 
+            style={tab === 0 ? style.selectedTab : style.unselectedTab}
+          >
             Home
           </TextComponent>
         </Button>
 
         
-        <Button style={style.tabButton} onPress={() => {}}>
+        <Button
+          style={style.tabButton} 
+          onPress={() => toggleTab(1, '/Groups', tab)}
+        >
           <Ionicons 
             name='grid'
             size={38}
-            style={selected(tab === 1).buttonColor}
+            style={tab === 1 ? style.selectedTab : style.unselectedTab}
           />
-          <TextComponent style={selected(tab === 1).buttonColor}>
+          <TextComponent 
+            style={tab === 1 ? style.selectedTab : style.unselectedTab}
+          >
             Grupos
           </TextComponent>
         </Button>
@@ -48,13 +53,18 @@ const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
         </Button>
         
 
-        <Button style={style.tabButton} onPress={() => {}}>
+        <Button
+          style={style.tabButton} 
+          onPress={() => toggleTab(2, '/Games', tab)}
+        >
           <Ionicons
             name='search'
             size={38}
-            style={selected(tab === 2).buttonColor}
+            style={tab === 2 ? style.selectedTab : style.unselectedTab}
           />
-          <TextComponent style={selected(tab === 2).buttonColor}>
+          <TextComponent 
+            style={tab === 2 ? style.selectedTab : style.unselectedTab}
+          >
             Jogos
           </TextComponent>
         </Button>
@@ -66,9 +76,11 @@ const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
           <Ionicons
             name='settings-outline'
             size={38}
-            style={selected(tab === 3).buttonColor}
+            style={tab === 3 ? style.selectedTab : style.unselectedTab}
           />
-          <TextComponent style={selected(tab === 3).buttonColor}>
+          <TextComponent 
+            style={tab === 3 ? style.selectedTab : style.unselectedTab}
+          >
             Ajustes
           </TextComponent>
         </Button>

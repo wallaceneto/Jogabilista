@@ -19,9 +19,6 @@ const useStyles = () => {
       paddingVertical: 8,
       justifyContent: 'space-evenly',
     },
-    tabButton: {
-      alignItems: 'center',
-    },
     addButton: {
       backgroundColor: colors.primaryColor,
       padding: 4,
@@ -32,6 +29,15 @@ const useStyles = () => {
     },
     addIcon: {
       fontSize: 52,
+      color: colors.commonColors.baseWhite,
+    },
+    tabButton: {
+      alignItems: 'center',
+    },
+    unselectedTab: {
+      color: colors.commonColors.opacityWhite,
+    },
+    selectedTab: {
       color: colors.commonColors.baseWhite,
     },
   });

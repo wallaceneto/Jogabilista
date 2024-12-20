@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import useStyles from './styles';
 import TabBar from '../../components/TabBar';
+import TextComponent from '../../components/Text';
 
 const Settings: React.FC = () => {
   const style = useStyles();
@@ -10,7 +11,9 @@ const Settings: React.FC = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={style.container}>
-        <Text style={style.title}>Settings</Text>
+        <TextComponent light style={style.title}>
+          Settings
+        </TextComponent>
       </View>
 
       <TabBar tab={3} />

@@ -20,6 +20,11 @@ const Layout: React.FC = () => {
 
           <Stack>
             <Stack.Screen
+              name='index'
+              options={{ headerShown: false, title: 'index', animation: 'none' }}
+            />
+
+            <Stack.Screen
               name='Home/index'
               options={{ headerShown: false, title: 'Home', animation: 'none' }}
             />

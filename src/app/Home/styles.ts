@@ -16,6 +16,10 @@ const useStyles = () => {
       fontSize: 36,
       marginLeft: 12,
     },
+    content: {
+      backgroundColor: colors.commonColors.baseWhite,
+      padding: 12,
+    },
   });
 };
 

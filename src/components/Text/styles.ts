@@ -13,6 +13,7 @@ const useStyles = ({ size, light, weight }: ITextComponentStyle) => {
       color: light ? colors.commonColors.baseWhite : colors.commonColors.textColor,
       fontSize: size || 16,
       fontFamily: setFamily(weight || 'regular'),
+      margin: 1,
     },
   });
 };

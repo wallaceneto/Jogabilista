@@ -1,0 +1,1 @@
+export type IPlatform = 'Nintendo' | 'Playstation' | 'Xbox' | 'PC' | 'Outro';

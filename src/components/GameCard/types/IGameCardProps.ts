@@ -1,5 +1,5 @@
-import { IGame } from "../../../global/types";
+import Game from "../../../global/classes/Game";
 
 export type IGameCardProps = {
-  game: IGame
+  game: Game
 };

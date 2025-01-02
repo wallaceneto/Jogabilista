@@ -1,0 +1,1 @@
+export type IStatus = 'Terminado' | 'Largado' | 'Platinado' | 'Jogando';

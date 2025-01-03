@@ -5,11 +5,11 @@ export default class Game {
   private id: string;
   private create_date: Date;
   private name: string;
-  private platform?: IPlatform;
+  private platform: IPlatform = 'Outro';
+  private play_time: number = 0;
   private status?: IStatus;
   private interest_score?: number; // Eixo x = interessancia
   private quality_score?: number; // Eixo y = qualidade (1 representando 'J' e 10 representando 'A')
-  private play_time?: number;
   private finish_date?: Date;
 
   constructor(game: IGame) {
@@ -21,11 +21,12 @@ export default class Game {
     this.id = uuid.v4(); 
     this.create_date = new Date();
 
-    this.platform = game.platform;
+    if(game.platform) this.platform = game.platform;
+    if(game.play_time) this.play_time = game.play_time;
+
     this.status = game.status;
     this.interest_score = game.interest_score;
     this.quality_score = game.quality_score;
-    this.play_time = game.play_time;
     this.finish_date = game.finish_date;
   }
 
@@ -39,11 +40,11 @@ export default class Game {
   public get getCreateDate(): Date {
     return this.create_date;
   }
-  public get getPlatform(): IPlatform | undefined {
+  public get getPlatform(): IPlatform {
     return this.platform;
   }
-  public get getStatus(): IStatus | undefined {
-    return this.status;
+  public get getStatus(): string{
+    return this.status || 'N/A';
   }
   public get getInterestScore(): number | undefined  {
     return this.interest_score;
@@ -51,7 +52,7 @@ export default class Game {
   public get getQualityScore(): number | undefined  {
     return this.quality_score;
   }
-  public get getPlayTime(): number | undefined  {
+  public get getPlayTime(): number {
     return this.play_time;
   }
   public get getFinishDate(): Date | undefined {
@@ -94,5 +95,7 @@ export default class Game {
   }
 
   // methods
-  
+  public getPlaytimeInHours(): number {
+    return Math.floor(this.play_time / 60);
+  }
 };

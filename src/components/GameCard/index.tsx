@@ -3,11 +3,11 @@ import { View } from 'react-native';
 
 import useStyles from './styles';
 import { IGameCardProps } from './types';
-import { convertTime } from './lib';
 import TextComponent from '../Text';
 import Button from '../Button';
 import PlatformTag from '../PlatformTag';
 import ScoreTag from '../ScoreTag';
+import { displayTime } from './lib';
 
 const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   const style = useStyles();
@@ -15,11 +15,11 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   return (
     <Button style={style.card}>
       <View style={style.cardTop}>
-        <PlatformTag platform={game.getPlatform || 'Outro'} />
+        <PlatformTag platform={game.getPlatform} />
 
         <ScoreTag
-          quality_score={game.getQualityScore}
-          interest_score={game.getInterestScore}
+          quality={game.getQualityScore}
+          interest={game.getInterestScore}
         />
       </View>
 
@@ -42,7 +42,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
             Tempo:
           </TextComponent>
           <TextComponent>
-            {game.getPlayTime ? convertTime(game.getPlayTime) + ' horas' : 'N/A'}
+            {displayTime(game)}
           </TextComponent>
         </View>
       </View>

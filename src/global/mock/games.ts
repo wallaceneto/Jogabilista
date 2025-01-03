@@ -7,7 +7,7 @@ const temporaryGames: IGame[] = [
     status: 'Terminado',
     interest_score: 10,
     quality_score: 10,
-    play_time: 480,
+    play_time: 119,
   },
   {
     name: 'Saints Row (2022)',
@@ -30,13 +30,13 @@ const temporaryGames: IGame[] = [
     platform: 'PC',
     status: 'Jogando',
     interest_score: 4,
-    quality_score: 4,
-    play_time: 120,
+    quality_score: 8,
+    play_time: 50,
   },
   {
     name: 'Monument Valley 3',
     status: 'Jogando',
-    play_time: 120,
+    play_time: 1,
   },
   {
     name: 'Crash 3',

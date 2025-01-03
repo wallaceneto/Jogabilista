@@ -1,1 +1,1 @@
-export * from './convertTime';
+export * from './displayTime';

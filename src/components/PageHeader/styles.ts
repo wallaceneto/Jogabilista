@@ -9,7 +9,7 @@ const useStyles = () => {
   return StyleSheet.create({
     container: {
       backgroundColor: colors.primaryColor,
-      paddingVertical: 40,
+      paddingVertical: 32,
       borderEndEndRadius: 58,
     },
     title: {

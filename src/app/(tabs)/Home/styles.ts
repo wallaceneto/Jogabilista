@@ -4,7 +4,7 @@ const useStyles = () => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      marginBottom: 85,
+      paddingBottom: 220,
     },
     loading: {
       alignSelf: 'center',

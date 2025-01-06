@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
 import useStyles from './styles';
-import { ThemeContext } from '../../storage/context';
-import HomeHeader from '../../components/HomeHeader';
-import TabBar from '../../components/TabBar';
-import TextComponent from '../../components/Text';
-import { temporaryGames } from '../../global/mock/games';
-import GameCard from '../../components/GameCard';
-import Game from '../../global/classes/Game';
+import { ThemeContext } from '../../../storage/context';
+import HomeHeader from '../../../components/HomeHeader';
+import TabBar from '../../../components/TabBar';
+import TextComponent from '../../../components/Text';
+import { temporaryGames } from '../../../global/mock/games';
+import GameCard from '../../../components/GameCard';
+import Game from '../../../global/classes/Game';
 
 const Home: React.FC = () => {
   const {colors} = useContext(ThemeContext);

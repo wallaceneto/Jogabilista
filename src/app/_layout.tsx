@@ -20,28 +20,8 @@ const Layout: React.FC = () => {
 
           <Stack>
             <Stack.Screen
-              name='index'
-              options={{ headerShown: false, title: 'index', animation: 'none' }}
-            />
-
-            <Stack.Screen
-              name='Home/index'
-              options={{ headerShown: false, title: 'Home', animation: 'none' }}
-            />
-
-            <Stack.Screen
-              name='Groups/index'
-              options={{ headerShown: false, title: 'Groups', animation: 'none' }}
-            />
-
-            <Stack.Screen
-              name='Games/index'
-              options={{ headerShown: false, title: 'Games', animation: 'none' }}
-            />
-            
-            <Stack.Screen
-              name='Settings/index'
-              options={{ headerShown: false, title: 'Settings', animation: 'none'  }}
+              name='(tabs)'
+              options={{ headerShown: false, animation: 'none' }}
             />
           </Stack>
         </SafeAreaView>

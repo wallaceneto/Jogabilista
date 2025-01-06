@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import {StyleSheet} from 'react-native';
 
-import { ThemeContext } from '../../storage/context';
+import { ThemeContext } from '../../../storage/context';
 
 const useStyles = () => {
   const {colors} = useContext(ThemeContext);
@@ -15,6 +15,10 @@ const useStyles = () => {
     title: {
       fontSize: 36,
       marginLeft: 12,
+    },
+    content: {
+      backgroundColor: colors.commonColors.baseWhite,
+      padding: 12,
     },
   });
 };

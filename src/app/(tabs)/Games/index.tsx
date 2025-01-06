@@ -2,8 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import useStyles from './styles';
-import TabBar from '../../components/TabBar';
-import TextComponent from '../../components/Text';
+import TextComponent from '../../../components/Text';
 
 const Games: React.FC = () => {
   const style = useStyles();
@@ -16,9 +15,11 @@ const Games: React.FC = () => {
         </TextComponent>
       </View>
 
-      <TabBar tab={2} />
+      <TextComponent>
+        Tela com os games
+      </TextComponent>
     </View>
-    );
+  );
 }
 
 export default Games;

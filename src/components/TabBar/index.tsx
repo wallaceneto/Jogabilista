@@ -1,14 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 import useStyles from './style';
 import TextComponent from '../Text';
 import Button from '../Button';
-import { ITabBarProps } from './types';
-import { toggleTab } from './lib';
 
-const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
+const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBarProps) => {
   const style = useStyles();
 
   return (
@@ -16,33 +15,33 @@ const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
       <View style={style.bar}>
 
         <Button
-          style={style.tabButton} 
-          onPress={() => toggleTab(0, '/Home', tab)}
+          style={style.tabButton}
+          onPress={() => navigation.navigate('index')}
         >
           <Ionicons
             name='home-sharp'
             size={38}
-            style={tab === 0 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 0 ? style.selectedTab : style.unselectedTab}
           />
           <TextComponent 
-            style={tab === 0 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 0 ? style.selectedTab : style.unselectedTab}
           >
             Home
           </TextComponent>
         </Button>
 
-        
+
         <Button
-          style={style.tabButton} 
-          onPress={() => toggleTab(1, '/Groups', tab)}
+          style={style.tabButton}
+          onPress={() => navigation.navigate('Groups/index')}
         >
-          <Ionicons 
+          <Ionicons
             name='grid'
             size={38}
-            style={tab === 1 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 1 ? style.selectedTab : style.unselectedTab}
           />
           <TextComponent 
-            style={tab === 1 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 1 ? style.selectedTab : style.unselectedTab}
           >
             Grupos
           </TextComponent>
@@ -51,40 +50,40 @@ const TabBar: React.FC<ITabBarProps> = ({ tab }) => {
         <Button style={style.addButton} onPress={() => {}}>
           <Ionicons name='add' style={style.addIcon} />
         </Button>
-        
+
 
         <Button
-          style={style.tabButton} 
-          onPress={() => toggleTab(2, '/Games', tab)}
+          style={style.tabButton}
+          onPress={() => navigation.navigate('Games/index')}
         >
           <Ionicons
             name='search'
             size={38}
-            style={tab === 2 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 2 ? style.selectedTab : style.unselectedTab}
           />
           <TextComponent 
-            style={tab === 2 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 2 ? style.selectedTab : style.unselectedTab}
           >
             Jogos
           </TextComponent>
         </Button>
-        
+
         <Button
-          style={style.tabButton} 
-          onPress={() => toggleTab(3, '/Settings', tab)}
+          style={style.tabButton}
+          onPress={() => navigation.navigate('Settings/index')}
         >
           <Ionicons
             name='settings-outline'
             size={38}
-            style={tab === 3 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 3 ? style.selectedTab : style.unselectedTab}
           />
           <TextComponent 
-            style={tab === 3 ? style.selectedTab : style.unselectedTab}
+            style={state.index === 3 ? style.selectedTab : style.unselectedTab}
           >
             Ajustes
           </TextComponent>
         </Button>
-        
+
       </View>
     </View>
   );

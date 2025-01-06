@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import useStyles from './styles';
 import TextComponent from '../Text';
 
-const HomeHeader: React.FC = () => {
+const PageHeader: React.FC = () => {
   const style = useStyles();
 
   return (
@@ -16,4 +16,4 @@ const HomeHeader: React.FC = () => {
   );
 }
 
-export default HomeHeader;
+export default PageHeader;

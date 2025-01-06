@@ -13,6 +13,7 @@ const useStyles = () => {
       paddingHorizontal: 12,
       paddingVertical: 8,
       marginBottom: 24,
+      marginRight: 4,
       borderRadius: 12,
       boxShadow: '2px 2px 4px 0px rgba(0, 0, 0, 0.25)',
     },

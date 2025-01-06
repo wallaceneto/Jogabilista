@@ -3,19 +3,16 @@ import { View } from 'react-native';
 
 import useStyles from './styles';
 import TextComponent from '../../../components/Text';
+import PageHeader from '../../../components/PageHeader';
 
 const Groups: React.FC = () => {
   const style = useStyles();
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={style.container}>
-        <TextComponent light style={style.title}>
-          Groups
-        </TextComponent>
-      </View>
+      <PageHeader />
 
-      <TextComponent>
+      <TextComponent weight='semibold' size={20}>
         Tela com os grupos
       </TextComponent>
     </View>

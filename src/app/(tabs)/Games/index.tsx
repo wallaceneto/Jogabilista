@@ -3,20 +3,17 @@ import { View } from 'react-native';
 
 import useStyles from './styles';
 import TextComponent from '../../../components/Text';
+import PageHeader from '../../../components/PageHeader';
 
 const Games: React.FC = () => {
   const style = useStyles();
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={style.container}>
-        <TextComponent light style={style.title}>
-          Games
-        </TextComponent>
-      </View>
+      <PageHeader />
 
-      <TextComponent>
-        Tela com os games
+      <TextComponent weight='semibold' size={20}>
+        Tela para pesquisar jogos
       </TextComponent>
     </View>
   );

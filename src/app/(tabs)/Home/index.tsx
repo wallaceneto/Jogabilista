@@ -3,15 +3,14 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 
 import useStyles from './styles';
 import { ThemeContext } from '../../../storage/context';
-import HomeHeader from '../../../components/HomeHeader';
-import TabBar from '../../../components/TabBar';
 import TextComponent from '../../../components/Text';
 import { temporaryGames } from '../../../global/mock/games';
 import GameCard from '../../../components/GameCard';
 import Game from '../../../global/classes/Game';
+import PageHeader from '../../../components/PageHeader';
 
 const Home: React.FC = () => {
-  const {colors} = useContext(ThemeContext);
+  const { colors } = useContext(ThemeContext);
 
   const style = useStyles();
   const [loading, setLoading] = useState(true)
@@ -43,26 +42,36 @@ const Home: React.FC = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {loading ?
-        <ActivityIndicator color={colors.primaryColor} size='large' />
-      :
-        <FlatList
-          data={games}
-          keyExtractor={item => item.getId}
-          ListHeaderComponent={() => 
-            <View style={style.container}>
-              <TextComponent light style={style.title}>
-                Home
-              </TextComponent>
+      <PageHeader />
+
+      <View style={style.container}>
+        { loading ?
+          <View style={style.loading}>
+            <ActivityIndicator size='large' color={colors.primaryColor} /> 
+          </View>
+        : 
+          <View>
+            <View style={style.search}>
+              <TextComponent weight='light'>Filtro</TextComponent>
+              <TextComponent weight='light'>Busca</TextComponent>
             </View>
-          }
-          renderItem={({ item }) =>
+
             <View style={style.content}>
-              <GameCard game={item} />
+              <FlatList
+                data={games}
+                keyExtractor={item => item.getId}
+                ListHeaderComponent={() => 
+                  <TextComponent weight='bold' style={style.title}>
+                    Jogos recentes
+                  </TextComponent>
+                }
+                renderItem={({ item }) => <GameCard game={item} /> }
+                showsVerticalScrollIndicator={false}
+              />
             </View>
-          }
-        />
-      }
+          </View>
+        }
+      </View>
     </View>
   );
 }

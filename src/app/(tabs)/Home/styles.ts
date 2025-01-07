@@ -11,9 +11,7 @@ const useStyles = () => {
       marginTop: 80,
     },
     search: {
-      backgroundColor: 'pink',
-      paddingVertical: 24,
-      paddingHorizontal: 16,
+      padding: 16,
       flexDirection: 'row',
       justifyContent: 'space-between',
     },

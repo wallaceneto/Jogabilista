@@ -9,7 +9,7 @@ const useStyles = () => {
 
   return StyleSheet.create({
     card: {
-      backgroundColor: commonColors.baseGrey,
+      backgroundColor: commonColors.lightGrey,
       paddingHorizontal: 12,
       paddingVertical: 8,
       marginBottom: 24,

@@ -39,7 +39,19 @@ const temporaryGames: IGame[] = [
     play_time: 1,
   },
   {
+    name: 'Crash 1',
+  },
+  {
+    name: 'Crash 2',
+    platform: 'Xbox',
+    status: 'Jogando',
+  },
+  {
     name: 'Crash 3',
+    interest_score: 4,
+    quality_score: 2,
+    status: 'Largado',
+    play_time: 50,
   }
 ];
 

@@ -15,6 +15,7 @@ export const defaultTheme: IDefaultTheme = {
     bad: '#E50000',
     empty: '#7F7F7F',
   },
+  dividerColor: '#BDBDBD',
   baseBlack: '#000000',
   baseWhite: '#FFFFFF',
   lightGrey: '#F2F2F2',

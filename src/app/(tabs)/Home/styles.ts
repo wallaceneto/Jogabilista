@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import {StyleSheet} from 'react-native';
 
+import { ThemeContext } from '../../../storage/context';
+
 const useStyles = () => {
+  const {colors} = useContext(ThemeContext);
+
   return StyleSheet.create({
     container: {
       flex: 1,
-      paddingBottom: 220,
+      backgroundColor: colors.commonColors.backgroundColor,
     },
     loading: {
       alignSelf: 'center',
@@ -21,6 +26,7 @@ const useStyles = () => {
     },
     content: {
       paddingHorizontal: 12,
+      marginBottom: 220
     },
   });
 };

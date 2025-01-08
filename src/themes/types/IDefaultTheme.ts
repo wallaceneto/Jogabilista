@@ -13,6 +13,7 @@ export type IDefaultTheme = {
     bad: string,
     empty: string,
   },
+  dividerColor: string,
   baseBlack: string,
   baseWhite: string,
   lightGrey: string,

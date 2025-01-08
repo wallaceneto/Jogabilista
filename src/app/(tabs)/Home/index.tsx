@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import { ActivityIndicator, FlatList, Modal, View } from 'react-native';
 
 import useStyles from './styles';
 import { ThemeContext } from '../../../storage/context';
@@ -9,7 +9,10 @@ import GameCard from '../../../components/GameCard';
 import Game from '../../../global/classes/Game';
 import PageHeader from '../../../components/PageHeader';
 import SearchBar from '../../../components/SearchBar';
-import { cleanSearch, fetchSearch } from '../../../global/lib/Home';
+import { cleanSearch, fetchSearch } from '../../../global/pagesLib/Home/lib';
+import FilterButton from '../../../components/FilterButton';
+import { IPlatformFilter, IScoreFilter, IStatusFilter } from '../../../global/pagesLib/Home/types';
+import FilterModal from '../../../modals/FilterModal';
 
 const Home: React.FC = () => {
   const { colors } = useContext(ThemeContext);
@@ -18,9 +21,14 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState<Game[]>([]);
   const [filterGames, setFilterGames] = useState<Game[]>([]);
-  //search bar
+  //search
   const [searchText, onChangeSearchText] = useState("");
   const [showLabel, setShowLabel] = useState(true);
+  //filter
+  const [filterModal, setFilterModal] = useState(false);
+  const [platformFilter, setPlatformFilter] = useState<IPlatformFilter[]>([]);
+  const [scoreFilter, setScoreFilter] = useState<IScoreFilter[]>([]);
+  const [statusFilter, setStatusFilter] = useState<IStatusFilter[]>([]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -49,7 +57,24 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={style.container}>
+      <Modal
+        transparent
+        animationType='fade'
+        visible={filterModal}
+        onRequestClose={() => setFilterModal(false)}
+      >
+        <FilterModal
+          onClose={() => setFilterModal(false)}
+          platformFilters={platformFilter}
+          setPlatformFilters={setPlatformFilter}
+          scoreFilters={scoreFilter}
+          setScoreFilters={setScoreFilter}
+          statusFilters={statusFilter}
+          setStatusFilters={setStatusFilter}
+        />
+      </Modal>
+
       <PageHeader />
 
       <View style={style.container}>
@@ -60,8 +85,6 @@ const Home: React.FC = () => {
           :
           <View>
             <View style={style.search}>
-              <TextComponent weight='light'>Filtro</TextComponent>
-
               <SearchBar
                 text={searchText}
                 onChangeText={onChangeSearchText}
@@ -69,6 +92,11 @@ const Home: React.FC = () => {
                 handleSearch={() => 
                   fetchSearch(searchText, fetchData, setLoading, games, setFilterGames, setShowLabel)
                 }
+              />
+
+              <FilterButton
+                amount={platformFilter.length + scoreFilter.length + statusFilter.length}
+                onPress={() => setFilterModal(true)}
               />
             </View>
 

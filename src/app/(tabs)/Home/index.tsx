@@ -30,6 +30,30 @@ const Home: React.FC = () => {
   const [scoreFilter, setScoreFilter] = useState<IScoreFilter[]>([]);
   const [statusFilter, setStatusFilter] = useState<IStatusFilter[]>([]);
 
+  const fetchFilter = async () => {
+    setLoading(true);
+
+    let gameList: Game[] = [];
+    const data = games;
+
+    data.forEach((item) => {
+      const applyPlatformFilter
+        = platformFilter.length > 0 ? platformFilter.includes(item.getPlatform) : true;
+      const applyStatusFilter
+        = statusFilter.length > 0 ? statusFilter.includes(item.getStatus) : true;
+      const applyScoreFilter
+        = scoreFilter.length > 0 ? scoreFilter.includes(item.getGameOverallScore()) : true;
+
+      if (applyPlatformFilter && applyStatusFilter && applyScoreFilter) {
+        gameList.push(item);
+      }
+
+    });
+
+    setFilterGames(gameList);
+    setLoading(false);
+  }
+
   const fetchData = async () => {
     setLoading(true);
     setShowLabel(true);
@@ -65,13 +89,17 @@ const Home: React.FC = () => {
         onRequestClose={() => setFilterModal(false)}
       >
         <FilterModal
-          onClose={() => setFilterModal(false)}
           platformFilters={platformFilter}
           setPlatformFilters={setPlatformFilter}
           scoreFilters={scoreFilter}
           setScoreFilters={setScoreFilter}
           statusFilters={statusFilter}
           setStatusFilters={setStatusFilter}
+          onClose={() => setFilterModal(false)}
+          onSubmit={() => {
+            cleanSearch(onChangeSearchText, fetchFilter);
+            fetchFilter();
+          }}
         />
       </Modal>
 
@@ -85,18 +113,18 @@ const Home: React.FC = () => {
           :
           <View>
             <View style={style.search}>
-              <SearchBar
-                text={searchText}
-                onChangeText={onChangeSearchText}
-                cleanSearch={() => cleanSearch(onChangeSearchText, fetchData)}
-                handleSearch={() => 
-                  fetchSearch(searchText, fetchData, setLoading, games, setFilterGames, setShowLabel)
-                }
-              />
-
               <FilterButton
                 amount={platformFilter.length + scoreFilter.length + statusFilter.length}
                 onPress={() => setFilterModal(true)}
+              />
+              
+              <SearchBar
+                text={searchText}
+                onChangeText={onChangeSearchText}
+                cleanSearch={() => cleanSearch(onChangeSearchText, fetchFilter)}
+                handleSearch={() =>
+                  fetchSearch(searchText, fetchFilter, setLoading, games, setFilterGames, setShowLabel)
+                }
               />
             </View>
 
@@ -109,11 +137,11 @@ const Home: React.FC = () => {
                     <TextComponent weight='bold' style={style.title}>
                       Jogos recentes
                     </TextComponent>
-                  : null
+                    : null
                 }
                 renderItem={({ item }) => <GameCard game={item} />}
                 showsVerticalScrollIndicator={false}
-                ListEmptyComponent={() => 
+                ListEmptyComponent={() =>
                   <TextComponent weight='bold' style={style.title}>
                     Nenhum jogo encontrado
                   </TextComponent>

@@ -1,1 +1,3 @@
-export type IScoreFilter = 'Bom' | 'Mediano' | 'Ruim' | undefined;
+import { IScore } from "../../../types";
+
+export type IScoreFilter = IScore | undefined;

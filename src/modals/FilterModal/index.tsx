@@ -12,13 +12,14 @@ import { cleanAllFilters, platformOptions, scoreOptions,  statusOptions } from '
 import FiltersCheckboxs from './components/FiltersCheckboxs';
 
 const FilterModal: React.FC<IFilterModalProps> = ({
-  onClose,
   platformFilters,
   setPlatformFilters,
   scoreFilters,
   setScoreFilters,
   statusFilters,
-  setStatusFilters
+  setStatusFilters,
+  onClose,
+  onSubmit,
 }) => {
   const style = useStyles();
 
@@ -91,6 +92,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
           <Button
             onPress={() => {
               cleanAllFilters(setPlatformFilters, setScoreFilters, setStatusFilters);
+              onSubmit();
               onClose();
             }}
             style={style.cleanButton}
@@ -101,7 +103,10 @@ const FilterModal: React.FC<IFilterModalProps> = ({
           </Button>
 
           <Button
-            onPress={() => onClose()}
+            onPress={() => {
+              onSubmit();
+              onClose();
+            }}
             style={style.applyButton}
           >
             <TextComponent light weight='semibold'>

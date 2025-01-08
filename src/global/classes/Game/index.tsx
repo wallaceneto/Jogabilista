@@ -1,5 +1,5 @@
 import uuid from 'react-native-uuid';
-import { IGame, IPlatform, IStatus } from '../../types';
+import { IGame, IPlatform, IScore, IStatus } from '../../types';
 
 export default class Game {
   private id: string;
@@ -43,8 +43,8 @@ export default class Game {
   public get getPlatform(): IPlatform {
     return this.platform;
   }
-  public get getStatus(): string{
-    return this.status || 'N/A';
+  public get getStatus(): IStatus | undefined{
+    return this.status;
   }
   public get getInterestScore(): number | undefined  {
     return this.interest_score;
@@ -97,5 +97,21 @@ export default class Game {
   // methods
   public getPlaytimeInHours(): number {
     return Math.floor(this.play_time / 60);
+  }
+  public getGameOverallScore(): IScore | undefined {
+    if (this.quality_score === undefined || this.interest_score === undefined) {
+      return undefined;
+    }
+    
+    const goodQuality = (this.quality_score > 5);
+    const goodInterest = (this.interest_score > 5);
+
+    if (goodQuality && goodInterest) {
+      return 'Bom';
+    } else if (!goodQuality && !goodInterest) {
+      return 'Ruim';
+    } else {
+      return 'Mediano';
+    }
   }
 };

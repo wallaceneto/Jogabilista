@@ -4,6 +4,6 @@ export type ICheckboxProps = {
   text: string,
   checked?: boolean,
   style?: StyleProp<ViewStyle>
-  check?: () => void,
-  uncheck?: () => void,
+  checkAction?: () => void,
+  uncheckAction?: () => void,
 };

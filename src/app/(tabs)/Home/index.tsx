@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Modal, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Modal, View } from 'react-native';
 
 import useStyles from './styles';
-import { ThemeContext } from '../../../storage/context';
 import TextComponent from '../../../components/Text';
 import { temporaryGames } from '../../../global/mock/games';
 import GameCard from '../../../components/GameCard';
@@ -13,10 +12,9 @@ import { cleanSearch, fetchSearch } from '../../../global/pagesLib/Home/lib';
 import FilterButton from '../../../components/FilterButton';
 import { IPlatformFilter, IScoreFilter, IStatusFilter } from '../../../global/pagesLib/Home/types';
 import FilterModal from '../../../modals/FilterModal';
+import LoadingIndicator from '../../../components/LoadingIndicator';
 
 const Home: React.FC = () => {
-  const { colors } = useContext(ThemeContext);
-
   const style = useStyles();
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState<Game[]>([]);
@@ -24,7 +22,7 @@ const Home: React.FC = () => {
   //search
   const [searchText, onChangeSearchText] = useState("");
   //filter
-  const [filterModal, setFilterModal] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [platformFilter, setPlatformFilter] = useState<IPlatformFilter[]>([]);
   const [scoreFilter, setScoreFilter] = useState<IScoreFilter[]>([]);
   const [statusFilter, setStatusFilter] = useState<IStatusFilter[]>([]);
@@ -41,7 +39,7 @@ const Home: React.FC = () => {
       const applyStatusFilter
         = statusFilter.length > 0 ? statusFilter.includes(item.getStatus) : true;
       const applyScoreFilter
-        = scoreFilter.length > 0 ? scoreFilter.includes(item.getGameOverallScore()) : true;
+        = scoreFilter.length > 0 ? scoreFilter.includes(item.getScoreQuadrant()) : true;
 
       if (applyPlatformFilter && applyStatusFilter && applyScoreFilter) {
         gameList.push(item);
@@ -70,7 +68,7 @@ const Home: React.FC = () => {
 
     setGames(gameList);
     setFilterGames(gameList);
-    
+
     setLoading(false);
   }
 
@@ -78,19 +76,17 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
-  const closeModal = () => {
-    cleanSearch(onChangeSearchText, fetchFilter);
-    fetchFilter();
-    setFilterModal(false);
-  }
-
   return (
     <View style={style.container}>
       <Modal
         transparent
         animationType='fade'
-        visible={filterModal}
-        onRequestClose={closeModal}
+        visible={modalVisible}
+        onRequestClose={() => {
+          cleanSearch(onChangeSearchText, fetchFilter);
+          fetchFilter();
+          setModalVisible(false);
+        }}
       >
         <FilterModal
           platformFilters={platformFilter}
@@ -99,10 +95,10 @@ const Home: React.FC = () => {
           setScoreFilters={setScoreFilter}
           statusFilters={statusFilter}
           setStatusFilters={setStatusFilter}
-          onClose={closeModal}
-          onSubmit={() => {
+          applyFilter={() => {
             cleanSearch(onChangeSearchText, fetchFilter);
             fetchFilter();
+            setModalVisible(false);
           }}
         />
       </Modal>
@@ -112,22 +108,22 @@ const Home: React.FC = () => {
       <View style={style.container}>
         {loading ?
           <View style={style.loading}>
-            <ActivityIndicator size='large' color={colors.primaryColor} />
+            <LoadingIndicator />
           </View>
           :
           <View>
             <View style={style.search}>
               <FilterButton
                 amount={platformFilter.length + scoreFilter.length + statusFilter.length}
-                onPress={() => setFilterModal(true)}
+                onPress={() => setModalVisible(true)}
               />
-              
+
               <SearchBar
                 text={searchText}
                 onChangeText={onChangeSearchText}
                 cleanSearch={() => cleanSearch(onChangeSearchText, fetchFilter)}
                 handleSearch={() =>
-                  fetchSearch(filterGames, searchText,  setLoading, setFilterGames)
+                  fetchSearch(filterGames, searchText, setLoading, setFilterGames)
                 }
               />
             </View>

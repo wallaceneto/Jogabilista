@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import {StyleSheet} from 'react-native';
 
-import { ThemeContext } from '../../storage/context';
 import { ITextComponentStyle } from './types';
 import { setFamily } from './lib';
+
+import { ThemeContext } from '../../storage/context';
 
 const useStyles = ({ size, light, weight }: ITextComponentStyle) => {
   const {colors} = useContext(ThemeContext);

@@ -31,33 +31,15 @@ export default class Game {
   }
 
   // getters
-  public get getId(): string {
-    return this.id;
-  }
-  public get getName(): string {
-    return this.name;
-  }
-  public get getCreateDate(): Date {
-    return this.create_date;
-  }
-  public get getPlatform(): IPlatform {
-    return this.platform;
-  }
-  public get getStatus(): IStatus | undefined{
-    return this.status;
-  }
-  public get getInterestScore(): number | undefined  {
-    return this.interest_score;
-  }
-  public get getQualityScore(): number | undefined  {
-    return this.quality_score;
-  }
-  public get getPlayTime(): number {
-    return this.play_time;
-  }
-  public get getFinishDate(): Date | undefined {
-    return this.finish_date;
-  }
+  public get getId(): string { return this.id }
+  public get getName(): string { return this.name }
+  public get getCreateDate(): Date { return this.create_date }
+  public get getPlatform(): IPlatform { return this.platform }
+  public get getStatus(): IStatus | undefined{ return this.status }
+  public get getInterestScore(): number | undefined  { return this.interest_score }
+  public get getQualityScore(): number | undefined  { return this.quality_score }
+  public get getPlayTime(): number { return this.play_time }
+  public get getFinishDate(): Date | undefined { return this.finish_date }
 
   //setters
   public setName(name: string): void {
@@ -98,7 +80,7 @@ export default class Game {
   public getPlaytimeInHours(): number {
     return Math.floor(this.play_time / 60);
   }
-  public getGameOverallScore(): IScore | undefined {
+  public getScoreQuadrant(): IScore | undefined {
     if (this.quality_score === undefined || this.interest_score === undefined) {
       return undefined;
     }
@@ -113,5 +95,18 @@ export default class Game {
     } else {
       return 'Mediano';
     }
+  }
+  public getOverallScore(): string {
+    if (this.quality_score === undefined || this.interest_score === undefined) {
+      return 'N/A';
+    }
+    
+    let score = '';
+  
+    const letters = ['J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
+    score = letters[this.quality_score - 1];
+    score += this.interest_score.toString();
+  
+    return score;
   }
 };

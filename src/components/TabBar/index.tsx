@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 import useStyles from './style';
+
 import TextComponent from '../Text';
 import Button from '../Button';
 

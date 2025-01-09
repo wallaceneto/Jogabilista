@@ -1,4 +1,4 @@
 export type IScoreTagProps = {
-  interest?: number,
-  quality?: number,
+  score: string,
+  quadrant?: string,
 };

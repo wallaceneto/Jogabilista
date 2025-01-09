@@ -3,8 +3,9 @@ import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './styles';
-import Button from '../Button';
 import { IFilterButtonProps } from './types';
+
+import Button from '../Button';
 import TextComponent from '../Text';
 
 const FilterButton: React.FC<IFilterButtonProps> = ({ amount, onPress }) => {

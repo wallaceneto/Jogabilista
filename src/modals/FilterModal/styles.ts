@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
+
 import { ThemeContext } from '../../storage/context';
 
 const useStyles = () => {

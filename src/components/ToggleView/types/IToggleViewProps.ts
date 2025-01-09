@@ -1,4 +1,4 @@
-export type IToggleButtonProps = {
+export type IToggleViewProps = {
   text: string,
   isPressed: boolean,
   setIsPressed: (value: boolean) => void,

@@ -3,13 +3,14 @@ import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './styles';
+import { IFilterModalProps } from './types';
+import { cleanAllFilters, platformOptions, scoreOptions, statusOptions } from './lib';
+
+import FiltersCheckboxs from './components/FiltersCheckboxs';
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
-import { IFilterModalProps } from './types';
-import ToggleButton from '../../components/ToggleButton';
+import ToggleView from '../../components/ToggleView';
 import Divider from '../../components/Divider';
-import { cleanAllFilters, platformOptions, scoreOptions, statusOptions } from './lib';
-import FiltersCheckboxs from './components/FiltersCheckboxs';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
 const FilterModal: React.FC<IFilterModalProps> = ({
@@ -19,8 +20,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
   setScoreFilters,
   statusFilters,
   setStatusFilters,
-  onClose,
-  onSubmit,
+  applyFilter,
 }) => {
   const style = useStyles();
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
               Aplicar filtro
             </TextComponent>
 
-            <Button onPress={onClose}>
+            <Button onPress={applyFilter}>
               <Ionicons
                 name='close'
                 style={style.headerIcon}
@@ -49,7 +49,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
           {loading ? <LoadingIndicator style={style.loading} />
             :
             <View style={style.content}>
-              <ToggleButton
+              <ToggleView
                 text={'Plataforma'}
                 isPressed={platformFilterOpen}
                 setIsPressed={setPlatformFilterOpen}
@@ -60,11 +60,11 @@ const FilterModal: React.FC<IFilterModalProps> = ({
                   scoreFilters={scoreFilters}
                   statusFilters={statusFilters}
                 />
-              </ToggleButton>
+              </ToggleView>
 
               <Divider style={style.divider} />
 
-              <ToggleButton
+              <ToggleView
                 text={'Classificação'}
                 isPressed={scoreFilterOpen}
                 setIsPressed={setScoreFilterOpen}
@@ -75,11 +75,11 @@ const FilterModal: React.FC<IFilterModalProps> = ({
                   scoreFilters={scoreFilters}
                   statusFilters={statusFilters}
                 />
-              </ToggleButton>
+              </ToggleView>
 
               <Divider style={style.divider} />
 
-              <ToggleButton
+              <ToggleView
                 text={'Status'}
                 isPressed={statusFilterOpen}
                 setIsPressed={setStatusFilterOpen}
@@ -90,10 +90,11 @@ const FilterModal: React.FC<IFilterModalProps> = ({
                   scoreFilters={scoreFilters}
                   statusFilters={statusFilters}
                 />
-              </ToggleButton>
+              </ToggleView>
             </View>
           }
         </View>
+
         <View style={style.buttonsContainer}>
           <Button
             onPress={() =>
@@ -107,10 +108,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
           </Button>
 
           <Button
-            onPress={() => {
-              onSubmit();
-              onClose();
-            }}
+            onPress={applyFilter}
             style={style.applyButton}
           >
             <TextComponent light weight='semibold'>

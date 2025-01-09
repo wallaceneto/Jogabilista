@@ -3,11 +3,12 @@ import { View } from 'react-native';
 
 import useStyles from './styles';
 import { IGameCardProps } from './types';
+import { displayTime } from './lib';
+
 import TextComponent from '../Text';
 import Button from '../Button';
 import PlatformTag from '../PlatformTag';
 import ScoreTag from '../ScoreTag';
-import { displayTime } from './lib';
 
 const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   const style = useStyles();
@@ -18,8 +19,8 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
         <PlatformTag platform={game.getPlatform} />
 
         <ScoreTag
-          quality={game.getQualityScore}
-          interest={game.getInterestScore}
+          quadrant={game.getScoreQuadrant()}
+          score={game.getOverallScore()}
         />
       </View>
 

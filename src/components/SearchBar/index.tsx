@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './style';
 import { ISearchBarProps } from './types';
+
 import Button from '../Button';
 
 const SearchBar: React.FC<ISearchBarProps> = ({ 

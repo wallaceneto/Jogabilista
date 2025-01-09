@@ -1,32 +1,27 @@
 import React, { useContext, useState } from 'react';
+import Checkbox from 'expo-checkbox';
 
 import useStyles from './styles';
-import { ICheckboxProps } from './types/ICheckboxProps';
+import { ICheckboxProps } from './types';
+import { toggleCheckbox } from './lib';
+
 import { ThemeContext } from '../../storage/context';
 import Button from '../Button';
 import TextComponent from '../Text';
-import Checkbox from 'expo-checkbox';
 
-const CheckboxComponent: React.FC<ICheckboxProps> = ({ text, checked, style, check, uncheck }) => {
+const CheckboxComponent: React.FC<ICheckboxProps> = ({ text, checked, style, checkAction, uncheckAction }) => {
   const styles = useStyles();
   const { colors } = useContext(ThemeContext);
   const [isChecked, setChecked] = useState(checked || false);
 
-  const toggleCheckbox = (value: boolean) => {
-    if (value) {
-      setChecked(true);
-      if (check) check();
-    } else {
-      setChecked(false);
-      if (uncheck) uncheck();
-    }
-  }
-
   return (
-    <Button style={[styles.container, style]} onPress={() => toggleCheckbox(!isChecked)}>
+    <Button 
+      style={[styles.container, style]}
+      onPress={() => toggleCheckbox(!isChecked, setChecked, checkAction, uncheckAction)}
+    >
       <Checkbox
         value={isChecked}
-        onValueChange={() => toggleCheckbox(!isChecked)}
+        onValueChange={() => toggleCheckbox(!isChecked, setChecked, checkAction, uncheckAction)}
         color={isChecked ? colors.primaryColor : undefined}
       />
 

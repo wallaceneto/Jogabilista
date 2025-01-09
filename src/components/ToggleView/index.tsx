@@ -3,11 +3,12 @@ import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './styles';
+import { IToggleViewProps } from './types';
+
 import Button from '../Button';
 import TextComponent from '../Text';
-import { IToggleButtonProps } from './types';
 
-const ToggleButton: React.FC<IToggleButtonProps> = ({ text, isPressed, setIsPressed, children }) => {
+const ToggleView: React.FC<IToggleViewProps> = ({ text, isPressed, setIsPressed, children }) => {
   const style = useStyles();
 
   return (
@@ -34,4 +35,4 @@ const ToggleButton: React.FC<IToggleButtonProps> = ({ text, isPressed, setIsPres
   );
 }
 
-export default ToggleButton;
+export default ToggleView;

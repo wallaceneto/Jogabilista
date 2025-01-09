@@ -7,6 +7,5 @@ export type IFilterModalProps = {
   setScoreFilters: (value: IScoreFilter[]) => void,
   statusFilters: IStatusFilter[],
   setStatusFilters: (value: IStatusFilter[]) => void,
-  onClose: () => void,
-  onSubmit: () => void,
+  applyFilter: () => void,
 };

@@ -2,9 +2,10 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 import useStyles from './styles';
-import CheckboxComponent from '../../../../components/Checkbox';
 import { setCheckbox } from '../../lib';
 import { IFiltersCheckboxsProps } from './types';
+
+import CheckboxComponent from '../../../../components/Checkbox';
 
 const FiltersCheckboxs: React.FC<IFiltersCheckboxsProps> = ({ 
   content,
@@ -24,8 +25,8 @@ const FiltersCheckboxs: React.FC<IFiltersCheckboxsProps> = ({
         <CheckboxComponent
           style={style.checkbox}
           text={item.option}
-          check={item.addItem}
-          uncheck={item.removeItem}
+          checkAction={item.addItem}
+          uncheckAction={item.removeItem}
           checked={
             setCheckbox(item.optionType, item.option, platformFilters, scoreFilters, statusFilters)
           }

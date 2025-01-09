@@ -1,1 +1,1 @@
-export * from './convertScore';
+export * from './selectScoreColor';

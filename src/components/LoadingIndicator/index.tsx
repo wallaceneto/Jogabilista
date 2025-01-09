@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import { ThemeContext } from '../../storage/context';
 import { ILoadingIndicatorProps } from './types';
+
+import { ThemeContext } from '../../storage/context';
 
 const LoadingIndicator: React.FC<ILoadingIndicatorProps> = ({ style }) => {
   const { colors } = useContext(ThemeContext);

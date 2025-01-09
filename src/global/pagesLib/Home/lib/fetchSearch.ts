@@ -1,33 +1,26 @@
 import Game from "../../../classes/Game";
 
 const fetchSearch = (
-  searchString: string,
-  fetchData: () => void,
-  setLoading: (value: boolean) => void,
   games: Game[],
+  searchString: string,
+  setLoading: (value: boolean) => void,
   setFilterGames: (list: Game[]) => void,
-  setShowLabel: (value: boolean) => void,
 ) => {
-  if (searchString.trim() === '') {
-    fetchData();
-    setShowLabel(true);
-  } else {
-    setLoading(true);
-    setShowLabel(false);
+  const queryString = searchString.trim().toLowerCase();
 
-    let gameList: Game[] = [];
-    games.forEach((game) => {
-      const gameName = game.getName.toLowerCase();
-      const searchText = searchString.toLowerCase();
+  setLoading(true);
 
-      if (gameName.includes(searchText)) {
-        gameList.push(game);
-      }
-    });
-    setFilterGames(gameList);
+  let gameList: Game[] = [];
+  games.forEach((game) => {
+    const gameName = game.getName.toLowerCase();
 
-    setLoading(false);
-  }
+    if (gameName.includes(queryString)) {
+      gameList.push(game);
+    }
+  });
+  setFilterGames(gameList);
+
+  setLoading(false);
 }
 
 export { fetchSearch }

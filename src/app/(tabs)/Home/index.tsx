@@ -23,7 +23,6 @@ const Home: React.FC = () => {
   const [filterGames, setFilterGames] = useState<Game[]>([]);
   //search
   const [searchText, onChangeSearchText] = useState("");
-  const [showLabel, setShowLabel] = useState(true);
   //filter
   const [filterModal, setFilterModal] = useState(false);
   const [platformFilter, setPlatformFilter] = useState<IPlatformFilter[]>([]);
@@ -56,7 +55,6 @@ const Home: React.FC = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    setShowLabel(true);
 
     let gameList: Game[] = [];
 
@@ -72,7 +70,7 @@ const Home: React.FC = () => {
 
     setGames(gameList);
     setFilterGames(gameList);
-    if (gameList.length === 0) setShowLabel(false);
+    
     setLoading(false);
   }
 
@@ -80,13 +78,19 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
+  const closeModal = () => {
+    cleanSearch(onChangeSearchText, fetchFilter);
+    fetchFilter();
+    setFilterModal(false);
+  }
+
   return (
     <View style={style.container}>
       <Modal
         transparent
         animationType='fade'
         visible={filterModal}
-        onRequestClose={() => setFilterModal(false)}
+        onRequestClose={closeModal}
       >
         <FilterModal
           platformFilters={platformFilter}
@@ -95,7 +99,7 @@ const Home: React.FC = () => {
           setScoreFilters={setScoreFilter}
           statusFilters={statusFilter}
           setStatusFilters={setStatusFilter}
-          onClose={() => setFilterModal(false)}
+          onClose={closeModal}
           onSubmit={() => {
             cleanSearch(onChangeSearchText, fetchFilter);
             fetchFilter();
@@ -123,7 +127,7 @@ const Home: React.FC = () => {
                 onChangeText={onChangeSearchText}
                 cleanSearch={() => cleanSearch(onChangeSearchText, fetchFilter)}
                 handleSearch={() =>
-                  fetchSearch(searchText, fetchFilter, setLoading, games, setFilterGames, setShowLabel)
+                  fetchSearch(filterGames, searchText,  setLoading, setFilterGames)
                 }
               />
             </View>
@@ -132,13 +136,6 @@ const Home: React.FC = () => {
               <FlatList
                 data={filterGames}
                 keyExtractor={game => game.getId}
-                ListHeaderComponent={() =>
-                  filterGames.length > 0 && showLabel ?
-                    <TextComponent weight='bold' style={style.title}>
-                      Jogos recentes
-                    </TextComponent>
-                    : null
-                }
                 renderItem={({ item }) => <GameCard game={item} />}
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={() =>

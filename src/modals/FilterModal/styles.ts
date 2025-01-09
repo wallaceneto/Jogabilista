@@ -1,20 +1,23 @@
 import { useContext } from 'react';
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import { ThemeContext } from '../../storage/context';
 
 const useStyles = () => {
   const {colors} = useContext(ThemeContext);
+  const WINDOW_HEIGHT = Dimensions.get('window').height;
 
   return StyleSheet.create({
     background: {
       flex: 1,
       backgroundColor: "rgba(0,0,0,0.6)",
+      justifyContent: 'center',
     },
     container: {
       backgroundColor: colors.commonColors.baseWhite,
       borderRadius: 20,
       marginHorizontal: 20,
-      marginVertical: 40,
+      height: WINDOW_HEIGHT * 0.80,
+      justifyContent: 'space-between',
     },
     header: {
       backgroundColor: colors.primaryColor,
@@ -33,12 +36,15 @@ const useStyles = () => {
       color: colors.commonColors.baseWhite,
       fontSize: 32,
     },
+    loading: {
+      marginTop: 40,
+    },
     content: {
       paddingHorizontal: 16,
-      marginVertical: 45,
+      marginTop: 40,
     },
     divider: {
-      marginVertical: 16,
+      marginVertical: 20,
     },
     buttonsContainer: {
       flexDirection: 'row',

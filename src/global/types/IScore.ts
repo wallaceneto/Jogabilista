@@ -1,0 +1,1 @@
+export type IScore = 'Bom' | 'Mediano' | 'Ruim';

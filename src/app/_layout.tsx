@@ -23,6 +23,11 @@ const Layout: React.FC = () => {
               name='(tabs)'
               options={{ headerShown: false, animation: 'none' }}
             />
+
+            <Stack.Screen
+              name='Settings/index'
+              options={{ headerShown: false, animation: 'slide_from_right' }}
+            />
           </Stack>
         </SafeAreaView>
       </SafeAreaProvider>

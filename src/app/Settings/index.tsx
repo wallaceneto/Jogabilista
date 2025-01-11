@@ -37,7 +37,7 @@ const Settings: React.FC = () => {
         </TextComponent>
 
         <SectionButton
-          onPress={() => {}}
+          onPress={() => router.push('/SwitchTheme')}
           title='Trocar tema'
           icon={
             <Ionicons

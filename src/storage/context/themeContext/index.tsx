@@ -2,6 +2,7 @@ import { createContext, PropsWithChildren, useState } from "react";
 
 import { IThemeContext } from "./types";
 import { themes } from "../../../themes";
+import { setStatusBarBackgroundColor } from "expo-status-bar";
 
 export const ThemeContext = createContext<IThemeContext>({
   currentTheme: 'yellow',
@@ -33,6 +34,7 @@ export const ThemeProvider = ({children}: PropsWithChildren) => {
 
     setCurrentTheme(otherTheme);
     setTheme(newTheme);
+    setStatusBarBackgroundColor(newTheme.primaryColor);
   }
 
   return (

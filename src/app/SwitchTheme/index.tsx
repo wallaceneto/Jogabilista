@@ -12,7 +12,7 @@ import ThemeButton from '../../global/pagesLib/SwitchTheme/components/ThemeButto
 import StyledButton from '../../components/StyledButton';
 import { ThemeContext } from '../../storage/context';
 import LoadingIndicator from '../../components/LoadingIndicator';
-
+import { handleToggleTheme } from '../../global/pagesLib/SwitchTheme/lib/handleToggleTheme';
 
 const SwitchTheme: React.FC = () => {
   const style = useStyles();
@@ -24,15 +24,6 @@ const SwitchTheme: React.FC = () => {
   const purple: primaryColor = { colorName: 'purple', colorHex: '#9E4FC4' };
   const red: primaryColor = { colorName: 'red', colorHex: '#FE3942' };
   const black: primaryColor = { colorName: 'black', colorHex: '#252525' };
-
-  const handleToggleTheme = () => {
-    setLoading(true);
-    setTimeout(() => {
-      router.navigate('/(tabs)'); 
-      toggleTheme(current);
-    }, 400);
-    
-  }
 
   return (
     <View style={style.background}>
@@ -86,7 +77,7 @@ const SwitchTheme: React.FC = () => {
         <LoadingIndicator style={style.button} /> 
       : 
         <StyledButton
-          onPress={handleToggleTheme}
+          onPress={() => handleToggleTheme(current, setLoading, toggleTheme)}
           style={style.button}
         >
           <TextComponent light weight='semibold' size={20}>

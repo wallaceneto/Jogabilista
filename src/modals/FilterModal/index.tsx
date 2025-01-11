@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -12,6 +12,8 @@ import Button from '../../components/Button';
 import ToggleView from '../../components/ToggleView';
 import Divider from '../../components/Divider';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import StyledButton from '../../components/StyledButton';
+import { ThemeContext } from '../../storage/context';
 
 const FilterModal: React.FC<IFilterModalProps> = ({
   platformFilters,
@@ -23,6 +25,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
   applyFilter,
 }) => {
   const style = useStyles();
+  const {colors} = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
 
   const [platformFilterOpen, setPlatformFilterOpen] = useState(true);
@@ -96,25 +99,26 @@ const FilterModal: React.FC<IFilterModalProps> = ({
         </View>
 
         <View style={style.buttonsContainer}>
-          <Button
+          <StyledButton
             onPress={() =>
               cleanAllFilters(setPlatformFilters,setScoreFilters,setStatusFilters,setLoading)
             }
-            style={style.cleanButton}
+            style={style.buttons}
+            color={colors.commonColors.lightGrey}
           >
             <TextComponent weight='medium'>
               Limpar
             </TextComponent>
-          </Button>
+          </StyledButton>
 
-          <Button
+          <StyledButton
             onPress={applyFilter}
-            style={style.applyButton}
+            style={style.buttons}
           >
             <TextComponent light weight='semibold'>
               Aplicar
             </TextComponent>
-          </Button>
+          </StyledButton>
         </View>
       </View>
     </View>

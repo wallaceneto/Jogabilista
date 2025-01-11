@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 import { router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -10,20 +10,28 @@ import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
 import ThemeButton from '../../global/pagesLib/SwitchTheme/components/ThemeButton';
 import StyledButton from '../../components/StyledButton';
+import { ThemeContext } from '../../storage/context';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 
 const SwitchTheme: React.FC = () => {
   const style = useStyles();
+  const {toggleTheme, currentTheme} = useContext(ThemeContext);
+  const [current, setCurrent] = useState(currentTheme);
+  const [loading, setLoading] = useState(false);
 
   const yellow: primaryColor = { colorName: 'yellow', colorHex: '#FFCD0E' };
   const purple: primaryColor = { colorName: 'purple', colorHex: '#9E4FC4' };
   const red: primaryColor = { colorName: 'red', colorHex: '#FE3942' };
   const black: primaryColor = { colorName: 'black', colorHex: '#252525' };
 
-  const [current, setCurrent] = useState(yellow.colorName);
-
   const handleToggleTheme = () => {
-    console.log(current);
+    setLoading(true);
+    setTimeout(() => {
+      router.navigate('/(tabs)'); 
+      toggleTheme(current);
+    }, 400);
+    
   }
 
   return (
@@ -74,14 +82,18 @@ const SwitchTheme: React.FC = () => {
         </View>
       </View>
 
-      <StyledButton
-        onPress={handleToggleTheme}
-        style={style.button}
-      >
-        <TextComponent light weight='semibold' size={20}>
-          Aplicar
-        </TextComponent>
-      </StyledButton>
+      { loading ? 
+        <LoadingIndicator style={style.button} /> 
+      : 
+        <StyledButton
+          onPress={handleToggleTheme}
+          style={style.button}
+        >
+          <TextComponent light weight='semibold' size={20}>
+            Aplicar
+          </TextComponent>
+        </StyledButton>
+      }
     </View>
   );
 }

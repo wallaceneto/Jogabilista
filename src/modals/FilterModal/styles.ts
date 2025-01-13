@@ -53,16 +53,7 @@ const useStyles = () => {
       marginVertical: 20,
       justifyContent: 'space-between',
     },
-    cleanButton: {
-      backgroundColor: colors.commonColors.lightGrey,
-      borderRadius: 8,
-      paddingVertical: 8,
-      paddingHorizontal: 48,
-    },
-    applyButton: {
-      backgroundColor: colors.primaryColor,
-      borderRadius: 8,
-      paddingVertical: 8,
+    buttons: {
       paddingHorizontal: 48,
     },
   });

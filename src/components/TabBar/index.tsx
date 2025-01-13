@@ -7,6 +7,7 @@ import useStyles from './style';
 
 import TextComponent from '../Text';
 import Button from '../Button';
+import { router } from 'expo-router';
 
 const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBarProps) => {
   const style = useStyles();
@@ -71,7 +72,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBar
 
         <Button
           style={style.tabButton}
-          onPress={() => navigation.navigate('Settings/index')}
+          onPress={() => router.push('/Settings')}
         >
           <Ionicons
             name='settings-outline'

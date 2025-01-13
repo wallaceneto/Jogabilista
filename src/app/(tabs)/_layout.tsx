@@ -28,14 +28,6 @@ const TabLayout: React.FC = () => {
           headerShown: false
         }}
       />
-
-      <Tabs.Screen
-        name="Settings/index"
-        options={{
-          title: 'Ajustes',
-          headerShown: false
-        }}
-      />
     </Tabs>
   );
 }

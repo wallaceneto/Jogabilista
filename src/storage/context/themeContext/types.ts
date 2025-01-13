@@ -1,5 +1,7 @@
 import { ITheme } from "../../../themes";
 
 export type IThemeContext = {
-  colors: ITheme
+  currentTheme: string,
+  colors: ITheme,
+  toggleTheme: (value: string) => void,
 };

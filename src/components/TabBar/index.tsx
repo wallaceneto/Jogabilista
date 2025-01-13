@@ -1,21 +1,30 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { Modal, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { router } from 'expo-router';
 
 import useStyles from './style';
 
 import TextComponent from '../Text';
 import Button from '../Button';
-import { router } from 'expo-router';
+import AddGame from '../../modals/AddGame';
 
 const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBarProps) => {
   const style = useStyles();
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={style.container}>
-      <View style={style.bar}>
+      <Modal
+        visible={modalVisible}
+        animationType='slide'
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <AddGame onClose={() => setModalVisible(false)} />
+      </Modal>
 
+      <View style={style.bar}>
         <Button
           style={style.tabButton}
           onPress={() => navigation.navigate('index')}
@@ -49,7 +58,9 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBar
           </TextComponent>
         </Button>
 
-        <Button style={style.addButton} onPress={() => {}}>
+        <Button
+          style={style.addButton}
+          onPress={() => setModalVisible(true)}>
           <Ionicons name='add' style={style.addIcon} />
         </Button>
 

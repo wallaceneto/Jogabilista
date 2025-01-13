@@ -4,8 +4,8 @@ import { Text, View } from 'react-native';
 import useStyles from './styles';
 import { ISectionButtonProps } from './types';
 
-import Button from '../../../../components/Button';
-import TextComponent from '../../../../components/Text';
+import Button from '../../../../../components/Button';
+import TextComponent from '../../../../../components/Text';
 
 const SectionButton: React.FC<ISectionButtonProps> = ({ icon, title, onPress, rightContent, warning }) => {
   const style = useStyles(warning || false);

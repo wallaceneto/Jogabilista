@@ -4,13 +4,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 
 import useStyles from './styles';
-import SectionButton from './components/SectionButton';
+import SectionButton from '../../global/pagesLib/Settings/components/SectionButton';
+import { appVersion, repositoryURL } from '../../global/pagesLib/Settings/lib';
 
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
-
-const appVersion = '1.0.0';
-const repositoryURL = 'https://github.com/wallaceneto/Jogabilista';
 
 const Settings: React.FC = () => {
   const style = useStyles();

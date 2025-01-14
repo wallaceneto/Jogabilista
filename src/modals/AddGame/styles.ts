@@ -37,6 +37,10 @@ const useStyles = () => {
     fieldInput: {
       marginTop: 16,
     },
+    rowField: {
+      flexDirection: 'row',
+      marginBottom: 24,
+    },
   });
 };
 

@@ -7,10 +7,11 @@ import { ITextFieldProps } from './types';
 import TextComponent from '../Text';
 
 const TextField: React.FC<ITextFieldProps> = ({
-  text,
+  value,
   onTextChange,
   placeholder,
   maxCharacters,
+  type,
 }) => {
   const styles = useStyles();
   const { colors } = useContext(ThemeContext);
@@ -20,15 +21,16 @@ const TextField: React.FC<ITextFieldProps> = ({
       <View style={styles.container}>
         <TextInput
           style={styles.text}
-          value={text}
+          value={value}
           onChangeText={onTextChange}
           cursorColor={colors.primaryColor}
           placeholder={placeholder}
           maxLength={maxCharacters}
+          keyboardType={type}
         />
       </View>
       
-      {maxCharacters && text.length >= maxCharacters ?
+      {maxCharacters && value.length >= maxCharacters ?
         <TextComponent style={styles.errorText}>
           Máximo de {maxCharacters} caracteres
         </TextComponent>

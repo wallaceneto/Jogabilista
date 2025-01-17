@@ -19,11 +19,11 @@ const useStyles = () => {
       paddingHorizontal: 16,
       paddingVertical: 32,
     },
-    headerIcon: {
+    headerTitle: {
       fontSize: 31,
       color: colors.commonColors.baseWhite,
     },
-    headerTitle: {
+    headerIcon: {
       fontSize: 31,
       color: colors.commonColors.baseWhite,
     },
@@ -37,9 +37,24 @@ const useStyles = () => {
     fieldInput: {
       marginTop: 16,
     },
+    numberField: {
+      marginHorizontal: 8,
+    },
     rowField: {
       flexDirection: 'row',
+      alignItems: 'flex-start',
       marginBottom: 24,
+    },
+    scores: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    scoreLabel: {
+      marginTop: 16,
+      marginRight: 4,
+    },
+    button: {
+      marginVertical: 32,
     },
   });
 };

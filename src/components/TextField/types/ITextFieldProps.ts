@@ -1,6 +1,9 @@
+import { KeyboardTypeOptions } from "react-native";
+
 export type ITextFieldProps = {
-  text: string,
+  value: string,
   onTextChange: (value: string) => void,
   placeholder?: string,
   maxCharacters?: number,
+  type?: KeyboardTypeOptions,
 };

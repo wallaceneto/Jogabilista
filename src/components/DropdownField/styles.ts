@@ -19,7 +19,7 @@ const useStyles = (open: boolean) => {
       borderBottomRightRadius: open ? 0 : 8,
     },
     fieldText: {
-      fontSize: 20,
+      fontSize: 18,
       color: colors.commonColors.darkGrey,
       marginRight: 8,
     },

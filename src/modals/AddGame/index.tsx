@@ -49,6 +49,7 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
               text={gameName}
               onTextChange={setGameName}
               placeholder='Nome'
+              maxCharacters={50}
             />
           </View>
         </View>
@@ -85,7 +86,7 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
           </TextComponent>
           <View style={style.fieldInput}>
             <DropdownField
-              placeholder='Qualidade'
+              placeholder='Nota'
               options={quality}
               setValue={setQualityScore}
             />

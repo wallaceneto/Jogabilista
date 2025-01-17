@@ -11,8 +11,15 @@ const useStyles = () => {
       backgroundColor: colors.commonColors.backgroundColor,
       borderWidth: 1,
       borderRadius: 12,
-      paddingLeft: 8,
       borderColor: colors.commonColors.baseBlack,
+      paddingLeft: 8,
+    },
+    text: {
+      fontSize: 18,
+    },
+    errorText: {
+      color: 'orange',
+      marginLeft: 8,
     },
   });
 };

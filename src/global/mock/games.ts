@@ -94,6 +94,13 @@ const temporaryGames: IGame[] = [
     quality_score: 2,
     status: 'Largado',
     play_time: 50,
+  },
+  {
+    name: 'Naruto shippuden ultimate ninja storm revolution',
+    interest_score: 4,
+    quality_score: 2,
+    status: 'Largado',
+    play_time: 50,
   }
 ];
 

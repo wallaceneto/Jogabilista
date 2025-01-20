@@ -28,14 +28,11 @@ const useStyles = () => {
       color: colors.commonColors.baseWhite,
     },
     content: {
-      paddingHorizontal: 20,
-      marginTop: 24,
+      paddingHorizontal: 16,
+      marginVertical: 24,
     },
     field: {
       marginBottom: 24,
-    },
-    fieldInput: {
-      marginTop: 16,
     },
     numberField: {
       marginHorizontal: 8,
@@ -43,6 +40,7 @@ const useStyles = () => {
     rowField: {
       flexDirection: 'row',
       alignItems: 'flex-start',
+      justifyContent: 'space-between',
       marginBottom: 24,
     },
     scores: {

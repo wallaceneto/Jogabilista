@@ -1,5 +1,5 @@
 export type IDropdownFieldProps = {
-  options: string[],
-  setValue: (value: string) => void,
+  options: any[],
+  setValue: (value: any) => void,
   placeholder?: string,
 };

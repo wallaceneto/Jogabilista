@@ -15,40 +15,31 @@ import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import StyledButton from '../../components/StyledButton';
 import Game from '../../global/classes/Game';
 import { IPlatform, IStatus } from '../../global/types';
+import DatePicker from '../../components/DatePicker';
+
+const platforms = ['Nintendo', 'Playstation', 'Xbox', 'PC', 'Outro'];
+const status = ['Terminado', 'Largado', 'Platinado', 'Jogando'];
+const quality = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+const interest = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 
 const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const styles = useStyles();
+
   const [gameName, setGameName] = useState('');
-  const [playDate, setPlayDate] = useState<Date>(new Date());
+  const [platformValue, setPlatformValue] = useState<IPlatform | ''>('');
+  const [statusValue, setStatusValue] = useState<IStatus | ''>('');
+  const [playDate, setPlayDate] = useState('');
+
   const [playTime, setPlaytime] = useState('0');
-
-  const platforms = ['Nintendo', 'Playstation', 'Xbox', 'PC', 'Outro'];
-  const [platformValue, setPlatformValue] = useState<IPlatform | string>('');
-  const status = ['Terminado', 'Largado', 'Platinado', 'Jogando'];
-  const [statusValue, setStatusValue] = useState<IStatus | string>('');
-  const quality = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   const [qualityScore, setQualityScore] = useState('');
-  const interest = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
   const [interestScore, setInterestScore] = useState('');
-
-  const showMode = () => {
-    DateTimePickerAndroid.open({
-      mode: 'date',
-      is24Hour: true,
-      value: playDate,
-      onChange: (_, selectedDate) => setPlayDate(selectedDate || new Date()),
-    });
-  }
 
   const submitForm = () => {
     const newGame = new Game({
       name: gameName,
-      finish_date: playDate,
-      play_time: parseInt(playTime),
-      platform: typeof(platformValue) === 'string' ? undefined : platformValue,
-      status: typeof(statusValue) === 'string' ? undefined : statusValue,
-      interest_score: interestScore ? parseInt(interestScore) : undefined,
-      quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
+      platform: platformValue || undefined,
+      status: statusValue || undefined,
+      finish_date: playDate ? new Date(playDate) : undefined,
     });
 
     console.log(newGame);
@@ -75,106 +66,49 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.field}>
-          <TextComponent weight='medium'>
-            Jogo:
-          </TextComponent>
-          <View style={styles.fieldInput}>
-            <TextField
-              value={gameName}
-              onTextChange={setGameName}
-              placeholder='Nome'
-              maxCharacters={50}
-            />
-          </View>
+          <TextField
+            value={gameName}
+            onTextChange={setGameName}
+            placeholder='Título'
+            maxCharacters={50}
+          />
         </View>
 
         <View style={styles.field}>
-          <TextComponent weight='medium'>
-            Onde jogou:
-          </TextComponent>
-          <View style={styles.fieldInput}>
-            <DropdownField
-              placeholder='Plataforma'
-              options={platforms}
-              setValue={setPlatformValue}
-            />
-          </View>
+          <DropdownField
+            placeholder='Onde jogou'
+            options={platforms}
+            setValue={setPlatformValue}
+          />
         </View>
 
         <View style={styles.field}>
-          <TextComponent weight='medium'>
-            Status:
-          </TextComponent>
-          <View style={styles.fieldInput}>
-            <DropdownField
-              placeholder='Status'
-              options={status}
-              setValue={setStatusValue}
-            />
-          </View>
-        </View>
-
-        <View style={styles.field}>
-          <TextComponent weight='medium'>
-            Terminado em:
-          </TextComponent>
-          <View style={styles.fieldInput}>
-            <Button onPress={showMode}>
-              <TextComponent>
-                {moment(playDate).format('LL')}
-              </TextComponent>
-            </Button>
-          </View>
+          <DropdownField
+            placeholder='Status'
+            options={status}
+            setValue={setStatusValue}
+          />
         </View>
 
         <View style={styles.rowField}>
-          <TextComponent weight='medium'>
-            Tempo de jogo:
-          </TextComponent>
-          <View style={styles.numberField}>
-            <TextField
-              value={playTime}
-              onTextChange={setPlaytime}
-              type='number-pad'
+          <View style={styles.field}>
+            <DatePicker
+              label='Terminado'
+              value={playDate}
+              setValue={setPlayDate}
             />
           </View>
-          <TextComponent weight='medium'>
-            minutos
-          </TextComponent>
-        </View>
-
-        <View style={styles.scores}>
-          <View style={styles.rowField}>
-            <TextComponent
-              weight='medium'
-              style={styles.scoreLabel}
-            >
-              Qualidade:
-            </TextComponent>
-            <View style={styles.fieldInput}>
-              <DropdownField
-                options={quality}
-                setValue={setQualityScore}
-              />
-            </View>
-          </View>
-
-          <View style={styles.rowField}>
-            <TextComponent
-              weight='medium'
-              style={styles.scoreLabel}
-            >
-              Interessancia:
-            </TextComponent>
-            <View style={styles.fieldInput}>
-              <DropdownField
-                options={interest}
-                setValue={setInterestScore}
-              />
-            </View>
+          
+          <View style={styles.field}>
+            <DatePicker
+              label='Terminado'
+              value={playDate}
+              setValue={setPlayDate}
+            />
           </View>
         </View>
 
+        
         <StyledButton
           onPress={submitForm}
           style={styles.button}

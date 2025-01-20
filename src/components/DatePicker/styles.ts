@@ -11,15 +11,19 @@ const useStyles = () => {
       backgroundColor: colors.commonColors.backgroundColor,
       borderWidth: 1,
       borderRadius: 4,
-      borderColor: colors.commonColors.baseBlack,
-      paddingLeft: 8,
+      padding: 16,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
-    text: {
-      fontSize: 18,
-      fontFamily: 'Quicksand_500Medium',
+    label: {
+      position: 'absolute',
+      marginTop: -14,
+      marginLeft: 8,
+      backgroundColor: colors.commonColors.backgroundColor,
+      paddingHorizontal: 4,
     },
-    errorText: {
-      color: 'orange',
+    icon: {
+      fontSize: 25,
       marginLeft: 8,
     },
   });

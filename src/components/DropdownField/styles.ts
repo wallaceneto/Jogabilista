@@ -8,19 +8,20 @@ const useStyles = (open: boolean) => {
 
   return StyleSheet.create({
     field: {
+      backgroundColor: colors.commonColors.backgroundColor,
       flexDirection: 'row',
       justifyContent: 'space-between',
       paddingVertical: 8,
       paddingHorizontal: 16,
       borderWidth: 1,
-      borderTopRightRadius: 8,
-      borderTopLeftRadius: 8,
-      borderBottomLeftRadius: open ? 0 : 8,
-      borderBottomRightRadius: open ? 0 : 8,
+      borderTopRightRadius: 4,
+      borderTopLeftRadius: 4,
+      borderBottomLeftRadius: open ? 0 : 4,
+      borderBottomRightRadius: open ? 0 : 4,
     },
     fieldText: {
       fontSize: 18,
-      color: colors.commonColors.darkGrey,
+      color: colors.commonColors.baseBlack,
       marginRight: 8,
     },
     fieldIcon: {
@@ -28,8 +29,9 @@ const useStyles = (open: boolean) => {
       color: colors.commonColors.darkGrey,
     },
     optionsContainer: {
-      borderBottomLeftRadius: 8,
-      borderBottomRightRadius: 8,
+      backgroundColor: colors.commonColors.backgroundColor,
+      borderBottomLeftRadius: 4,
+      borderBottomRightRadius: 4,
       marginTop: 2,
       borderWidth: 1,
     },

@@ -22,7 +22,7 @@ const DropdownField: React.FC<IDropdownFieldProps> = ({ placeholder, options, se
         style={styles.field}
         onPress={() => setOpen(!open)}
       >
-        <TextComponent style={styles.fieldText}>
+        <TextComponent style={styles.fieldText} weight='medium'>
           {currentValue || placeholder}
         </TextComponent>
 

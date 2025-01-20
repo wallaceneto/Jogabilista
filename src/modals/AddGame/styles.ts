@@ -39,6 +39,14 @@ const useStyles = () => {
     field: {
       marginBottom: 24,
     },
+    scoreContainer: {
+      flexDirection: 'row',
+      marginBottom: 24,
+    },
+    scoreField: {
+      flex: 1,
+      marginRight: 8,
+    },
   });
 };
 

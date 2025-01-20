@@ -3,7 +3,9 @@ import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './styles';
-import { IAddGameProps } from './types';
+import { IAddGameProps, ITimeUnit } from './types';
+import { convertPlayTime } from './lib';
+import TimeField from './components/TimeField';
 
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
@@ -30,11 +32,13 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const [interestScore, setInterestScore] = useState('');
 
   const [playTime, setPlaytime] = useState('0');
+  const [timeUnit, setTimeUnit] = useState<ITimeUnit>('hr');
 
   const submitForm = () => {
     const newGame = new Game({
       name: gameName,
       platform: platformValue || undefined,
+      play_time: convertPlayTime(playTime, timeUnit),
       status: statusValue || undefined,
       finish_date: playDate ? new Date(playDate) : undefined,
       quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
@@ -89,6 +93,15 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
         </View>
 
         <View style={styles.field}>
+          <TimeField
+            value={playTime}
+            onTextChange={setPlaytime}
+            timeUnit={timeUnit}
+            setTimeUnit={setTimeUnit}
+          />
+        </View>
+
+        <View style={styles.field}>
           <DropdownField
             placeholder='Status'
             options={status}
@@ -99,7 +112,7 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
         {statusValue && statusValue !== 'Jogando' ?
           <View style={styles.field}>
             <DatePicker
-              label='Data'
+              label={`Dia que ${ statusValue === 'Largado' ? 'largou' : 'terminou' }`}
               value={playDate}
               setValue={setPlayDate}
             />
@@ -113,20 +126,22 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
           Nota naval
         </TextComponent>
 
-        <View style={styles.field}>
-          <DropdownField
-            placeholder='Qualidade'
-            options={quality}
-            setValue={setQualityScore}
-          />
-        </View>
+        <View style={styles.scoreContainer}>
+          <View style={styles.scoreField}>
+            <DropdownField
+              placeholder='Qualidade'
+              options={quality}
+              setValue={setQualityScore}
+            />
+          </View>
 
-        <View style={styles.field}>
-          <DropdownField
-            placeholder='Interessância'
-            options={interest}
-            setValue={setInterestScore}
-          />
+          <View style={styles.scoreField}>
+            <DropdownField
+              placeholder='Interessância'
+              options={interest}
+              setValue={setInterestScore}
+            />
+          </View>
         </View>
 
         <StyledButton onPress={submitForm} >

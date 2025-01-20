@@ -38,9 +38,10 @@ const DropdownField: React.FC<IDropdownFieldProps> = ({ placeholder, options, se
             <View key={item}>
               <Button
                 style={styles.optionButton}
-                onPress={() =>
-                  handleOptionPress(item, currentValue, setCurrentValue, setValue)
-                }
+                onPress={() => {
+                  handleOptionPress(item, currentValue, setCurrentValue, setValue);
+                  setOpen(false);
+                }}
               >
                 <TextComponent style={styles.optionText}>
                   {item}

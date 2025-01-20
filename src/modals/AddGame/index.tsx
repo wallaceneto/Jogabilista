@@ -35,17 +35,21 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const [timeUnit, setTimeUnit] = useState<ITimeUnit>('hr');
 
   const submitForm = () => {
-    const newGame = new Game({
-      name: gameName,
-      platform: platformValue || undefined,
-      play_time: convertPlayTime(playTime, timeUnit),
-      status: statusValue || undefined,
-      finish_date: playDate ? new Date(playDate) : undefined,
-      quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
-      interest_score: interestScore ? parseInt(interestScore) : undefined,
-    });
+    const name = gameName.trim();
 
-    console.log(newGame);
+    if(name !== '') {
+      const newGame = new Game({
+        name: name,
+        platform: platformValue || undefined,
+        play_time: convertPlayTime(playTime, timeUnit),
+        status: statusValue || undefined,
+        finish_date: playDate ? new Date(playDate) : undefined,
+        quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
+        interest_score: interestScore ? parseInt(interestScore) : undefined,
+      });
+  
+      console.log(newGame);
+    }
   }
 
   return (

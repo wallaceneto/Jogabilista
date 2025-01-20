@@ -11,12 +11,16 @@ const useStyles = () => {
       backgroundColor: colors.commonColors.backgroundColor,
       borderWidth: 1,
       borderRadius: 4,
-      borderColor: colors.commonColors.baseBlack,
+      borderColor: colors.commonColors.dividerColor,
       paddingLeft: 8,
     },
     text: {
       fontSize: 18,
       fontFamily: 'Quicksand_500Medium',
+      color: colors.commonColors.baseBlack,
+    },
+    error: {
+      borderColor: 'red',
     },
     errorText: {
       color: 'orange',

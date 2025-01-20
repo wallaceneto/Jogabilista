@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
 import useStyles from './styles';
 import { IAddGameProps } from './types';
@@ -11,7 +9,6 @@ import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 import DropdownField from '../../components/DropdownField';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import StyledButton from '../../components/StyledButton';
 import Game from '../../global/classes/Game';
 import { IPlatform, IStatus } from '../../global/types';
@@ -29,10 +26,10 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const [platformValue, setPlatformValue] = useState<IPlatform | ''>('');
   const [statusValue, setStatusValue] = useState<IStatus | ''>('');
   const [playDate, setPlayDate] = useState('');
-
-  const [playTime, setPlaytime] = useState('0');
   const [qualityScore, setQualityScore] = useState('');
   const [interestScore, setInterestScore] = useState('');
+
+  const [playTime, setPlaytime] = useState('0');
 
   const submitForm = () => {
     const newGame = new Game({
@@ -40,6 +37,8 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
       platform: platformValue || undefined,
       status: statusValue || undefined,
       finish_date: playDate ? new Date(playDate) : undefined,
+      quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
+      interest_score: interestScore ? parseInt(interestScore) : undefined,
     });
 
     console.log(newGame);
@@ -65,6 +64,13 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
         style={styles.content}
         showsVerticalScrollIndicator={false}
       >
+        <TextComponent
+          weight='semibold'
+          style={styles.lable}
+        >
+          Dados do jogo
+        </TextComponent>
+
         <View style={styles.field}>
           <TextField
             value={gameName}
@@ -90,29 +96,40 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
           />
         </View>
 
-        <View style={styles.rowField}>
+        {statusValue && statusValue !== 'Jogando' ?
           <View style={styles.field}>
             <DatePicker
-              label='Terminado'
+              label='Data'
               value={playDate}
               setValue={setPlayDate}
             />
           </View>
-          
-          <View style={styles.field}>
-            <DatePicker
-              label='Terminado'
-              value={playDate}
-              setValue={setPlayDate}
-            />
-          </View>
+          : null}
+
+        <TextComponent
+          weight='semibold'
+          style={styles.lable}
+        >
+          Nota naval
+        </TextComponent>
+
+        <View style={styles.field}>
+          <DropdownField
+            placeholder='Qualidade'
+            options={quality}
+            setValue={setQualityScore}
+          />
         </View>
 
-        
-        <StyledButton
-          onPress={submitForm}
-          style={styles.button}
-        >
+        <View style={styles.field}>
+          <DropdownField
+            placeholder='Interessância'
+            options={interest}
+            setValue={setInterestScore}
+          />
+        </View>
+
+        <StyledButton onPress={submitForm} >
           <TextComponent light weight='bold'>
             Adicionar
           </TextComponent>

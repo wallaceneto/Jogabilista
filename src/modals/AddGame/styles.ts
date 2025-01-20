@@ -29,30 +29,15 @@ const useStyles = () => {
     },
     content: {
       paddingHorizontal: 16,
-      marginVertical: 24,
+      marginVertical: 16,
+    },
+    lable: {
+      marginLeft: 4,
+      marginBottom: 16,
+      fontSize: 18,
     },
     field: {
       marginBottom: 24,
-    },
-    numberField: {
-      marginHorizontal: 8,
-    },
-    rowField: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
-      marginBottom: 24,
-    },
-    scores: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    scoreLabel: {
-      marginTop: 16,
-      marginRight: 4,
-    },
-    button: {
-      marginVertical: 32,
     },
   });
 };

@@ -9,6 +9,7 @@ const useStyles = () => {
   return StyleSheet.create({
     container: {
       backgroundColor: colors.commonColors.backgroundColor,
+      borderColor: colors.commonColors.dividerColor,
       borderWidth: 1,
       borderRadius: 4,
       padding: 16,

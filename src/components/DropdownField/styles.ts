@@ -14,6 +14,7 @@ const useStyles = (open: boolean) => {
       paddingVertical: 8,
       paddingHorizontal: 16,
       borderWidth: 1,
+      borderColor: colors.commonColors.dividerColor,
       borderTopRightRadius: 4,
       borderTopLeftRadius: 4,
       borderBottomLeftRadius: open ? 0 : 4,
@@ -34,6 +35,7 @@ const useStyles = (open: boolean) => {
       borderBottomRightRadius: 4,
       marginTop: 2,
       borderWidth: 1,
+      borderColor: colors.commonColors.dividerColor,
     },
     optionButton: {
       flexDirection: 'row',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextInput, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -6,8 +6,8 @@ import useStyles from './styles';
 import { ITimeFieldProps } from './types';
 import { handleChangeText, toggleTimeUnit } from './lib';
 
-import TextComponent from '../../../../components/Text';
-import Button from '../../../../components/Button';
+import TextComponent from '../../../../../components/Text';
+import Button from '../../../../../components/Button';
 
 const TimeField: React.FC<ITimeFieldProps> = ({ value, onTextChange, timeUnit, setTimeUnit }) => {
   const styles = useStyles();

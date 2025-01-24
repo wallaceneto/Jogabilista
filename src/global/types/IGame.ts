@@ -8,5 +8,5 @@ export type IGame = {
   interest_score?: number, // Eixo x = interessancia
   quality_score?: number, // Eixo y = qualidade (0 representando 'J' e 10 representando 'A')
   play_time?: number,
-  finish_date?: Date,
+  finish_date?: string,
 };

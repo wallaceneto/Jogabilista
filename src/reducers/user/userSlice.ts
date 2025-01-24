@@ -19,7 +19,6 @@ const userSlice = createSlice({
       state.selectedTheme = action.payload;
     },
     addGameToList: (state, action: PayloadAction<IGame>) => {
-      console.log(action.payload);
       state.allGames.push(action.payload);
     }
   },

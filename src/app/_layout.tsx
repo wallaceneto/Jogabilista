@@ -36,6 +36,11 @@ const Layout: React.FC = () => {
                 name='SwitchTheme/index'
                 options={{ headerShown: false, animation: 'slide_from_right' }}
               />
+              
+              <Stack.Screen
+                name='AddGame/index'
+                options={{ headerShown: false, animation: 'slide_from_bottom' }}
+              />
             </Stack>
           </SafeAreaView>
         </SafeAreaProvider>

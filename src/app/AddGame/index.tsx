@@ -3,9 +3,9 @@ import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './styles';
-import { IAddGameProps, ITimeUnit } from './types';
-import { convertPlayTime } from './lib';
-import TimeField from './components/TimeField';
+import { convertPlayTime } from '../../global/pagesLib/AddGame/lib';
+import { ITimeUnit } from '../../global/pagesLib/AddGame/types';
+import TimeField from '../../global/pagesLib/AddGame/components/TimeField';
 
 import { platforms, status, quality, interest, IGame } from '../../global/types';
 import TextComponent from '../../components/Text';
@@ -13,14 +13,14 @@ import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 import DropdownField from '../../components/DropdownField';
 import StyledButton from '../../components/StyledButton';
-import Game from '../../global/classes/Game';
 import { IPlatform, IStatus } from '../../global/types';
 import DatePicker from '../../components/DatePicker';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { useDispatch } from 'react-redux';
 import { addGameToList } from '../../reducers/user/userSlice';
+import { router } from 'expo-router';
 
-const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
+const AddGame: React.FC = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState('');
@@ -42,19 +42,22 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
       setErrorMsg('');
       setLoading(true);
 
+      const gameQuality = qualityScore ? 10 - quality.indexOf(qualityScore) : undefined;
+      const gameInterest = interestScore ? parseInt(interestScore) : undefined;
+
       const newGame:IGame = {
         name: name,
         platform: platformValue || undefined,
         play_time: convertPlayTime(playTime, timeUnit),
         status: statusValue || undefined,
-        finish_date: playDate ? new Date(playDate) : undefined,
-        quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
-        interest_score: interestScore ? parseInt(interestScore) : undefined,
+        finish_date: playDate || undefined,
+        quality_score: gameQuality,
+        interest_score: gameInterest,
       };
 
       setTimeout(() => {
         dispatch(addGameToList(newGame));
-        onClose();
+        router.replace('(tabs)');
       }, 900);
 
     } else {
@@ -70,7 +73,7 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
           Adicionar jogo
         </TextComponent>
 
-        <Button onPress={onClose}>
+        <Button onPress={router.back}>
           <Ionicons
             name='close'
             style={styles.headerIcon}

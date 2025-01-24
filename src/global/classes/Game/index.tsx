@@ -10,7 +10,7 @@ export default class Game {
   private status?: IStatus;
   private interest_score?: number; // Eixo x = interessancia
   private quality_score?: number; // Eixo y = qualidade (1 representando 'J' e 10 representando 'A')
-  private finish_date?: Date;
+  private finish_date?: string;
 
   constructor(game: IGame) {
     if (!game.name.trim()) {
@@ -39,7 +39,7 @@ export default class Game {
   public get getInterestScore(): number | undefined  { return this.interest_score }
   public get getQualityScore(): number | undefined  { return this.quality_score }
   public get getPlayTime(): number { return this.play_time }
-  public get getFinishDate(): Date | undefined { return this.finish_date }
+  public get getFinishDate(): string | undefined { return this.finish_date }
 
   //setters
   public setName(name: string): void {
@@ -72,7 +72,7 @@ export default class Game {
   public setPlayTime(playTime: number): void {
     this.play_time = playTime;
   }
-  public setFinishDate(date: Date): void {
+  public setFinishDate(date: string): void {
     this.finish_date = date;
   }
 

@@ -13,9 +13,13 @@ import FilterButton from '../../../components/FilterButton';
 import { IPlatformFilter, IScoreFilter, IStatusFilter } from '../../../global/pagesLib/Home/types';
 import FilterModal from '../../../modals/FilterModal';
 import LoadingIndicator from '../../../components/LoadingIndicator';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../reducers/store';
 
 const Home: React.FC = () => {
   const style = useStyles();
+  const allGames = useSelector((state: RootState) => state.user.allGames);
+
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState<Game[]>([]);
   const [filterGames, setFilterGames] = useState<Game[]>([]);
@@ -56,7 +60,7 @@ const Home: React.FC = () => {
 
     let gameList: Game[] = [];
 
-    const data = temporaryGames;
+    const data = allGames;
     data.forEach((item) => {
       try {
         const game = new Game(item);
@@ -139,6 +143,8 @@ const Home: React.FC = () => {
                     Nenhum jogo encontrado
                   </TextComponent>
                 }
+                refreshing={loading}
+                onRefresh={() => fetchData()}
               />
             </View>
           </View>

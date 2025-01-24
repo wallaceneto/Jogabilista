@@ -7,7 +7,7 @@ import { IAddGameProps, ITimeUnit } from './types';
 import { convertPlayTime } from './lib';
 import TimeField from './components/TimeField';
 
-import { platforms, status, quality, interest } from '../../global/types';
+import { platforms, status, quality, interest, IGame } from '../../global/types';
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
@@ -17,9 +17,12 @@ import Game from '../../global/classes/Game';
 import { IPlatform, IStatus } from '../../global/types';
 import DatePicker from '../../components/DatePicker';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import { useDispatch } from 'react-redux';
+import { addGameToList } from '../../reducers/user/userSlice';
 
 const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +42,7 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
       setErrorMsg('');
       setLoading(true);
 
-      const newGame = new Game({
+      const newGame:IGame = {
         name: name,
         platform: platformValue || undefined,
         play_time: convertPlayTime(playTime, timeUnit),
@@ -47,10 +50,10 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
         finish_date: playDate ? new Date(playDate) : undefined,
         quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
         interest_score: interestScore ? parseInt(interestScore) : undefined,
-      });
+      };
 
       setTimeout(() => {
-        console.log(newGame);
+        dispatch(addGameToList(newGame));
         onClose();
       }, 900);
 

@@ -12,13 +12,14 @@ const TextField: React.FC<ITextFieldProps> = ({
   placeholder,
   maxCharacters,
   type,
+  errorMsg,
 }) => {
   const styles = useStyles();
   const { colors } = useContext(ThemeContext);
 
   return (
     <View>
-      <View style={styles.container}>
+      <View style={[styles.container, errorMsg ? styles.error : null]}>
         <TextInput
           style={styles.text}
           value={value}
@@ -29,12 +30,18 @@ const TextField: React.FC<ITextFieldProps> = ({
           keyboardType={type}
         />
       </View>
-      
+
       {maxCharacters && value.length >= maxCharacters ?
-        <TextComponent style={styles.errorText}>
+        <TextComponent style={styles.warnText}>
           Máximo de {maxCharacters} caracteres
         </TextComponent>
-      : null}
+        : null}
+
+      {errorMsg ?
+        <TextComponent style={styles.errorText}>
+          {errorMsg}
+        </TextComponent>
+        : null}
     </View>
   );
 }

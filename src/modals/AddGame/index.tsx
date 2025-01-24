@@ -7,6 +7,7 @@ import { IAddGameProps, ITimeUnit } from './types';
 import { convertPlayTime } from './lib';
 import TimeField from './components/TimeField';
 
+import { platforms, status, quality, interest } from '../../global/types';
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
@@ -16,21 +17,16 @@ import Game from '../../global/classes/Game';
 import { IPlatform, IStatus } from '../../global/types';
 import DatePicker from '../../components/DatePicker';
 
-const platforms = ['Nintendo', 'Playstation', 'Xbox', 'PC', 'Outro'];
-const status = ['Terminado', 'Largado', 'Platinado', 'Jogando'];
-const quality = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-const interest = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
-
 const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const styles = useStyles();
 
+  const [errorMsg, setErrorMsg] = useState('');
   const [gameName, setGameName] = useState('');
   const [platformValue, setPlatformValue] = useState<IPlatform | ''>('');
   const [statusValue, setStatusValue] = useState<IStatus | ''>('');
   const [playDate, setPlayDate] = useState('');
   const [qualityScore, setQualityScore] = useState('');
   const [interestScore, setInterestScore] = useState('');
-
   const [playTime, setPlaytime] = useState('0');
   const [timeUnit, setTimeUnit] = useState<ITimeUnit>('hr');
 
@@ -49,6 +45,8 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
       });
   
       console.log(newGame);
+    } else {
+      setErrorMsg('O título é obrigatório!')
     }
   }
 
@@ -85,6 +83,7 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
             onTextChange={setGameName}
             placeholder='Título'
             maxCharacters={50}
+            errorMsg={errorMsg}
           />
         </View>
 

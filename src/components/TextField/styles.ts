@@ -19,11 +19,15 @@ const useStyles = () => {
       fontFamily: 'Quicksand_500Medium',
       color: colors.commonColors.baseBlack,
     },
+    warnText: {
+      color: 'orange',
+      marginLeft: 8,
+    },
     error: {
       borderColor: 'red',
     },
     errorText: {
-      color: 'orange',
+      color: 'red',
       marginLeft: 8,
     },
   });

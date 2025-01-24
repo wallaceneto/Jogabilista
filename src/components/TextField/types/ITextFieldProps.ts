@@ -6,4 +6,5 @@ export type ITextFieldProps = {
   placeholder?: string,
   maxCharacters?: number,
   type?: KeyboardTypeOptions,
+  errorMsg?: string,
 };

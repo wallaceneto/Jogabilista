@@ -16,11 +16,13 @@ import StyledButton from '../../components/StyledButton';
 import Game from '../../global/classes/Game';
 import { IPlatform, IStatus } from '../../global/types';
 import DatePicker from '../../components/DatePicker';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const styles = useStyles();
-
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const [gameName, setGameName] = useState('');
   const [platformValue, setPlatformValue] = useState<IPlatform | ''>('');
   const [statusValue, setStatusValue] = useState<IStatus | ''>('');
@@ -33,7 +35,10 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
   const submitForm = () => {
     const name = gameName.trim();
 
-    if(name !== '') {
+    if (name !== '') {
+      setErrorMsg('');
+      setLoading(true);
+
       const newGame = new Game({
         name: name,
         platform: platformValue || undefined,
@@ -43,10 +48,14 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
         quality_score: qualityScore ? 10 - quality.indexOf(qualityScore) : undefined,
         interest_score: interestScore ? parseInt(interestScore) : undefined,
       });
-  
-      console.log(newGame);
+
+      setTimeout(() => {
+        console.log(newGame);
+        onClose();
+      }, 900);
+
     } else {
-      setErrorMsg('O título é obrigatório!')
+      setErrorMsg('O título é obrigatório!');
     }
   }
 
@@ -66,93 +75,95 @@ const AddGame: React.FC<IAddGameProps> = ({ onClose }) => {
         </Button>
       </View>
 
-      <ScrollView
-        style={styles.content}
-        showsVerticalScrollIndicator={false}
-      >
-        <TextComponent
-          weight='semibold'
-          style={styles.lable}
+      {loading ? <LoadingIndicator style={styles.loading} /> :
+        <ScrollView
+          style={styles.content}
+          showsVerticalScrollIndicator={false}
         >
-          Dados do jogo
-        </TextComponent>
-
-        <View style={styles.field}>
-          <TextField
-            value={gameName}
-            onTextChange={setGameName}
-            placeholder='Título'
-            maxCharacters={50}
-            errorMsg={errorMsg}
-          />
-        </View>
-
-        <View style={styles.field}>
-          <DropdownField
-            placeholder='Onde jogou'
-            options={platforms}
-            setValue={setPlatformValue}
-          />
-        </View>
-
-        <View style={styles.field}>
-          <TimeField
-            value={playTime}
-            onTextChange={setPlaytime}
-            timeUnit={timeUnit}
-            setTimeUnit={setTimeUnit}
-          />
-        </View>
-
-        <View style={styles.field}>
-          <DropdownField
-            placeholder='Status'
-            options={status}
-            setValue={setStatusValue}
-          />
-        </View>
-
-        {statusValue && statusValue !== 'Jogando' ?
-          <View style={styles.field}>
-            <DatePicker
-              label={`Dia que ${ statusValue === 'Largado' ? 'largou' : 'terminou' }`}
-              value={playDate}
-              setValue={setPlayDate}
-            />
-          </View>
-          : null}
-
-        <TextComponent
-          weight='semibold'
-          style={styles.lable}
-        >
-          Nota naval
-        </TextComponent>
-
-        <View style={styles.scoreContainer}>
-          <View style={styles.scoreField}>
-            <DropdownField
-              placeholder='Qualidade'
-              options={quality}
-              setValue={setQualityScore}
-            />
-          </View>
-
-          <View style={styles.scoreField}>
-            <DropdownField
-              placeholder='Interessância'
-              options={interest}
-              setValue={setInterestScore}
-            />
-          </View>
-        </View>
-
-        <StyledButton onPress={submitForm} >
-          <TextComponent light weight='bold'>
-            Adicionar
+          <TextComponent
+            weight='semibold'
+            style={styles.lable}
+          >
+            Dados do jogo
           </TextComponent>
-        </StyledButton>
-      </ScrollView>
+
+          <View style={styles.field}>
+            <TextField
+              value={gameName}
+              onTextChange={setGameName}
+              placeholder='Título'
+              maxCharacters={50}
+              errorMsg={errorMsg}
+            />
+          </View>
+
+          <View style={styles.field}>
+            <DropdownField
+              placeholder='Onde jogou'
+              options={platforms}
+              setValue={setPlatformValue}
+            />
+          </View>
+
+          <View style={styles.field}>
+            <TimeField
+              value={playTime}
+              onTextChange={setPlaytime}
+              timeUnit={timeUnit}
+              setTimeUnit={setTimeUnit}
+            />
+          </View>
+
+          <View style={styles.field}>
+            <DropdownField
+              placeholder='Status'
+              options={status}
+              setValue={setStatusValue}
+            />
+          </View>
+
+          {statusValue && statusValue !== 'Jogando' ?
+            <View style={styles.field}>
+              <DatePicker
+                label={`Dia que ${statusValue === 'Largado' ? 'largou' : 'terminou'}`}
+                value={playDate}
+                setValue={setPlayDate}
+              />
+            </View>
+            : null}
+
+          <TextComponent
+            weight='semibold'
+            style={styles.lable}
+          >
+            Nota naval
+          </TextComponent>
+
+          <View style={styles.scoreContainer}>
+            <View style={styles.scoreField}>
+              <DropdownField
+                placeholder='Qualidade'
+                options={quality}
+                setValue={setQualityScore}
+              />
+            </View>
+
+            <View style={styles.scoreField}>
+              <DropdownField
+                placeholder='Interessância'
+                options={interest}
+                setValue={setInterestScore}
+              />
+            </View>
+          </View>
+
+          <StyledButton onPress={submitForm} >
+            <TextComponent light weight='bold'>
+              Adicionar
+            </TextComponent>
+          </StyledButton>
+        </ScrollView>
+      }
     </View>
   );
 }

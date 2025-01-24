@@ -27,6 +27,9 @@ const useStyles = () => {
       fontSize: 31,
       color: colors.commonColors.baseWhite,
     },
+    loading: {
+      marginVertical: 40,
+    },
     content: {
       paddingHorizontal: 16,
       marginVertical: 16,

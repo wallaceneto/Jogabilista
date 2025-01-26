@@ -2,6 +2,8 @@ import { IPlatform } from "./IPlatform";
 import { IStatus } from "./IStatus";
 
 export type IGame = {
+  id?: string,
+  create_date?: string,
   name: string,
   platform?: IPlatform,
   status?: IStatus,

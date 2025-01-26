@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useDispatch } from 'react-redux';
+import { router } from 'expo-router';
 
 import useStyles from './styles';
 import { convertPlayTime } from '../../global/pagesLib/AddGame/lib';
@@ -16,9 +18,8 @@ import StyledButton from '../../components/StyledButton';
 import { IPlatform, IStatus } from '../../global/types';
 import DatePicker from '../../components/DatePicker';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import { useDispatch } from 'react-redux';
 import { addGameToList } from '../../reducers/user/userSlice';
-import { router } from 'expo-router';
+import Game from '../../global/classes/Game';
 
 const AddGame: React.FC = () => {
   const styles = useStyles();
@@ -45,7 +46,7 @@ const AddGame: React.FC = () => {
       const gameQuality = qualityScore ? 10 - quality.indexOf(qualityScore) : undefined;
       const gameInterest = interestScore ? parseInt(interestScore) : undefined;
 
-      const newGame:IGame = {
+      const newGame = new Game({
         name: name,
         platform: platformValue || undefined,
         play_time: convertPlayTime(playTime, timeUnit),
@@ -53,10 +54,10 @@ const AddGame: React.FC = () => {
         finish_date: playDate || undefined,
         quality_score: gameQuality,
         interest_score: gameInterest,
-      };
+      });
 
       setTimeout(() => {
-        dispatch(addGameToList(newGame));
+        dispatch(addGameToList(newGame.getAllAtributes()));
         router.replace('(tabs)');
       }, 900);
 

@@ -14,7 +14,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   const style = useStyles();
 
   return (
-    <Button style={style.card}>
+    <Button style={style.card} onPress={() => console.log(game)}>
       <View style={style.cardTop}>
         <PlatformTag platform={game.getPlatform} />
 

@@ -3,14 +3,14 @@ import { IGame, IPlatform, IScore, IStatus } from '../../types';
 
 export default class Game {
   private id: string;
-  private create_date: Date;
+  private create_date: string;
   private name: string;
   private platform: IPlatform = 'Outro';
   private play_time: number = 0;
   private status?: IStatus;
   private interest_score?: number; // Eixo x = interessancia
   private quality_score?: number; // Eixo y = qualidade (1 representando 'J' e 10 representando 'A')
-  private finish_date?: Date;
+  private finish_date?: string;
 
   constructor(game: IGame) {
     if (!game.name.trim()) {
@@ -18,8 +18,8 @@ export default class Game {
     }
 
     this.name = game.name;
-    this.id = uuid.v4(); 
-    this.create_date = new Date();
+    this.id = game.id || uuid.v4(); 
+    this.create_date = game.create_date || (new Date()).toString();
 
     if(game.platform) this.platform = game.platform;
     if(game.play_time) this.play_time = game.play_time;
@@ -33,13 +33,13 @@ export default class Game {
   // getters
   public get getId(): string { return this.id }
   public get getName(): string { return this.name }
-  public get getCreateDate(): Date { return this.create_date }
+  public get getCreateDate(): string { return this.create_date }
   public get getPlatform(): IPlatform { return this.platform }
   public get getStatus(): IStatus | undefined{ return this.status }
   public get getInterestScore(): number | undefined  { return this.interest_score }
   public get getQualityScore(): number | undefined  { return this.quality_score }
   public get getPlayTime(): number { return this.play_time }
-  public get getFinishDate(): Date | undefined { return this.finish_date }
+  public get getFinishDate(): string | undefined { return this.finish_date }
 
   //setters
   public setName(name: string): void {
@@ -72,11 +72,24 @@ export default class Game {
   public setPlayTime(playTime: number): void {
     this.play_time = playTime;
   }
-  public setFinishDate(date: Date): void {
+  public setFinishDate(date: string): void {
     this.finish_date = date;
   }
 
   // methods
+  public getAllAtributes(): IGame {
+    return {
+      id: this.id,
+      create_date: this.create_date,
+      name: this.name,
+      platform: this.platform,
+      status: this.status,
+      interest_score: this.interest_score,
+      quality_score: this.quality_score,
+      play_time: this.play_time,
+      finish_date: this.finish_date,
+    };
+  }
   public getPlaytimeInHours(): number {
     return Math.floor(this.play_time / 60);
   }

@@ -9,17 +9,17 @@ import TextComponent from '../../../../../components/Text';
 import RadioButton from '../../../../../components/RadioButton';
 
 const ThemeButton: React.FC<IThemeButtonProps> = ({ text, color, current, setCurrent }) => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
     <Button
       onPress={() => setCurrent(color.colorName)}
-      style={style.container}
+      style={styles.container}
     >
-      <View style={style.leftSide}>
-        <View style={[style.colorPreview, { backgroundColor: color.colorHex }]} />
+      <View style={styles.leftSide}>
+        <View style={[styles.colorPreview, { backgroundColor: color.colorHex }]} />
 
-        <TextComponent style={style.text} weight='medium'>
+        <TextComponent style={styles.text} weight='medium'>
           {text}
         </TextComponent>
       </View>

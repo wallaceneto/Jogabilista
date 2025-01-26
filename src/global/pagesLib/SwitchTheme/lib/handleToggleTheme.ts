@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import { storeTheme } from "../../../../storage/asyncStorage";
 
 const handleToggleTheme = (
   current: string,
@@ -10,6 +11,7 @@ const handleToggleTheme = (
   setTimeout(() => {
     router.navigate('/(tabs)');
     toggleTheme(current);
+    storeTheme(current);
   }, 100);
 
 }

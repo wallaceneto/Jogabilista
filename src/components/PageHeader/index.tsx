@@ -6,11 +6,11 @@ import useStyles from './styles';
 import TextComponent from '../Text';
 
 const PageHeader: React.FC = () => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
-    <View style={style.container}>
-        <TextComponent light weight='bold' style={style.title}>
+    <View style={styles.container}>
+        <TextComponent light weight='bold' style={styles.title}>
           Jogabilista
         </TextComponent>
       </View>

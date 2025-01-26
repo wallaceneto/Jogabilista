@@ -15,7 +15,7 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 import { handleToggleTheme } from '../../global/pagesLib/SwitchTheme/lib/handleToggleTheme';
 
 const SwitchTheme: React.FC = () => {
-  const style = useStyles();
+  const styles = useStyles();
   const {toggleTheme, currentTheme} = useContext(ThemeContext);
   const [current, setCurrent] = useState(currentTheme);
   const [loading, setLoading] = useState(false);
@@ -26,10 +26,10 @@ const SwitchTheme: React.FC = () => {
   const black: primaryColor = { colorName: 'black', colorHex: '#252525' };
 
   return (
-    <View style={style.background}>
+    <View style={styles.background}>
       <View>
         <Button
-          style={style.header}
+          style={styles.header}
           onPress={() => router.back()}
         >
           <Ionicons
@@ -37,12 +37,12 @@ const SwitchTheme: React.FC = () => {
             size={24}
           />
 
-          <TextComponent weight='medium' style={style.headerText}>
+          <TextComponent weight='medium' style={styles.headerText}>
             Trocar tema
           </TextComponent>
         </Button>
 
-        <View style={style.content}>
+        <View style={styles.content}>
           <ThemeButton
             text='Jogabiliamarelo'
             color={yellow}
@@ -74,11 +74,11 @@ const SwitchTheme: React.FC = () => {
       </View>
 
       { loading ? 
-        <LoadingIndicator style={style.button} /> 
+        <LoadingIndicator style={styles.button} /> 
       : 
         <StyledButton
           onPress={() => handleToggleTheme(current, setLoading, toggleTheme)}
-          style={style.button}
+          style={styles.button}
         >
           <TextComponent light weight='semibold' size={20}>
             Aplicar

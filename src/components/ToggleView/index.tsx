@@ -9,22 +9,22 @@ import Button from '../Button';
 import TextComponent from '../Text';
 
 const ToggleView: React.FC<IToggleViewProps> = ({ text, isPressed, setIsPressed, children }) => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
     <View>
       <Button
-        style={style.container}
+        style={styles.container}
         onPress={() => setIsPressed(!isPressed)}
       >
         <Ionicons
           name={isPressed ? 'caret-down-outline' :'caret-forward-outline' }
-          style={style.icon}
+          style={styles.icon}
         />
 
         <TextComponent
           weight='semibold'
-          style={style.text}
+          style={styles.text}
         >
           {text}
         </TextComponent>

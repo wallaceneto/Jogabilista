@@ -8,25 +8,25 @@ import Button from '../../../../../components/Button';
 import TextComponent from '../../../../../components/Text';
 
 const SectionButton: React.FC<ISectionButtonProps> = ({ icon, title, onPress, rightContent, warning }) => {
-  const style = useStyles(warning || false);
+  const styles = useStyles(warning || false);
 
   return (
     <Button
-      style={style.container}
+      style={styles.container}
       onPress={onPress}
     >
-      <View style={style.leftSide}>
-        <Text style={style.warningContent}>
+      <View style={styles.leftSide}>
+        <Text style={styles.warningContent}>
           {icon}
         </Text>
 
-        <TextComponent style={style.text}>
+        <TextComponent style={styles.text}>
           {title}
         </TextComponent>
       </View>
 
       { rightContent ?
-        <Text style={style.warningContent}>
+        <Text style={styles.warningContent}>
           { rightContent }
         </Text>
       : null}

@@ -5,18 +5,18 @@ import { router } from 'expo-router';
 
 import useStyles from './styles';
 import SectionButton from '../../global/pagesLib/Settings/components/SectionButton';
-import { appVersion, repositoryURL } from '../../global/pagesLib/Settings/lib';
+import { appVersion, cleanStorageAlert, repositoryURL } from '../../global/pagesLib/Settings/lib';
 
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
 
 const Settings: React.FC = () => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
-    <View style={style.background}>
+    <View style={styles.background}>
       <Button
-        style={style.header}
+        style={styles.header}
         onPress={() => router.back()}
       >
         <Ionicons
@@ -24,13 +24,13 @@ const Settings: React.FC = () => {
           size={24}
         />
 
-        <TextComponent weight='medium' style={style.headerText}>
+        <TextComponent weight='medium' style={styles.headerText}>
           Ajustes
         </TextComponent>
       </Button>
 
-      <View style={style.section}>
-        <TextComponent style={style.sectionTitle}>
+      <View style={styles.section}>
+        <TextComponent style={styles.sectionTitle}>
           Preferências
         </TextComponent>
 
@@ -52,8 +52,8 @@ const Settings: React.FC = () => {
         />
       </View>
       
-      <View style={style.section}>
-        <TextComponent style={style.sectionTitle}>
+      <View style={styles.section}>
+        <TextComponent style={styles.sectionTitle}>
           Mais
         </TextComponent>
 
@@ -85,14 +85,14 @@ const Settings: React.FC = () => {
         />
       </View>
       
-      <View style={style.section}>
-        <TextComponent style={style.sectionTitle}>
+      <View style={styles.section}>
+        <TextComponent style={styles.sectionTitle}>
           Limpeza
         </TextComponent>
 
         <SectionButton
           warning
-          onPress={() => {}}
+          onPress={cleanStorageAlert}
           title='Limpar dados'
           icon={
             <Ionicons

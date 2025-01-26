@@ -5,9 +5,9 @@ import useStyles from './styles';
 import { ICheckboxProps } from './types';
 import { toggleCheckbox } from './lib';
 
-import { ThemeContext } from '../../storage/context';
 import Button from '../Button';
 import TextComponent from '../Text';
+import { ThemeContext } from '../../storage/context';
 
 const CheckboxComponent: React.FC<ICheckboxProps> = ({ text, checked, style, checkAction, uncheckAction }) => {
   const styles = useStyles();

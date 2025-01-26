@@ -13,19 +13,19 @@ const SearchBar: React.FC<ISearchBarProps> = ({
   handleSearch,
   cleanSearch
 }) => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <Button onPress={() => handleSearch(text)}>
         <Ionicons
           name='search'
-          style={style.searchIcon}
+          style={styles.searchIcon}
         />
       </Button>
 
       <TextInput
-        style={style.textField}
+        style={styles.textField}
         value={text}
         onChangeText={onChangeText}
         placeholder='Buscar'
@@ -34,14 +34,14 @@ const SearchBar: React.FC<ISearchBarProps> = ({
       
       {
         text === '' ? 
-          <View style={style.emptyCloseIcon} /> 
+          <View style={styles.emptyCloseIcon} /> 
         :
         <Button
           onPress={() => cleanSearch()}
         >
           <Ionicons
             name='close'
-            style={style.searchIcon}
+            style={styles.searchIcon}
           />
         </Button>
       }

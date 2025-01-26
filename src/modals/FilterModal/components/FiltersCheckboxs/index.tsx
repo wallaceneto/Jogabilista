@@ -13,17 +13,17 @@ const FiltersCheckboxs: React.FC<IFiltersCheckboxsProps> = ({
   scoreFilters,
   statusFilters
 }) => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
     <FlatList
-      style={style.filtersContainers}
+      style={styles.filtersContainers}
       data={content}
       keyExtractor={item => item.option}
       numColumns={3}
       renderItem={({ item }) =>
         <CheckboxComponent
-          style={style.checkbox}
+          style={styles.checkbox}
           text={item.option}
           checkAction={item.addItem}
           uncheckAction={item.removeItem}

@@ -6,7 +6,7 @@ import TextComponent from '../../../components/Text';
 import PageHeader from '../../../components/PageHeader';
 
 const Groups: React.FC = () => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
     <View style={{ flex: 1 }}>

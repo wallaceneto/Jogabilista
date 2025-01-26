@@ -9,12 +9,12 @@ import TextComponent from '../Text';
 import { ThemeContext } from '../../storage/context';
 
 const ScoreTag: React.FC<IScoreTagProps> = ({ score, quadrant }) => {
-  const style = useStyles;
   const { colors } = useContext(ThemeContext);
+  const styles = useStyles(selectColor(colors, quadrant));
 
   return (
     <View
-      style={style(selectColor(colors, quadrant)).container}
+      style={styles.container}
     >
       <TextComponent light weight='semibold'>
         {score}

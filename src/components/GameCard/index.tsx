@@ -11,11 +11,11 @@ import PlatformTag from '../PlatformTag';
 import ScoreTag from '../ScoreTag';
 
 const GameCard: React.FC<IGameCardProps> = ({ game }) => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
-    <Button style={style.card} onPress={() => console.log(game)}>
-      <View style={style.cardTop}>
+    <Button style={styles.card} onPress={() => console.log(game)}>
+      <View style={styles.cardTop}>
         <PlatformTag platform={game.getPlatform} />
 
         <ScoreTag
@@ -24,12 +24,12 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
         />
       </View>
 
-      <TextComponent weight='bold' style={style.title}>
+      <TextComponent weight='bold' style={styles.title}>
         {game.getName}
       </TextComponent>
 
-      <View style={style.infos}>
-        <View style={style.status}>
+      <View style={styles.infos}>
+        <View style={styles.status}>
           <TextComponent weight='semibold'>
             Status:
           </TextComponent>
@@ -38,7 +38,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
           </TextComponent>
         </View>
 
-        <View style={style.status}>
+        <View style={styles.status}>
           <TextComponent weight='semibold'>
             Tempo:
           </TextComponent>

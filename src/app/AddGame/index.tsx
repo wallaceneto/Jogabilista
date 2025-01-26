@@ -9,7 +9,7 @@ import { convertPlayTime } from '../../global/pagesLib/AddGame/lib';
 import { ITimeUnit } from '../../global/pagesLib/AddGame/types';
 import TimeField from '../../global/pagesLib/AddGame/components/TimeField';
 
-import { platforms, status, quality, interest, IGame } from '../../global/types';
+import { platforms, status, quality, interest } from '../../global/types';
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';

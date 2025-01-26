@@ -9,20 +9,20 @@ import Button from '../Button';
 import TextComponent from '../Text';
 
 const FilterButton: React.FC<IFilterButtonProps> = ({ amount, onPress }) => {
-  const style = useStyles();
+  const styles = useStyles();
 
   return (
     <Button onPress={onPress}>
       { amount ? 
-        <View style={style.indicator}>
+        <View style={styles.indicator}>
           <TextComponent light weight='bold'>
             {amount}
           </TextComponent>
         </View>
       : null }
 
-      <View style={style.button}>
-        <Ionicons name='filter' style={style.icon}/>
+      <View style={styles.button}>
+        <Ionicons name='filter' style={styles.icon}/>
       </View>
     </Button>
   );

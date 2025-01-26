@@ -24,7 +24,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
   setStatusFilters,
   applyFilter,
 }) => {
-  const style = useStyles();
+  const styles = useStyles();
   const {colors} = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
 
@@ -33,25 +33,25 @@ const FilterModal: React.FC<IFilterModalProps> = ({
   const [statusFilterOpen, setStatusFilterOpen] = useState(true);
 
   return (
-    <View style={style.background} >
-      <View style={style.container}>
+    <View style={styles.background} >
+      <View style={styles.container}>
         <View>
-          <View style={style.header}>
-            <TextComponent weight='bold' style={style.headerText}>
+          <View style={styles.header}>
+            <TextComponent weight='bold' style={styles.headerText}>
               Aplicar filtro
             </TextComponent>
 
             <Button onPress={applyFilter}>
               <Ionicons
                 name='close'
-                style={style.headerIcon}
+                style={styles.headerIcon}
               />
             </Button>
           </View>
 
-          {loading ? <LoadingIndicator style={style.loading} />
+          {loading ? <LoadingIndicator style={styles.loading} />
             :
-            <View style={style.content}>
+            <View style={styles.content}>
               <ToggleView
                 text={'Plataforma'}
                 isPressed={platformFilterOpen}
@@ -65,7 +65,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
                 />
               </ToggleView>
 
-              <Divider style={style.divider} />
+              <Divider style={styles.divider} />
 
               <ToggleView
                 text={'Classificação'}
@@ -80,7 +80,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
                 />
               </ToggleView>
 
-              <Divider style={style.divider} />
+              <Divider style={styles.divider} />
 
               <ToggleView
                 text={'Status'}
@@ -98,12 +98,12 @@ const FilterModal: React.FC<IFilterModalProps> = ({
           }
         </View>
 
-        <View style={style.buttonsContainer}>
+        <View style={styles.buttonsContainer}>
           <StyledButton
             onPress={() =>
               cleanAllFilters(setPlatformFilters,setScoreFilters,setStatusFilters,setLoading)
             }
-            style={style.buttons}
+            style={styles.buttons}
             color={colors.commonColors.lightGrey}
           >
             <TextComponent weight='medium'>
@@ -113,7 +113,7 @@ const FilterModal: React.FC<IFilterModalProps> = ({
 
           <StyledButton
             onPress={applyFilter}
-            style={style.buttons}
+            style={styles.buttons}
           >
             <TextComponent light weight='semibold'>
               Aplicar

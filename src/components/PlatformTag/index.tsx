@@ -10,10 +10,10 @@ import TextComponent from '../Text';
 
 const PlatformTag: React.FC<IPlatformTagProps> = ({ platform }) => {
   const {colors} = useContext(ThemeContext);
-  const style = useStyles(getPlatformColor(platform, colors));
+  const styles = useStyles(getPlatformColor(platform, colors));
 
   return (
-    <View style={style.tag}>
+    <View style={styles.tag}>
       <TextComponent light size={14}>
         {platform}
       </TextComponent>

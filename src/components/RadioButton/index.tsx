@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
 import useStyles from './styles';
-import Button from '../Button';
 import { IRadioButtonProps } from './types';
 
+import Button from '../Button';
+
 const RadioButton: React.FC<IRadioButtonProps> = ({ pressed, setPressed, color }) => {
-  const style = useStyles(color);
+  const styles = useStyles(color);
 
   return (
     <Button
-      style={style.border}
+      style={styles.border}
       onPress={() => setPressed(!pressed)}
     >
-      { pressed ? <View style={style.inside} /> : null}
+      { pressed ? <View style={styles.inside} /> : null}
     </Button>
   );
 }

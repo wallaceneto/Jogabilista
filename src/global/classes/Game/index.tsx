@@ -77,6 +77,19 @@ export default class Game {
   }
 
   // methods
+  public getAllAtributes(): IGame {
+    return {
+      id: this.id,
+      create_date: this.create_date,
+      name: this.name,
+      platform: this.platform,
+      status: this.status,
+      interest_score: this.interest_score,
+      quality_score: this.quality_score,
+      play_time: this.play_time,
+      finish_date: this.finish_date,
+    };
+  }
   public getPlaytimeInHours(): number {
     return Math.floor(this.play_time / 60);
   }
@@ -108,18 +121,5 @@ export default class Game {
     score += this.interest_score.toString();
   
     return score;
-  }
-  public getAllAtributes(): IGame {
-    return {
-      id: this.id,
-      create_date: this.create_date,
-      name: this.name,
-      platform: this.platform,
-      status: this.status,
-      interest_score: this.interest_score,
-      quality_score: this.quality_score,
-      play_time: this.play_time,
-      finish_date: this.finish_date,
-    };
   }
 };

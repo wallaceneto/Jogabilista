@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Modal, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import useStyles from './styles';
+import { cleanSearch, fetchSearch } from '../../../global/pagesLib/Home/lib';
+import { IPlatformFilter, IScoreFilter, IStatusFilter } from '../../../global/pagesLib/Home/types';
+
 import TextComponent from '../../../components/Text';
-import { temporaryGames } from '../../../global/mock/games';
 import GameCard from '../../../components/GameCard';
 import Game from '../../../global/classes/Game';
 import PageHeader from '../../../components/PageHeader';
 import SearchBar from '../../../components/SearchBar';
-import { cleanSearch, fetchSearch } from '../../../global/pagesLib/Home/lib';
 import FilterButton from '../../../components/FilterButton';
-import { IPlatformFilter, IScoreFilter, IStatusFilter } from '../../../global/pagesLib/Home/types';
 import FilterModal from '../../../modals/FilterModal';
 import LoadingIndicator from '../../../components/LoadingIndicator';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers/store';
 
 const Home: React.FC = () => {
-  const style = useStyles();
+  const styles = useStyles();
   const allGames = useSelector((state: RootState) => state.user.allGames);
 
   const [loading, setLoading] = useState(true);
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <Modal
         transparent
         animationType='fade'
@@ -109,14 +109,14 @@ const Home: React.FC = () => {
 
       <PageHeader />
 
-      <View style={style.container}>
+      <View style={styles.container}>
         {loading ?
-          <View style={style.loading}>
+          <View style={styles.loading}>
             <LoadingIndicator />
           </View>
           :
           <View>
-            <View style={style.search}>
+            <View style={styles.search}>
               <FilterButton
                 amount={platformFilter.length + scoreFilter.length + statusFilter.length}
                 onPress={() => setModalVisible(true)}
@@ -132,14 +132,14 @@ const Home: React.FC = () => {
               />
             </View>
 
-            <View style={style.content}>
+            <View style={styles.content}>
               <FlatList
                 data={filterGames}
                 keyExtractor={game => game.getId}
                 renderItem={({ item }) => <GameCard game={item} />}
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={() =>
-                  <TextComponent weight='bold' style={style.title}>
+                  <TextComponent weight='bold' style={styles.title}>
                     Nenhum jogo encontrado
                   </TextComponent>
                 }

@@ -1,50 +1,22 @@
 import React from 'react';
-import { View, Linking, Alert } from 'react-native';
+import { View, Linking } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 
 import useStyles from './styles';
 import SectionButton from '../../global/pagesLib/Settings/components/SectionButton';
-import { appVersion, repositoryURL } from '../../global/pagesLib/Settings/lib';
+import { appVersion, cleanStorageAlert, repositoryURL } from '../../global/pagesLib/Settings/lib';
 
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
-import { cleanStorage } from '../../storage/asyncStorage';
-import { reloadAppAsync } from 'expo';
 
 const Settings: React.FC = () => {
-  const style = useStyles();
-
-  const reloadApp = async () => {
-    await reloadAppAsync('Removing all storage data');
-    console.log('Apagou')
-  }
-
-  const clearStorageAlert = async () => {
-    Alert.alert(
-      'Deseja mesmo apagar todos os dados?', 
-      'Essa ação é ireverssível e irá limpar todos os dados armazenados nesse aplicativo, restaurando-o as suas configurações de fábrica.',
-      [
-        {
-          text: 'Cancelar',
-          style: 'cancel',
-          onPress: () => {}
-        },
-        {
-          text: 'Apagar',
-          onPress: () => {
-            cleanStorage();
-            reloadApp();
-          }
-        }
-      ]
-    );
-  }
+  const styles = useStyles();
 
   return (
-    <View style={style.background}>
+    <View style={styles.background}>
       <Button
-        style={style.header}
+        style={styles.header}
         onPress={() => router.back()}
       >
         <Ionicons
@@ -52,13 +24,13 @@ const Settings: React.FC = () => {
           size={24}
         />
 
-        <TextComponent weight='medium' style={style.headerText}>
+        <TextComponent weight='medium' style={styles.headerText}>
           Ajustes
         </TextComponent>
       </Button>
 
-      <View style={style.section}>
-        <TextComponent style={style.sectionTitle}>
+      <View style={styles.section}>
+        <TextComponent style={styles.sectionTitle}>
           Preferências
         </TextComponent>
 
@@ -80,8 +52,8 @@ const Settings: React.FC = () => {
         />
       </View>
       
-      <View style={style.section}>
-        <TextComponent style={style.sectionTitle}>
+      <View style={styles.section}>
+        <TextComponent style={styles.sectionTitle}>
           Mais
         </TextComponent>
 
@@ -113,14 +85,14 @@ const Settings: React.FC = () => {
         />
       </View>
       
-      <View style={style.section}>
-        <TextComponent style={style.sectionTitle}>
+      <View style={styles.section}>
+        <TextComponent style={styles.sectionTitle}>
           Limpeza
         </TextComponent>
 
         <SectionButton
           warning
-          onPress={clearStorageAlert}
+          onPress={cleanStorageAlert}
           title='Limpar dados'
           icon={
             <Ionicons

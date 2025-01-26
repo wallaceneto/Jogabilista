@@ -19,6 +19,7 @@ const TimeField: React.FC<ITimeFieldProps> = ({ value, onTextChange, timeUnit, s
       </TextComponent>
 
       <TextInput
+        defaultValue='0'
         style={styles.text}
         value={value}
         onChangeText={(text: string) => handleChangeText(text, onTextChange)}
@@ -31,6 +32,10 @@ const TimeField: React.FC<ITimeFieldProps> = ({ value, onTextChange, timeUnit, s
         style={styles.timeUnit}
         onPress={() => toggleTimeUnit(timeUnit, setTimeUnit)}
       >
+        <Ionicons
+          name='caret-down'
+          style={styles.dropdownIcon}
+        />
         <TextComponent weight='medium'>
           {timeUnit === 'hr' ? 'horas' : 'minutos'}
         </TextComponent>

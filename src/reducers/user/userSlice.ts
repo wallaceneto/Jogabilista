@@ -20,7 +20,10 @@ const userSlice = createSlice({
       state.selectedTheme = action.payload;
     },
     addGameToList: (state, action: PayloadAction<IGame>) => {
-      state.allGames.push(action.payload);
+      let games: IGame[] = [];
+      games.push(action.payload);
+      games.push(...state.allGames);
+      state.allGames = games;
 
       storeAllGames(state.allGames);
     },

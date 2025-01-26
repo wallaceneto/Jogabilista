@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Linking } from 'react-native';
+import { View, Linking, Alert } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 
@@ -9,9 +9,37 @@ import { appVersion, repositoryURL } from '../../global/pagesLib/Settings/lib';
 
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
+import { cleanStorage } from '../../storage/asyncStorage';
+import { reloadAppAsync } from 'expo';
 
 const Settings: React.FC = () => {
   const style = useStyles();
+
+  const reloadApp = async () => {
+    await reloadAppAsync('Removing all storage data');
+    console.log('Apagou')
+  }
+
+  const clearStorageAlert = async () => {
+    Alert.alert(
+      'Deseja mesmo apagar todos os dados?', 
+      'Essa ação é ireverssível e irá limpar todos os dados armazenados nesse aplicativo, restaurando-o as suas configurações de fábrica.',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+          onPress: () => {}
+        },
+        {
+          text: 'Apagar',
+          onPress: () => {
+            cleanStorage();
+            reloadApp();
+          }
+        }
+      ]
+    );
+  }
 
   return (
     <View style={style.background}>
@@ -92,7 +120,7 @@ const Settings: React.FC = () => {
 
         <SectionButton
           warning
-          onPress={() => {}}
+          onPress={clearStorageAlert}
           title='Limpar dados'
           icon={
             <Ionicons

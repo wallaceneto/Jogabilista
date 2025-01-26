@@ -32,7 +32,7 @@ const AddGame: React.FC = () => {
   const [playDate, setPlayDate] = useState('');
   const [qualityScore, setQualityScore] = useState('');
   const [interestScore, setInterestScore] = useState('');
-  const [playTime, setPlaytime] = useState('0');
+  const [playTime, setPlaytime] = useState('');
   const [timeUnit, setTimeUnit] = useState<ITimeUnit>('hr');
 
   const submitForm = () => {

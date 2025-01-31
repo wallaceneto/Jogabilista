@@ -16,7 +16,6 @@
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@reduxjs/toolkit": "^2.5.0",
     "expo": "~52.0.19",
-    "expo-app-loading": "^2.1.1",
     "expo-checkbox": "^4.0.0",
     "expo-constants": "^17.0.3",
     "expo-font": "^13.0.2",

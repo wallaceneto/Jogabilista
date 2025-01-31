@@ -5,14 +5,14 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './styles';
 
-import { primaryColor } from '../../global/pagesLib/SwitchTheme/types';
-import TextComponent from '../../components/Text';
-import Button from '../../components/Button';
-import ThemeButton from '../../global/pagesLib/SwitchTheme/components/ThemeButton';
-import StyledButton from '../../components/StyledButton';
-import { ThemeContext } from '../../storage/context';
-import LoadingIndicator from '../../components/LoadingIndicator';
-import { handleToggleTheme } from '../../global/pagesLib/SwitchTheme/lib/handleToggleTheme';
+import { primaryColor } from '../../../global/pagesLib/SwitchTheme/types';
+import TextComponent from '../../../components/Text';
+import Button from '../../../components/Button';
+import ThemeButton from '../../../global/pagesLib/SwitchTheme/components/ThemeButton';
+import StyledButton from '../../../components/StyledButton';
+import { ThemeContext } from '../../../storage/context';
+import LoadingIndicator from '../../../components/LoadingIndicator';
+import { handleToggleTheme } from '../../../global/pagesLib/SwitchTheme/lib/handleToggleTheme';
 
 const SwitchTheme: React.FC = () => {
   const styles = useStyles();

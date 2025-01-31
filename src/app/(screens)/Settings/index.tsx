@@ -4,11 +4,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 
 import useStyles from './styles';
-import SectionButton from '../../global/pagesLib/Settings/components/SectionButton';
-import { appVersion, cleanStorageAlert, repositoryURL } from '../../global/pagesLib/Settings/lib';
+import SectionButton from '../../../global/pagesLib/Settings/components/SectionButton';
+import { appVersion, cleanStorageAlert, repositoryURL } from '../../../global/pagesLib/Settings/lib';
 
-import TextComponent from '../../components/Text';
-import Button from '../../components/Button';
+import TextComponent from '../../../components/Text';
+import Button from '../../../components/Button';
 
 const Settings: React.FC = () => {
   const styles = useStyles();

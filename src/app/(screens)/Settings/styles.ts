@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import {StyleSheet} from 'react-native';
-import { ThemeContext } from '../../storage/context';
+
+import { ThemeContext } from '../../../storage/context';
 
 const useStyles = () => {
   const {colors} = useContext(ThemeContext);
@@ -9,7 +10,6 @@ const useStyles = () => {
     background: {
       flex: 1,
       backgroundColor: colors.commonColors.lightGrey,
-      justifyContent: 'space-between'
     },
     header: {
       flexDirection: 'row',
@@ -22,13 +22,13 @@ const useStyles = () => {
       marginLeft: 12,
       paddingBottom: 2,
     },
-    content: {
-      marginHorizontal: 16,
-      marginVertical: 32,
+    section: {
+      paddingHorizontal: 11,
+      marginBottom: 16,
     },
-    button: {
-      marginVertical: 32,
-      marginHorizontal: 16,
+    sectionTitle: {
+      fontSize: 20,
+      marginLeft: 5,
     },
   });
 };

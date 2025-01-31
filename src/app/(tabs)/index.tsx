@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-import AppLoading from 'expo-app-loading';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
   useFonts,
   Quicksand_300Light,
@@ -14,11 +13,16 @@ import Home from './Home';
 import { ThemeContext } from '../../storage/context';
 import { getAllGames, getTheme } from '../../storage/asyncStorage';
 import { addFullGameList } from '../../reducers/user/userSlice';
+import { SplashScreen } from 'expo-router';
+import { View } from 'react-native';
 
-const App: React.FC = () => {
+SplashScreen.preventAutoHideAsync();
+
+const App: React.FC = () => { 
+  const [appIsReady, setAppIsReady] = useState(false);
   const { toggleTheme } = useContext(ThemeContext);
   const dispatch = useDispatch();
-  
+
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -27,20 +31,44 @@ const App: React.FC = () => {
     Quicksand_700Bold,
   });
 
-  const setUser = async () => {
-    const theme = await getTheme();
-    toggleTheme(theme || 'yellow');
-
-    const games = await getAllGames();
-    dispatch(addFullGameList(games));
-  }
-
   useEffect(() => {
-    setUser();
+    const prepare = async () => {
+      try {
+        const theme = await getTheme();
+        toggleTheme(theme || 'yellow');
+    
+        const games = await getAllGames();
+        dispatch(addFullGameList(games));
+  
+        fontsLoaded;
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+    fontsLoaded;
   }, []);
 
+  const onLayoutRootView = useCallback(() => {
+    if (appIsReady) {
+      SplashScreen.hide();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    fontsLoaded ? <Home /> : <AppLoading />
+    <View 
+      style={{ flex: 1 }}
+      onLayout={onLayoutRootView}
+    >
+      <Home />
+    </View>
   );
 }
 

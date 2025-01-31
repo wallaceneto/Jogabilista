@@ -5,21 +5,21 @@ import { useDispatch } from 'react-redux';
 import { router } from 'expo-router';
 
 import useStyles from './styles';
-import { convertPlayTime } from '../../global/pagesLib/AddGame/lib';
-import { ITimeUnit } from '../../global/pagesLib/AddGame/types';
-import TimeField from '../../global/pagesLib/AddGame/components/TimeField';
+import { convertPlayTime } from '../../../global/pagesLib/AddGame/lib';
+import { ITimeUnit } from '../../../global/pagesLib/AddGame/types';
+import TimeField from '../../../global/pagesLib/AddGame/components/TimeField';
 
-import { platforms, status, quality, interest } from '../../global/types';
-import TextComponent from '../../components/Text';
-import Button from '../../components/Button';
-import TextField from '../../components/TextField';
-import DropdownField from '../../components/DropdownField';
-import StyledButton from '../../components/StyledButton';
-import { IPlatform, IStatus } from '../../global/types';
-import DatePicker from '../../components/DatePicker';
-import LoadingIndicator from '../../components/LoadingIndicator';
-import { addGameToList } from '../../reducers/user/userSlice';
-import Game from '../../global/classes/Game';
+import { platforms, status, quality, interest } from '../../../global/types';
+import TextComponent from '../../../components/Text';
+import Button from '../../../components/Button';
+import TextField from '../../../components/TextField';
+import DropdownField from '../../../components/DropdownField';
+import StyledButton from '../../../components/StyledButton';
+import { IPlatform, IStatus } from '../../../global/types';
+import DatePicker from '../../../components/DatePicker';
+import LoadingIndicator from '../../../components/LoadingIndicator';
+import { addGameToList } from '../../../reducers/user/userSlice';
+import Game from '../../../global/classes/Game';
 
 const AddGame: React.FC = () => {
   const styles = useStyles();

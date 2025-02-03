@@ -12,6 +12,9 @@ export default class Game {
   private quality_score?: number; // Eixo y = qualidade (1 representando 'J' e 10 representando 'A')
   private finish_date?: string;
 
+  private sync_game?: string;
+  private cover?: string;
+
   constructor(game: IGame) {
     if (!game.name.trim()) {
       throw new Error("The name cannot be empty");
@@ -28,6 +31,8 @@ export default class Game {
     this.interest_score = game.interest_score;
     this.quality_score = game.quality_score;
     this.finish_date = game.finish_date;
+    this.sync_game = game.sync_game;
+    this.cover = game.cover;
   }
 
   // getters
@@ -40,40 +45,34 @@ export default class Game {
   public get getQualityScore(): number | undefined  { return this.quality_score }
   public get getPlayTime(): number { return this.play_time }
   public get getFinishDate(): string | undefined { return this.finish_date }
-
+  public get getSyncGame(): string | undefined { return this.sync_game }
+  public get getCover(): string | undefined { return this.cover }
   //setters
-  public setName(name: string): void {
+  public set setPlatform(platform: IPlatform) { this.platform = platform }
+  public set setStatus(status: IStatus) { this.status = status }
+  public set setPlayTime(playTime: number){ this.play_time = playTime }
+  public set setFinishDate(date: string){ this.finish_date = date }
+  public set setSyncGame(sync_game: string) { this.sync_game = sync_game }
+  public set setName(name: string) {
     if (!name.trim()) {
       throw new Error("The name cannot be empty");
     }
 
     this.name = name;
   }
-  public setPlatform(platform: IPlatform): void {
-    this.platform = platform;
-  }
-  public setStatus(status: IStatus): void {
-    this.status = status;
-  }
-  public setInterestScore(score: number): void {
+  public set setInterestScore(score: number) {
     if (score < 1 || score > 10) {
       throw new Error("Invalid interest score");
     }
 
     this.interest_score = score;
   }
-  public setQualityScore(score: number): void {
+  public set setQualityScore(score: number) {
     if (score < 1 || score > 10) {
       throw new Error("Invalid quaity score");
     }
 
     this.quality_score = score;
-  }
-  public setPlayTime(playTime: number): void {
-    this.play_time = playTime;
-  }
-  public setFinishDate(date: string): void {
-    this.finish_date = date;
   }
 
   // methods
@@ -92,6 +91,12 @@ export default class Game {
   }
   public getPlaytimeInHours(): number {
     return Math.floor(this.play_time / 60);
+  }
+  public getTotalPlaytime(): string {
+    const hours = Math.floor(this.play_time / 60);
+    const minutes = this.play_time%60;
+
+    return `${hours} horas e ${minutes} minutos`;
   }
   public getScoreQuadrant(): IScore | undefined {
     if (this.quality_score === undefined || this.interest_score === undefined) {

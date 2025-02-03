@@ -9,12 +9,16 @@ import TextComponent from '../Text';
 import Button from '../Button';
 import PlatformTag from '../PlatformTag';
 import ScoreTag from '../ScoreTag';
+import { router } from 'expo-router';
 
 const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   const styles = useStyles();
 
   return (
-    <Button style={styles.card} onPress={() => console.log(game)}>
+    <Button
+      style={styles.card}
+      onPress={() => router.push('MyGame')}
+    >
       <View style={styles.cardTop}>
         <PlatformTag platform={game.getPlatform} />
 

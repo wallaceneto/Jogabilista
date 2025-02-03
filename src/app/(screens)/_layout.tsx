@@ -29,6 +29,14 @@ const ScreensLayout: React.FC = () => {
           animation: 'slide_from_bottom' 
         }}
       />
+
+      <Stack.Screen
+        name='MyGame/index'
+        options={{
+          title: 'Meu jogo',
+          headerShown: false
+        }}
+      />
     </Stack>
   );
 }

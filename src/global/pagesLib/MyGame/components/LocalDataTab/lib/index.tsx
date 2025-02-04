@@ -1,1 +1,1 @@
-export * from './deleteGame';
+export * from './handleDelete';

@@ -42,7 +42,7 @@ export default class Game {
   public get getName(): string { return this.name }
   public get getCreateDate(): string { return this.create_date }
   public get getPlatform(): IPlatform { return this.platform }
-  public get getStatus(): IStatus | undefined{ return this.status }
+  public get getStatus(): IStatus | 'Não informado' { return this.status || 'Não informado' }
   public get getInterestScore(): number | undefined  { return this.interest_score }
   public get getQualityScore(): number | undefined  { return this.quality_score }
   public get getPlayTime(): number { return this.play_time }
@@ -91,14 +91,35 @@ export default class Game {
       finish_date: this.finish_date,
     };
   }
-  public getPlaytimeInHours(): number {
-    return Math.floor(this.play_time / 60);
+  public getPlaytimeInHours(): string {
+    const hours = Math.floor(this.play_time / 60);
+    const plural = hours > 1 ? 's' : '';
+
+    return `${hours} hora${plural}`;
+  }
+  public getPlaytimeInMinutes(): string {
+    const minutes = this.play_time%60;
+    const plural = minutes > 1 ? 's' : '';
+
+    return `${minutes} minuto${plural}`;
   }
   public getTotalPlaytime(): string {
-    const hours = Math.floor(this.play_time / 60);
-    const minutes = this.play_time%60;
+    const time = this.play_time;
 
-    return `${hours} horas e ${minutes} minutos`;
+    if (time === 0) return 'não jogado';
+    
+    let totalPlaytime = '';
+
+    if (time < 60) {
+      totalPlaytime = this.getPlaytimeInMinutes();
+    } else {
+      totalPlaytime = this.getPlaytimeInHours();
+      if (time%60 > 0) {
+        totalPlaytime += ' e ' + this.getPlaytimeInMinutes();
+      }
+    }
+
+    return totalPlaytime;
   }
   public getScoreQuadrant(): IScore | undefined {
     if (this.quality_score === undefined || this.interest_score === undefined) {
@@ -116,17 +137,17 @@ export default class Game {
       return 'Mediano';
     }
   }
+  public getQualityLetter(): string {
+    if (this.quality_score === undefined) return 'N/A';
+
+    const letters = ['J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
+    return letters[this.quality_score - 1];
+  }
   public getOverallScore(): string {
     if (this.quality_score === undefined || this.interest_score === undefined) {
       return 'N/A';
     }
     
-    let score = '';
-  
-    const letters = ['J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
-    score = letters[this.quality_score - 1];
-    score += this.interest_score.toString();
-  
-    return score;
+    return this.getQualityLetter() + this.interest_score.toString();
   }
 };

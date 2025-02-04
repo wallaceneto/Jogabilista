@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
 import { ILocalDataTabProps } from './types';
-import { deleteGame } from './lib';
+import { handleDelete } from './lib';
 
 import TextComponent from '../../../../../components/Text';
 import StyledButton from '../../../../../components/StyledButton';
@@ -49,9 +49,12 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
         </TextComponent>
 
         <TextComponent>
+          {game.getStatus}
+        </TextComponent>
+        <TextComponent>
           {game.getFinishDate
-            ? `Terminado em ${formatDate(game.getFinishDate, 'default')}`
-            : game.getStatus
+            ? ` em ${formatDate(game.getFinishDate, 'default')}`
+            : null
           }
         </TextComponent>
       </View>
@@ -66,26 +69,28 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
         </TextComponent>
       </View>
 
-      <View style={styles.label}>
-        <TextComponent weight='medium' style={styles.lableTitle}>
+      <View>
+        <TextComponent weight='medium' style={styles.scoreLabel}>
           Nota naval:
         </TextComponent>
 
-        <TextComponent style={styles.scoreText}>
-          {`Qualidade: ${game.getQualityScore}`}
-        </TextComponent>
-        <TextComponent>
-          {`Interessância: ${game.getInterestScore}`}
-        </TextComponent>
+        <View style={styles.label}>
+          <TextComponent style={styles.scoreText}>
+            {`Qualidade: ${game.getQualityLetter()}`}
+          </TextComponent>
+          <TextComponent style={styles.scoreText}>
+            {`Interessância: ${game.getInterestScore || 'N/A'}`}
+          </TextComponent>
+        </View>
       </View>
 
-      {loading ? <LoadingIndicator style={styles.loading} /> 
-        : 
+      {loading ? <LoadingIndicator style={styles.loading} />
+        :
         <StyledButton
           style={styles.deleteButton}
           onPress={() => {
             setLoading(true);
-            deleteGame(game.getId, dispatch);
+            handleDelete(game.getId, dispatch);
           }}
         >
           <Ionicons
@@ -96,7 +101,7 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
             Apagar jogo
           </TextComponent>
         </StyledButton>
-      }      
+      }
 
     </ScrollView>
   );

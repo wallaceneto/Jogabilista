@@ -18,11 +18,15 @@ const useStyles = (color: string) => {
       marginRight: 8,
       marginBottom: 24,
     },
-    platformText: {
-      color: color,
+    scoreLabel: {
+      marginRight: 8,
+      marginBottom: 4,
     },
     scoreText: {
-      marginRight: 8,
+      marginLeft: 16,
+    },
+    platformText: {
+      color: color,
     },
     deleteButton: {
       backgroundColor: colors.commonColors.score.bad,

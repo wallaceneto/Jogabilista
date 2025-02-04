@@ -3,7 +3,6 @@ import { View } from 'react-native';
 
 import useStyles from './styles';
 import { IGameCardProps } from './types';
-import { displayTime } from './lib';
 
 import TextComponent from '../Text';
 import Button from '../Button';
@@ -35,7 +34,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
       <View style={styles.infos}>
         <View style={styles.status}>
           <TextComponent weight='semibold'>
-            Status:
+            {'Status: '}
           </TextComponent>
           <TextComponent>
             {game.getStatus}
@@ -44,10 +43,10 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
 
         <View style={styles.status}>
           <TextComponent weight='semibold'>
-            Tempo:
+            {'Tempo: '}
           </TextComponent>
           <TextComponent>
-            {displayTime(game)}
+            {game.getPlaytimeInHours()}
           </TextComponent>
         </View>
       </View>

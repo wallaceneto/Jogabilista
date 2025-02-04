@@ -27,8 +27,8 @@ const game = new Game({
 
 const MyGame: React.FC = () => {
   const styles = useStyles();
-  const SCREEN_WIDTH = Dimensions.get('window').width;
   const flatListRef = useRef<FlatList>(null);
+  const SCREEN_WIDTH = Dimensions.get('window').width;
   const [currentTab, setCurrentTab] = useState(0);
 
   const tabs = [

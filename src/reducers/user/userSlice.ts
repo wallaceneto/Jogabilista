@@ -30,8 +30,22 @@ const userSlice = createSlice({
     addFullGameList: (state, action: PayloadAction<IGame[]>) => {
       state.allGames = action.payload;
     },
+    removeGame: (state, action: PayloadAction<string>) => {
+      let games: IGame[] = [];
+      state.allGames.forEach(game => {
+        if (game.id !== action.payload) {
+          games.push(game);
+        } else {
+          console.log('Removing game:');
+          console.log(game);
+        }
+      });
+      state.allGames = games;
+
+      storeAllGames(state.allGames);
+    },
   },
 });
 
-export const { setTheme, addGameToList, addFullGameList } = userSlice.actions;
+export const { setTheme, addGameToList, addFullGameList, removeGame } = userSlice.actions;
 export default userSlice.reducer;

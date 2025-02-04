@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
+import { ThemeContext } from '../../../../../storage/context';
 
 const useStyles = (color: string) => {
+  const { colors } = useContext(ThemeContext);
   const SCREEN_WIDTH = Dimensions.get('window').width;
 
   return StyleSheet.create({
@@ -22,6 +25,7 @@ const useStyles = (color: string) => {
       marginRight: 8,
     },
     deleteButton: {
+      backgroundColor: colors.commonColors.score.bad,
       marginTop: 80,
       flexDirection: 'row',
       justifyContent: 'center',

@@ -22,7 +22,7 @@ const ScreensLayout: React.FC = () => {
       />
 
       <Stack.Screen
-        name='AddGame/index'
+        name='AddGame/[id]'
         options={{
           title: 'Novo jogo',
           headerShown: false,

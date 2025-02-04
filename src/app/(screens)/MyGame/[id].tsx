@@ -76,7 +76,7 @@ const MyGame: React.FC = () => {
                 {game.getCover ?
                   <TextComponent>Capa do jogo</TextComponent>
                   :
-                  <Button style={styles.syncGame} onPress={() => { }}>
+                  <Button style={styles.syncGame} onPress={() => console.log(game.getId)}>
                     <Ionicons
                       name='add'
                       style={styles.syncGameIcon}
@@ -89,7 +89,7 @@ const MyGame: React.FC = () => {
                 }
               </View>
 
-              <RoundedButton onPress={() => { }}>
+              <RoundedButton onPress={() => router.push(`/AddGame/${id}`)}>
                 <Ionicons
                   name='create-outline'
                   style={styles.icon}

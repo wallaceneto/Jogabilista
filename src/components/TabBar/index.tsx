@@ -50,7 +50,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBar
 
         <Button
           style={styles.addButton}
-          onPress={() => router.push('/AddGame')}>
+          onPress={() => router.push(`/AddGame/${'0'}`)}>
           <Ionicons name='add' style={styles.addIcon} />
         </Button>
 

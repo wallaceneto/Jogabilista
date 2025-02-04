@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useDispatch } from 'react-redux';
-import { router } from 'expo-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { router, useLocalSearchParams } from 'expo-router';
 
 import useStyles from './styles';
 import { convertPlayTime } from '../../../global/pagesLib/AddGame/lib';
@@ -18,10 +18,16 @@ import StyledButton from '../../../components/StyledButton';
 import { IPlatform, IStatus } from '../../../global/types';
 import DatePicker from '../../../components/DatePicker';
 import LoadingIndicator from '../../../components/LoadingIndicator';
-import { addGameToList } from '../../../reducers/user/userSlice';
+import { addGameToList, updateGame } from '../../../reducers/user/userSlice';
 import Game from '../../../global/classes/Game';
+import { RootState } from '../../../reducers/store';
 
 const AddGame: React.FC = () => {
+  const { id } = useLocalSearchParams();
+  const isUpdate = id !== '0';
+  const allGames = useSelector((state: RootState) => state.user.allGames);
+  const [game, setGame] = useState<Game | undefined>(undefined);
+
   const styles = useStyles();
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState('');
@@ -38,7 +44,6 @@ const AddGame: React.FC = () => {
 
   const submitForm = () => {
     const name = gameName.trim();
-
     if (name !== '') {
       setErrorMsg('');
       setLoading(true);
@@ -47,6 +52,12 @@ const AddGame: React.FC = () => {
       const gameInterest = interestScore ? parseInt(interestScore) : undefined;
 
       const newGame = new Game({
+        // immutable attributes
+        id: game ? game.getId : undefined,
+        create_date: game ? game.getCreateDate : undefined,
+        cover: game ? game.getCover : undefined,
+        sync_game: game ? game.getSyncGame : undefined,
+        // mutable attributes
         name: name,
         platform: platformValue || undefined,
         play_time: convertPlayTime(playTime, timeUnit),
@@ -57,7 +68,11 @@ const AddGame: React.FC = () => {
       });
 
       setTimeout(() => {
-        dispatch(addGameToList(newGame.getAllAtributes()));
+        if (isUpdate) {
+          dispatch(updateGame(newGame.getAllAtributes()));
+        } else {
+          dispatch(addGameToList(newGame.getAllAtributes()));
+        }
         router.replace('(tabs)');
       }, 900);
 
@@ -66,12 +81,35 @@ const AddGame: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    if (isUpdate) {
+      setLoading(true);
+
+      const data = allGames.find(game => game.id === id);
+      if (data) {
+        const currentGame = new Game(data);
+        setGame(currentGame);
+
+        setGameName(currentGame.getName);
+        setPlatformValue(currentGame.getPlatform);
+        setStatusValue(currentGame.getStatus === 'Não informado' ? '' : currentGame.getStatus);
+        setPlayDate(currentGame.getFinishDate || '');
+        setQualityScore(currentGame.getQualityLetter() === 'N/A' ? '' : currentGame.getQualityLetter());
+        setInterestScore(currentGame.getInterestScore ? currentGame.getInterestScore.toString() : '');
+        setPlaytime(currentGame.getPlayTime.toString());
+        setTimeUnit('min');
+
+        setLoading(false);
+      }
+    }
+  }, [])
+
   return (
     <View style={styles.background}>
 
       <View style={styles.header}>
         <TextComponent weight='bold' style={styles.headerTitle}>
-          Adicionar jogo
+          {isUpdate ? 'Editar' : 'Adicionar'} jogo
         </TextComponent>
 
         <Button onPress={router.back}>
@@ -166,7 +204,7 @@ const AddGame: React.FC = () => {
 
           <StyledButton onPress={submitForm} >
             <TextComponent light weight='bold'>
-              Adicionar
+              {isUpdate ? 'Editar' : 'Adicionar'}
             </TextComponent>
           </StyledButton>
         </ScrollView>

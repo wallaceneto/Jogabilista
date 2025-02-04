@@ -7,6 +7,7 @@ import { removeGame } from "../../../../../../reducers/user/userSlice";
 const handleDelete = (
   id: string,
   dispatch: Dispatch<UnknownAction>,
+  setLoading: (value: boolean) => void,
 ) => {
   Alert.alert(
     'Deseja mesmo apagar esse jogo?', 
@@ -16,6 +17,8 @@ const handleDelete = (
       {
         text: 'Apagar',
         onPress: () => {
+          setLoading(true);
+          
           setTimeout(() => {
               dispatch(removeGame(id));
               router.replace('(tabs)');;
@@ -25,7 +28,7 @@ const handleDelete = (
       {
         text: 'Cancelar',
         style: 'cancel',
-        onPress: () => {}
+        onPress: () => setLoading(false)
       },
     ]
   )

@@ -88,10 +88,7 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
         :
         <StyledButton
           style={styles.deleteButton}
-          onPress={() => {
-            setLoading(true);
-            handleDelete(game.getId, dispatch);
-          }}
+          onPress={() => handleDelete(game.getId, dispatch, setLoading)}
         >
           <Ionicons
             name='trash-outline'

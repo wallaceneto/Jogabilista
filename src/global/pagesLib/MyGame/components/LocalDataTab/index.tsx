@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
 
@@ -19,7 +19,10 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <ScrollView 
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
       {loading ? <LoadingIndicator />
         :
         <>
@@ -93,7 +96,7 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
           </StyledButton>
         </>
       }
-    </View>
+    </ScrollView>
   );
 }
 

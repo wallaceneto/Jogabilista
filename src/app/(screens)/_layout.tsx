@@ -31,7 +31,7 @@ const ScreensLayout: React.FC = () => {
       />
 
       <Stack.Screen
-        name='MyGame/index'
+        name='MyGame/[id]'
         options={{
           title: 'Meu jogo',
           headerShown: false

@@ -15,28 +15,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addGameToList: (state, action: PayloadAction<IGame>) => {
-      let games: IGame[] = [];
-      games.push(action.payload);
-      games.push(...state.allGames);
-      state.allGames = games;
-
+      state.allGames = [action.payload, ...state.allGames];
       storeAllGames(state.allGames);
     },
     addFullGameList: (state, action: PayloadAction<IGame[]>) => {
       state.allGames = action.payload;
     },
     removeGame: (state, action: PayloadAction<string>) => {
-      let games: IGame[] = [];
-      state.allGames.forEach(game => {
-        if (game.id !== action.payload) {
-          games.push(game);
-        } else {
-          console.log('Removing game:');
-          console.log(game);
-        }
-      });
-      state.allGames = games;
-
+      state.allGames = state.allGames.filter(game => game.id !== action.payload);
       storeAllGames(state.allGames);
     },
   },

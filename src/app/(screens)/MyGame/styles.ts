@@ -7,6 +7,15 @@ const useStyles = () => {
   const { colors } = useContext(ThemeContext);
 
   return StyleSheet.create({
+    errorMsg: {
+      fontSize: 24,
+      marginTop: 80,
+      alignSelf: 'center',
+    },
+    loading: {
+      alignSelf: 'center',
+      marginTop: 80,
+    },
     container: {
       flex: 1,
       backgroundColor: colors.commonColors.backgroundColor,

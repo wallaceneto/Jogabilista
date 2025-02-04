@@ -17,7 +17,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   return (
     <Button
       style={styles.card}
-      onPress={() => router.push('MyGame')}
+      onPress={() => router.push(`MyGame/${game.getId}`)}
     >
       <View style={styles.cardTop}>
         <PlatformTag platform={game.getPlatform} />

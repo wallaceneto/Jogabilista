@@ -9,9 +9,9 @@ const handleToggleTheme = (
   setLoading(true);
 
   setTimeout(() => {
-    router.navigate('/(tabs)');
     toggleTheme(current);
     storeTheme(current);
+    router.replace('(tabs)');
   }, 100);
 
 }

@@ -35,6 +35,9 @@ const useStyles = (color: string) => {
       marginRight: 8,
       fontSize: 24,
     },
+    loading: {
+      marginTop: 80,
+    },
   });
 };
 

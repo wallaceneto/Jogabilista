@@ -19,83 +19,85 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <ScrollView 
+    <ScrollView
       style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      {loading ? <LoadingIndicator />
-        :
-        <>
-          <View style={styles.label}>
-            <TextComponent weight='medium' style={styles.lableTitle}>
-              Adicionado em:
-            </TextComponent>
+      <View style={styles.label}>
+        <TextComponent weight='medium' style={styles.lableTitle}>
+          Adicionado em:
+        </TextComponent>
 
-            <TextComponent>
-              {formatDate(game.getCreateDate, 'withhour')}
-            </TextComponent>
-          </View>
+        <TextComponent>
+          {formatDate(game.getCreateDate, 'withhour')}
+        </TextComponent>
+      </View>
 
-          <View style={styles.label}>
-            <TextComponent weight='medium' style={styles.lableTitle}>
-              Plataforma jogada:
-            </TextComponent>
+      <View style={styles.label}>
+        <TextComponent weight='medium' style={styles.lableTitle}>
+          Plataforma jogada:
+        </TextComponent>
 
-            <TextComponent weight='semibold' style={styles.platformText}>
-              {game.getPlatform}
-            </TextComponent>
-          </View>
+        <TextComponent weight='semibold' style={styles.platformText}>
+          {game.getPlatform}
+        </TextComponent>
+      </View>
 
-          <View style={styles.label}>
-            <TextComponent weight='medium' style={styles.lableTitle}>
-              Status:
-            </TextComponent>
+      <View style={styles.label}>
+        <TextComponent weight='medium' style={styles.lableTitle}>
+          Status:
+        </TextComponent>
 
-            <TextComponent>
-              {game.getFinishDate
-                ? `Terminado em ${formatDate(game.getFinishDate, 'default')}`
-                : game.getStatus
-              }
-            </TextComponent>
-          </View>
+        <TextComponent>
+          {game.getFinishDate
+            ? `Terminado em ${formatDate(game.getFinishDate, 'default')}`
+            : game.getStatus
+          }
+        </TextComponent>
+      </View>
 
-          <View style={styles.label}>
-            <TextComponent weight='medium' style={styles.lableTitle}>
-              Tempo de jogo:
-            </TextComponent>
+      <View style={styles.label}>
+        <TextComponent weight='medium' style={styles.lableTitle}>
+          Tempo de jogo:
+        </TextComponent>
 
-            <TextComponent>
-              {game.getTotalPlaytime()}
-            </TextComponent>
-          </View>
+        <TextComponent>
+          {game.getTotalPlaytime()}
+        </TextComponent>
+      </View>
 
-          <View style={styles.label}>
-            <TextComponent weight='medium' style={styles.lableTitle}>
-              Nota naval:
-            </TextComponent>
+      <View style={styles.label}>
+        <TextComponent weight='medium' style={styles.lableTitle}>
+          Nota naval:
+        </TextComponent>
 
-            <TextComponent style={styles.scoreText}>
-              {`Qualidade: ${game.getQualityScore}`}
-            </TextComponent>
-            <TextComponent>
-              {`Interessância: ${game.getInterestScore}`}
-            </TextComponent>
-          </View>
+        <TextComponent style={styles.scoreText}>
+          {`Qualidade: ${game.getQualityScore}`}
+        </TextComponent>
+        <TextComponent>
+          {`Interessância: ${game.getInterestScore}`}
+        </TextComponent>
+      </View>
 
-          <StyledButton
-            style={styles.deleteButton}
-            onPress={() => deleteGame(game.getId, setLoading, dispatch)}
-          >
-            <Ionicons
-              name='trash-outline'
-              style={styles.deleteIcon}
-            />
-            <TextComponent light weight='bold'>
-              Apagar jogo
-            </TextComponent>
-          </StyledButton>
-        </>
-      }
+      {loading ? <LoadingIndicator style={styles.loading} /> 
+        : 
+        <StyledButton
+          style={styles.deleteButton}
+          onPress={() => {
+            setLoading(true);
+            deleteGame(game.getId, dispatch);
+          }}
+        >
+          <Ionicons
+            name='trash-outline'
+            style={styles.deleteIcon}
+          />
+          <TextComponent light weight='bold'>
+            Apagar jogo
+          </TextComponent>
+        </StyledButton>
+      }      
+
     </ScrollView>
   );
 }

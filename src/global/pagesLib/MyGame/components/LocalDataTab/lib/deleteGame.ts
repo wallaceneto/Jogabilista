@@ -6,15 +6,12 @@ import { removeGame } from "../../../../../../reducers/user/userSlice";
 
 const deleteGame = (
   id: string,
-  setLoading: (value: boolean) => void,
   dispatch: Dispatch<UnknownAction>,
 ) => {
-  setLoading(true);
-
-  dispatch(removeGame(id));
-  router.back();
-
-  setLoading(false);
+  setTimeout(() => {
+    dispatch(removeGame(id));
+    router.replace('(tabs)');;
+  }, 900);
 }
 
 export { deleteGame }

@@ -15,6 +15,8 @@ import Button from '../../../components/Button';
 import ScoreTag from '../../../components/ScoreTag';
 import { RootState } from '../../../reducers/store';
 import LoadingIndicator from '../../../components/LoadingIndicator';
+import { searchGame } from '../../../services/getData';
+import { IApiGames } from '../../../global/types';
 
 type TabType = {
   item: React.ReactNode;
@@ -36,6 +38,20 @@ const MyGame: React.FC = () => {
 
   const toggleTab = (tab: number) => {
     flatListRef.current?.scrollToIndex({ index: tab });
+  }
+
+  const handleSyncGame = async (gameName: string) => {
+    const response = await searchGame(gameName);
+
+    if (response) {
+      if (response.status === 200) {
+        const games: IApiGames[] = response.data;
+
+        games.forEach(game => console.log(game.name));
+      } else {
+        console.log('Error ' + response.status);
+      }
+    }
   }
 
   useEffect(() => {
@@ -76,7 +92,10 @@ const MyGame: React.FC = () => {
                 {game.getCover ?
                   <TextComponent>Capa do jogo</TextComponent>
                   :
-                  <Button style={styles.syncGame} onPress={() => console.log(game.getId)}>
+                  <Button 
+                    style={styles.syncGame} 
+                    onPress={() => handleSyncGame(game.getName)}
+                  >
                     <Ionicons
                       name='add'
                       style={styles.syncGameIcon}

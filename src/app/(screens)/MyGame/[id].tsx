@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import useStyles from './styles';
 import LocalDataTab from '../../../global/pagesLib/MyGame/components/LocalDataTab';
 import RemoteDataTab from '../../../global/pagesLib/MyGame/components/RemoteDataTab';
+import { ITabType } from '../../../global/pagesLib/MyGame/types';
+import { toggleTab } from '../../../global/pagesLib/MyGame/lib';
 
 import TextComponent from '../../../components/Text';
 import Game from '../../../global/classes/Game';
@@ -18,27 +20,18 @@ import LoadingIndicator from '../../../components/LoadingIndicator';
 import { searchGame } from '../../../services/getData';
 import { IApiGames } from '../../../global/types';
 
-type TabType = {
-  item: React.ReactNode;
-  index: number;
-};
-
 const MyGame: React.FC = () => {
   const { id } = useLocalSearchParams();
   const allGames = useSelector((state: RootState) => state.user.allGames);
-  
+
   const styles = useStyles();
   const flatListRef = useRef<FlatList>(null);
   const SCREEN_WIDTH = Dimensions.get('window').width;
-  
+
   const [loading, setLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState(0);
   const [game, setGame] = useState<Game | undefined>(undefined);
-  const [tabs, setTabs] = useState<TabType[]>();
-
-  const toggleTab = (tab: number) => {
-    flatListRef.current?.scrollToIndex({ index: tab });
-  }
+  const [tabs, setTabs] = useState<ITabType[]>();
 
   const handleSyncGame = async (gameName: string) => {
     const response = await searchGame(gameName);
@@ -92,9 +85,9 @@ const MyGame: React.FC = () => {
                 {game.getCover ?
                   <TextComponent>Capa do jogo</TextComponent>
                   :
-                  <Button 
-                    style={styles.syncGame} 
-                    onPress={() => handleSyncGame(game.getName)}
+                  <Button
+                    style={styles.syncGame}
+                    onPress={() => router.push(`SearchGame/${game.getName}`)}
                   >
                     <Ionicons
                       name='add'
@@ -130,14 +123,14 @@ const MyGame: React.FC = () => {
             <View style={styles.tabContainer}>
               <Button
                 style={[styles.tabButton, currentTab === 0 ? styles.tabButtonSelected : null]}
-                onPress={() => toggleTab(0)}
+                onPress={() => toggleTab(flatListRef, 0)}
               >
                 <TextComponent>Meus dados</TextComponent>
               </Button>
 
               <Button
                 style={[styles.tabButton, currentTab === 1 ? styles.tabButtonSelected : null]}
-                onPress={() => toggleTab(1)}
+                onPress={() => toggleTab(flatListRef, 1)}
               >
                 <TextComponent>Detalhes</TextComponent>
               </Button>
@@ -145,7 +138,6 @@ const MyGame: React.FC = () => {
 
             <FlatList
               ref={flatListRef}
-              style={styles.content}
               data={tabs}
               keyExtractor={item => item.index.toString()}
               renderItem={({ item }) => item.item}
@@ -158,10 +150,11 @@ const MyGame: React.FC = () => {
               scrollEventThrottle={0}
               onScroll={(data) => {
                 let offset = data.nativeEvent.contentOffset.x / SCREEN_WIDTH;
-                offset = Math.floor(offset);
-                if (offset < 0) offset = 0;
-
-                setCurrentTab(offset);
+                if (offset < 0.5) {
+                  setCurrentTab(0);
+                } else {
+                  setCurrentTab(1);
+                }
               }}
             />
           </>

@@ -26,7 +26,7 @@ const ScreensLayout: React.FC = () => {
         options={{
           title: 'Novo jogo',
           headerShown: false,
-          animation: 'slide_from_bottom' 
+          animation: 'slide_from_bottom'
         }}
       />
 
@@ -34,6 +34,14 @@ const ScreensLayout: React.FC = () => {
         name='MyGame/[id]'
         options={{
           title: 'Meu jogo',
+          headerShown: false
+        }}
+      />
+
+      <Stack.Screen
+        name='SearchGame/[name]'
+        options={{
+          title: 'Buscar jogo',
           headerShown: false
         }}
       />

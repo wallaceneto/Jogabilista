@@ -9,6 +9,7 @@ const useStyles = (color: string) => {
   return StyleSheet.create({
     container: {
       paddingHorizontal: 16,
+      paddingTop: 8,
       width: SCREEN_WIDTH,
     },
     label: {
@@ -31,6 +32,7 @@ const useStyles = (color: string) => {
     deleteButton: {
       backgroundColor: colors.commonColors.score.bad,
       marginTop: 80,
+      marginBottom: 24,
       flexDirection: 'row',
       justifyContent: 'center',
     },

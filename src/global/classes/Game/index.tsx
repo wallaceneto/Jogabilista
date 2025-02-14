@@ -1,6 +1,4 @@
 import uuid from 'react-native-uuid';
-import { useContext } from 'react';
-import { ThemeContext } from '../../../storage/context';
 import { IGame, IPlatform, IScore, IStatus } from '../../types';
 
 export default class Game {

@@ -61,7 +61,7 @@ const useStyles = () => {
     },
     tabContainer: {
       flexDirection: 'row',
-      marginTop: 32,
+      marginTop: 24,
     },
     tabButton: {
       width: '50%',
@@ -71,9 +71,6 @@ const useStyles = () => {
     tabButtonSelected: {
       borderBottomWidth: 3,
       borderBottomColor: colors.primaryColor,
-    },
-    content: {
-      marginTop: 32,
     },
   });
 };

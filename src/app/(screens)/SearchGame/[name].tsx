@@ -29,6 +29,7 @@ const SearchGame: React.FC = () => {
           onChangeText={setQueryString}
           cleanSearch={() => setQueryString('')}
           handleSearch={() => {}}
+          borderless
         />
 
         <Button onPress={router.back}>

@@ -9,6 +9,9 @@ const useStyles = () => {
     container: {
       flex: 1,
     },
+    loading: {
+      marginTop: 80,
+    },
     header: {
       backgroundColor: colors.primaryColor,
       paddingVertical: 24,

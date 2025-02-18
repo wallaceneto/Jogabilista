@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import useStyles from './styles';
-import TextComponent from '../../../components/Text';
 import Button from '../../../components/Button';
 import PopularGames from '../../../global/pagesLib/SearchGame/components/PopularGames';
 import SearchBar from '../../../components/SearchBar';
-import GamesResults from '../../../global/pagesLib/SearchGame/components/GamesResults';
+import { IApiGames } from '../../../global/types';
+import LoadingIndicator from '../../../components/LoadingIndicator';
+import SearchResult from '../../../global/pagesLib/SearchGame/components/SearchResult';
+import { handleSearch } from '../../../global/pagesLib/SearchGame/lib';
 
 const SearchGame: React.FC = () => {
   const { name } = useLocalSearchParams();
   const styles = useStyles();
 
+  const [loading, setLoading] = useState(false);
   const [queryString, setQueryString] = useState<string>(name.toString());
-  const [results, setResults] = useState<string[]>([]);
+  const [results, setResults] = useState<IApiGames[]>([]);
 
   useEffect(() => {
-    setQueryString(name.toString());
+    if (name) {
+      setQueryString(name.toString());
+      handleSearch(name.toString(), setLoading, setResults, setQueryString);
+    }
   }, []);
 
   return (
@@ -26,9 +32,9 @@ const SearchGame: React.FC = () => {
       <View style={styles.header}>
         <SearchBar
           text={queryString}
-          onChangeText={setQueryString}
+          onChangeText={(value: string) => handleSearch(value, setLoading, setResults, setQueryString)}
           cleanSearch={() => setQueryString('')}
-          handleSearch={() => {}}
+          handleSearch={() => { }}
           borderless
         />
 
@@ -40,9 +46,20 @@ const SearchGame: React.FC = () => {
         </Button>
       </View>
 
-      {queryString !== '' 
-        ? <GamesResults queryString={queryString} />
-        : <PopularGames />
+      {queryString === ''
+        ? <PopularGames />
+        :
+        loading ? <LoadingIndicator style={styles.loading} /> :
+          <View style={styles.container}>
+            <FlatList
+              data={results}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) =>
+                <SearchResult gameId={item.cover} gameName={item.name} />
+              }
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
       }
     </View>
   );

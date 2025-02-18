@@ -40,7 +40,7 @@ const SearchBar: React.FC<ISearchBarProps> = ({
           onPress={() => cleanSearch()}
         >
           <Ionicons
-            name='close'
+            name='trash-outline'
             style={styles.searchIcon}
           />
         </Button>

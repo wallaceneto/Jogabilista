@@ -1,3 +1,3 @@
 import { IStatus } from "../../../types";
 
-export type IStatusFilter = IStatus | undefined;
+export type IStatusFilter = IStatus | 'Não informado';

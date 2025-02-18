@@ -3,6 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { FlatList, View } from 'react-native';
 
 import useStyles from './styles';
+import { IGameResult } from '../../types';
 
 import TextComponent from '../../../../../components/Text';
 import Divider from '../../../../../components/Divider';
@@ -10,11 +11,6 @@ import Button from '../../../../../components/Button';
 import LoadingIndicator from '../../../../../components/LoadingIndicator';
 import { getPopularGames } from '../../../../../services/getData';
 import { IApiGames } from '../../../../types';
-
-type IGameResult = {
-  id: string,
-  name: string,
-};
 
 const PopularGames: React.FC = () => {
   const styles = useStyles();

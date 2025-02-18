@@ -7,12 +7,14 @@ import useStyles from './styles';
 import TextComponent from '../../../components/Text';
 import Button from '../../../components/Button';
 import PopularGames from '../../../global/pagesLib/SearchGame/components/PopularGames';
+import SearchBar from '../../../components/SearchBar';
+import GamesResults from '../../../global/pagesLib/SearchGame/components/GamesResults';
 
 const SearchGame: React.FC = () => {
   const { name } = useLocalSearchParams();
   const styles = useStyles();
 
-  const [queryString, setQueryString] = useState(name);
+  const [queryString, setQueryString] = useState<string>(name.toString());
   const [results, setResults] = useState<string[]>([]);
 
   useEffect(() => {
@@ -22,9 +24,12 @@ const SearchGame: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TextComponent light size={15}>
-          {`Buscar jogo ${queryString}`}
-        </TextComponent>
+        <SearchBar
+          text={queryString}
+          onChangeText={setQueryString}
+          cleanSearch={() => setQueryString('')}
+          handleSearch={() => {}}
+        />
 
         <Button onPress={router.back}>
           <Ionicons
@@ -34,7 +39,8 @@ const SearchGame: React.FC = () => {
         </Button>
       </View>
 
-      {queryString === '' ? null
+      {queryString !== '' 
+        ? <GamesResults queryString={queryString} />
         : <PopularGames />
       }
     </View>

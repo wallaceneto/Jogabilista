@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import debounce from 'lodash/debounce';
 
 import useStyles from './styles';
 import Button from '../../../components/Button';
@@ -19,11 +20,16 @@ const SearchGame: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [queryString, setQueryString] = useState<string>(name.toString());
   const [results, setResults] = useState<IApiGames[]>([]);
+  
+  const debounceSearch = useCallback(debounce(() => 
+    {console.log(queryString)}, 500), 
+  []);
 
   useEffect(() => {
     if (name) {
-      setQueryString(name.toString());
-      handleSearch(name.toString(), setLoading, setResults, setQueryString);
+      const gameName = name.toString();
+      setQueryString(gameName);
+      handleSearch(gameName, setLoading, setResults, setQueryString);
     }
   }, []);
 
@@ -32,9 +38,9 @@ const SearchGame: React.FC = () => {
       <View style={styles.header}>
         <SearchBar
           text={queryString}
-          onChangeText={(value: string) => handleSearch(value, setLoading, setResults, setQueryString)}
+          onChangeText={(value: string) => { setQueryString(value); debounceSearch; }}
           cleanSearch={() => setQueryString('')}
-          handleSearch={() => { }}
+          handleSearch={() => {}}
           borderless
         />
 

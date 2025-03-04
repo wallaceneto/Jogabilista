@@ -9,7 +9,6 @@ import Divider from '../../../../../components/Divider';
 import LoadingIndicator from '../../../../../components/LoadingIndicator';
 import Button from '../../../../../components/Button';
 import { getCoverUrl } from '../../../../../services/getData';
-import { IApiCover } from '../../../../types';
 
 const SearchResult: React.FC<ISearchResultProps> = ({ gameId, gameName }) => {
   const styles = useStyles();
@@ -44,7 +43,10 @@ const SearchResult: React.FC<ISearchResultProps> = ({ gameId, gameName }) => {
               style={styles.image}
               source={{ uri: cover }}
             />
-            : <View style={styles.imageContainer} />
+            : 
+            <View style={styles.imageContainer}>
+              <TextComponent light>Não encontrado</TextComponent>
+            </View>
         }
 
         <TextComponent weight='medium' style={styles.title}>

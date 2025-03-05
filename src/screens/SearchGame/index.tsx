@@ -6,13 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
 import { ISearchGameProps } from './types';
+import PopularGames from './components/PopularGames';
+import SearchResult from './components/SearchResult';
+import { handleSearch } from './lib';
 import Button from '../../components/Button';
-import PopularGames from '../../global/pagesLib/SearchGame/components/PopularGames';
 import SearchBar from '../../components/SearchBar';
 import { IApiGames, NavigationProps } from '../../global/types';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import SearchResult from '../../global/pagesLib/SearchGame/components/SearchResult';
-import { handleSearch } from '../../global/pagesLib/SearchGame/lib';
 
 const SearchGame: React.FC<ISearchGameProps> = ({ route }) => {
   const name = route.params ? route.params.gameName : '' ;

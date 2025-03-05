@@ -4,11 +4,10 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
-import { IMyGameProps } from './types';
-import LocalDataTab from '../../global/pagesLib/MyGame/components/LocalDataTab';
-import RemoteDataTab from '../../global/pagesLib/MyGame/components/RemoteDataTab';
-import { ITabType } from '../../global/pagesLib/MyGame/types';
-import { toggleTab } from '../../global/pagesLib/MyGame/lib';
+import { IMyGameProps, ITabType } from './types';
+import { toggleTab } from './lib';
+import LocalDataTab from './components/LocalDataTab';
+import RemoteDataTab from './components/RemoteDataTab';
 
 import TextComponent from '../../components/Text';
 import RoundedButton from '../../components/RoundedButton';

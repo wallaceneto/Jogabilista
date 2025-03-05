@@ -8,7 +8,6 @@ import {
   Quicksand_700Bold,
 } from '@expo-google-fonts/quicksand';
 import { useDispatch } from 'react-redux';
-import { SplashScreen } from 'expo-router';
 
 import { StackRoutes } from './stack.routes';
 import { ThemeContext } from '../storage/context';
@@ -51,7 +50,7 @@ const Routes: React.FC = () => {
 
   const onLayoutRootView = useCallback(() => {
     if (appIsReady) {
-      SplashScreen.hide();
+      // SplashScreen.hide();
     }
   }, [appIsReady]);
 

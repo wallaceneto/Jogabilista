@@ -3,8 +3,8 @@ import { FlatList, Modal, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import useStyles from './styles';
-import { cleanSearch, fetchSearch } from '../../global/pagesLib/Home/lib';
-import { IPlatformFilter, IScoreFilter, IStatusFilter } from '../../global/pagesLib/Home/types';
+import { IPlatformFilter, IScoreFilter, IStatusFilter } from './types';
+import { cleanSearch, fetchSearch } from './lib';
 import TextComponent from '../../components/Text';
 import GameCard from '../../components/GameCard';
 import Game from '../../global/classes/Game';

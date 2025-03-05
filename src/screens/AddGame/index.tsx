@@ -6,9 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
 import { IAddGameProps } from './types';
-import { convertPlayTime } from '../../global/pagesLib/AddGame/lib';
-import { ITimeUnit } from '../../global/pagesLib/AddGame/types';
-import TimeField from '../../global/pagesLib/AddGame/components/TimeField';
+import { convertPlayTime } from './lib';
+import { ITimeUnit } from './types';
+import TimeField from './components/TimeField';
 
 import { platforms, status, quality, interest, NavigationProps } from '../../global/types';
 import TextComponent from '../../components/Text';

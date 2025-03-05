@@ -4,8 +4,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
-import SectionButton from '../../global/pagesLib/Settings/components/SectionButton';
-import { appVersion, cleanStorageAlert, repositoryURL } from '../../global/pagesLib/Settings/lib';
+import { appVersion, cleanStorageAlert, repositoryURL } from './lib';
+import SectionButton from './components/SectionButton';
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
 import { NavigationProps } from '../../global/types';
@@ -70,7 +70,7 @@ const Settings: React.FC = () => {
         />
         
         <SectionButton
-          onPress={() => navigation.push('AddGame')}
+          onPress={() => {}}
           title='Versão'
           icon={
             <Ionicons

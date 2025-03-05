@@ -4,14 +4,14 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
-import { primaryColor } from '../../global/pagesLib/SwitchTheme/types';
+import { primaryColor } from './types';
+import { handleToggleTheme } from './lib';
+import ThemeButton from './components/ThemeButton';
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
-import ThemeButton from '../../global/pagesLib/SwitchTheme/components/ThemeButton';
 import StyledButton from '../../components/StyledButton';
 import { ThemeContext } from '../../storage/context';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import { handleToggleTheme } from '../../global/pagesLib/SwitchTheme/lib/handleToggleTheme';
 import { NavigationProps } from '../../global/types';
 
 const SwitchTheme: React.FC = () => {

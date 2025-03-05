@@ -1,17 +1,18 @@
-import { router } from "expo-router";
 import { storeTheme } from "../../../../storage/asyncStorage";
+import { NavigationProps } from "../../../types";
 
 const handleToggleTheme = (
   current: string,
   setLoading: (value: boolean) => void,
-  toggleTheme: (value: string) => void
+  toggleTheme: (value: string) => void,
+  navigation: NavigationProps,
 ) => {
   setLoading(true);
 
   setTimeout(() => {
     toggleTheme(current);
     storeTheme(current);
-    router.replace('(tabs)');
+    navigation.popTo('Homepage');
   }, 100);
 
 }

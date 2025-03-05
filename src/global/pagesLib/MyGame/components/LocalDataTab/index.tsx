@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
 import { ILocalDataTabProps } from './types';
@@ -11,8 +12,10 @@ import TextComponent from '../../../../../components/Text';
 import StyledButton from '../../../../../components/StyledButton';
 import { formatDate, getPlatformColor } from '../../../../lib';
 import LoadingIndicator from '../../../../../components/LoadingIndicator';
+import { NavigationProps } from '../../../../types';
 
 const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
+  const navigation = useNavigation<NavigationProps>();
   const styles = useStyles(getPlatformColor(game.getPlatform));
   const dispatch = useDispatch();
 
@@ -88,7 +91,9 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
         :
         <StyledButton
           style={styles.deleteButton}
-          onPress={() => handleDelete(game.getId, dispatch, setLoading)}
+          onPress={() => 
+            handleDelete(game.getId, dispatch, setLoading, () => navigation.replace('Homepage'))
+          }
         >
           <Ionicons
             name='trash-outline'

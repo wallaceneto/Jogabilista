@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
 import { IGameCardProps } from './types';
@@ -8,15 +9,16 @@ import TextComponent from '../Text';
 import Button from '../Button';
 import PlatformTag from '../PlatformTag';
 import ScoreTag from '../ScoreTag';
-import { router } from 'expo-router';
+import { NavigationProps } from '../../global/types';
 
 const GameCard: React.FC<IGameCardProps> = ({ game }) => {
+  const navigation = useNavigation<NavigationProps>()
   const styles = useStyles();
 
   return (
     <Button
       style={styles.card}
-      onPress={() => router.push(`MyGame/${game.getId}`)}
+      onPress={() => navigation.push('MyGame', { game })}
     >
       <View style={styles.cardTop}>
         <PlatformTag platform={game.getPlatform} />

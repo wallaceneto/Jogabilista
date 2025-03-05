@@ -94,7 +94,7 @@ const MyGame: React.FC<IMyGameProps> = ({ route }) => {
                 }
               </View>
 
-              <RoundedButton onPress={() => navigation.navigate('AddGame')}>
+              <RoundedButton onPress={() => navigation.navigate('AddGame', { game })}>
                 <Ionicons
                   name='create-outline'
                   style={styles.icon}

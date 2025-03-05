@@ -14,8 +14,11 @@ import FilterButton from '../../components/FilterButton';
 import FilterModal from '../../modals/FilterModal';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { RootState } from '../../reducers/store';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationProps } from '../../global/types';
 
 const Home: React.FC = () => {
+  const navigation = useNavigation<NavigationProps>();
   const styles = useStyles();
   const allGames = useSelector((state: RootState) => state.user.allGames);
 

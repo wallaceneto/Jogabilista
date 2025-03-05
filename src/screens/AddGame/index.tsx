@@ -22,16 +22,17 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 import { addGameToList, updateGame } from '../../reducers/user/userSlice';
 import Game from '../../global/classes/Game';
 
-const AddGame: React.FC<IAddGameProps> = (props) => {
-  const isUpdate = props.game !== undefined;
+const AddGame: React.FC<IAddGameProps> = ({ route }) => {
+  const previouGame = route.params ? route.params.game : undefined;
+  const isUpdate = previouGame !== undefined;
   const styles = useStyles();
   const dispatch = useDispatch();
-    const navigation = useNavigation<NavigationProps>();
+  const navigation = useNavigation<NavigationProps>();
 
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const [game, setGame] = useState<Game | undefined>(undefined);
+  const [game, setGame] = useState<Game | undefined>(previouGame);
   const [gameName, setGameName] = useState('');
   const [platformValue, setPlatformValue] = useState<IPlatform | ''>('');
   const [statusValue, setStatusValue] = useState<IStatus | ''>('');
@@ -67,12 +68,12 @@ const AddGame: React.FC<IAddGameProps> = (props) => {
       });
 
       setTimeout(() => {
-        if (props.game) {
+        if (game) {
           dispatch(updateGame(newGame.getAllAtributes()));
         } else {
           dispatch(addGameToList(newGame.getAllAtributes()));
         }
-        navigation.replace('Homepage');
+        navigation.popToTop();
       }, 900);
 
     } else {
@@ -81,19 +82,17 @@ const AddGame: React.FC<IAddGameProps> = (props) => {
   }
 
   useEffect(() => {
-    if (props.game) {
+    if (isUpdate) {
       setLoading(true);
 
-      const currentGame = new Game(props.game);
-      setGame(currentGame);
-
-      setGameName(currentGame.getName);
-      setPlatformValue(currentGame.getPlatform);
-      setStatusValue(currentGame.getStatus === 'Não informado' ? '' : currentGame.getStatus);
-      setPlayDate(currentGame.getFinishDate || '');
-      setQualityScore(currentGame.getQualityLetter() === 'N/A' ? '' : currentGame.getQualityLetter());
-      setInterestScore(currentGame.getInterestScore ? currentGame.getInterestScore.toString() : '');
-      setPlaytime(currentGame.getPlayTime.toString());
+      setGame(previouGame);
+      setGameName(previouGame.getName);
+      setPlatformValue(previouGame.getPlatform);
+      setStatusValue(previouGame.getStatus === 'Não informado' ? '' : previouGame.getStatus);
+      setPlayDate(previouGame.getFinishDate || '');
+      setQualityScore(previouGame.getQualityLetter() === 'N/A' ? '' : previouGame.getQualityLetter());
+      setInterestScore(previouGame.getInterestScore ? previouGame.getInterestScore.toString() : '');
+      setPlaytime(previouGame.getPlayTime.toString());
       setTimeUnit('min');
 
       setLoading(false);

@@ -1,5 +1,4 @@
-import { IGame } from "../../../global/types";
+import { StackScreenProps } from "@react-navigation/stack";
+import { StackParamList } from "../../../global/types";
 
-export type IAddGameProps = {
-  game?: IGame,
-};
+export type IAddGameProps = StackScreenProps<StackParamList , 'AddGame'>

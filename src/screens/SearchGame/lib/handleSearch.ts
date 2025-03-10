@@ -5,13 +5,13 @@ const handleSearch = async (
   gameName: string,
   setLoading: (value: boolean) => void,
   setResults: (value: IApiGames[]) => void,
-  setQueryString: (value: string) => void,
+  setSearchMade: (values: boolean) => void,
 ) => {
-  setQueryString(gameName);
   setLoading(true);
 
   const query = gameName.trim();
   if (query) {
+    setSearchMade(true);
     const response = await searchGame(query);
 
     if (response) {

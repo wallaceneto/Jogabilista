@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import debounce from 'lodash/debounce';
 import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
@@ -13,48 +12,69 @@ import Button from '../../components/Button';
 import SearchBar from '../../components/SearchBar';
 import { IApiGames, NavigationProps } from '../../global/types';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import TextComponent from '../../components/Text';
 
 const SearchGame: React.FC<ISearchGameProps> = ({ route }) => {
-  const name = route.params ? route.params.gameName : '' ;
+  const name = route.params ? route.params.gameName : '';
   const navigation = useNavigation<NavigationProps>();
   const styles = useStyles();
 
   const [loading, setLoading] = useState(false);
   const [queryString, setQueryString] = useState<string>(name);
   const [results, setResults] = useState<IApiGames[]>([]);
-  
-  const debounceSearch = useCallback(debounce(() => 
-    {console.log(queryString)}, 500), 
-  []);
+  const [searchMade, setSearchMade] = useState(name ? true : false);
+
+  const cleanSearch = () => {
+    setSearchMade(false);
+    setQueryString('');
+    setResults([]);
+  }
 
   useEffect(() => {
     if (name !== '') {
       setQueryString(name);
-      handleSearch(name, setLoading, setResults, setQueryString);
+      handleSearch(name, setLoading, setResults, setSearchMade);
     }
   }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <SearchBar
-          text={queryString}
-          onChangeText={(value: string) => { setQueryString(value); debounceSearch; }}
-          cleanSearch={() => setQueryString('')}
-          handleSearch={() => {}}
-          borderless
-        />
+        <View style={styles.headerSearch}>
+          <Button onPress={() => navigation.goBack()}>
+            <Ionicons
+              name='arrow-back'
+              style={styles.icon}
+            />
+          </Button>
 
-        <Button onPress={() => navigation.goBack()}>
-          <Ionicons
-            name='close'
-            style={styles.icon}
+          <SearchBar
+            text={queryString}
+            onChangeText={(value: string) => setQueryString(value)}
+            handleSearch={() => handleSearch(queryString, setLoading, setResults, setSearchMade)}
+            cleanSearch={() => cleanSearch()}
+            borderless
           />
+        </View>
+
+        <Button
+          style={styles.headerButton}
+          onPress={() => handleSearch(queryString, setLoading, setResults, setSearchMade)}
+        >
+          <TextComponent weight='medium' light>
+            Pesquisar
+          </TextComponent>
         </Button>
       </View>
 
-      {queryString === ''
-        ? <PopularGames />
+      {!searchMade
+        ? 
+        <PopularGames
+          setQueryString={(value: string) => { 
+            setQueryString(value); 
+            handleSearch(value, setLoading, setResults, setSearchMade) 
+          }}
+        />
         :
         loading ? <LoadingIndicator style={styles.loading} /> :
           <View style={styles.container}>

@@ -16,9 +16,18 @@ const useStyles = () => {
       backgroundColor: colors.primaryColor,
       paddingVertical: 24,
       paddingHorizontal: 16,
+    },
+    headerSearch: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+    },
+    headerButton: {
+      backgroundColor: 'rgba(250,250,250,0.5)',
+      alignItems: 'center',
+      marginTop: 16,
+      paddingVertical: 8,
+      borderRadius: 8,
     },
     icon: {
       color: colors.commonColors.baseWhite,

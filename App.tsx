@@ -19,6 +19,7 @@ const App: React.FC = () => {
             <StatusBar
               backgroundColor={colors.primaryColor}
               style='light'
+              translucent={false}
             />
             <Routes />
           </SafeAreaProvider>

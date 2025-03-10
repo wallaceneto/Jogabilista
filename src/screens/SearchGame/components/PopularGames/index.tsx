@@ -11,8 +11,9 @@ import Button from '../../../../components/Button';
 import LoadingIndicator from '../../../../components/LoadingIndicator';
 import { getPopularGames } from '../../../../services/getData';
 import { IApiGames } from '../../../../global/types';
+import { IPopularGamesProps } from './types';
 
-const PopularGames: React.FC = () => {
+const PopularGames: React.FC<IPopularGamesProps> = ({ setQueryString }) => {
   const styles = useStyles();
   const [games, setGames] = useState<IGameResult[]>([]);
   const [loading, setLoading] = useState(true);
@@ -20,17 +21,14 @@ const PopularGames: React.FC = () => {
   useEffect(() => {
     const fetchGames = async () => {
       setLoading(true);
-
       const response = await getPopularGames(8);
 
       if (response) {
         const allGames = response.data;
         let gamesName: IGameResult[] = [];
-
         allGames.forEach((game: IApiGames) => {
           if (game.id && game.name) gamesName.push({ id: game.id, name: game.name });
         });
-
         setGames(gamesName);
       }
 
@@ -54,7 +52,10 @@ const PopularGames: React.FC = () => {
             <>
               <Divider style={styles.divider} />
 
-              <Button style={styles.button}>
+              <Button
+                style={styles.button}
+                onPress={() => setQueryString(item.name)}
+              >
                 <Ionicons
                   name='search'
                   style={styles.icon}

@@ -31,10 +31,11 @@ const SearchGame: React.FC<ISearchGameProps> = ({ route }) => {
   }
 
   useEffect(() => {
-    if (name !== '') {
-      setQueryString(name);
-      handleSearch(name, setLoading, setResults, setSearchMade);
-    }
+    // EM BREVE
+    // if (name !== '') {
+    //   setQueryString(name);
+    //   handleSearch(name, setLoading, setResults, setSearchMade);
+    // }
   }, []);
 
   return (
@@ -67,12 +68,51 @@ const SearchGame: React.FC<ISearchGameProps> = ({ route }) => {
         </Button>
       </View>
 
+      <View style={styles.content}>
+        <TextComponent style={styles.title} weight='bold'>
+          EM BREVE
+        </TextComponent>
+      </View>
+    </View>
+  );
+
+  // EM BREVE
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.headerSearch}>
+          <Button onPress={() => navigation.goBack()}>
+            <Ionicons
+              name='arrow-back'
+              style={styles.icon}
+            />
+          </Button>
+
+          <SearchBar
+            text={queryString}
+            onChangeText={(value: string) => setQueryString(value)}
+            handleSearch={() => handleSearch(queryString, setLoading, setResults, setSearchMade)}
+            cleanSearch={() => cleanSearch()}
+            borderless
+          />
+        </View>
+
+        <Button
+          style={styles.headerButton}
+          onPress={() => handleSearch(queryString, setLoading, setResults, setSearchMade)}
+        >
+          <TextComponent weight='medium' light>
+            Pesquisar
+          </TextComponent>
+        </Button>
+      </View>
+
       {!searchMade
-        ? 
+        ?
         <PopularGames
-          setQueryString={(value: string) => { 
-            setQueryString(value); 
-            handleSearch(value, setLoading, setResults, setSearchMade) 
+          setQueryString={(value: string) => {
+            setQueryString(value);
+            handleSearch(value, setLoading, setResults, setSearchMade)
           }}
         />
         :

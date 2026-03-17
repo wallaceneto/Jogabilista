@@ -9,12 +9,14 @@ const Games: React.FC = () => {
   const styles = useStyles();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <PageHeader />
 
-      <TextComponent weight='semibold' size={20}>
-        Tela para pesquisar jogos
-      </TextComponent>
+      <View style={styles.content}>
+        <TextComponent style={styles.title} weight='bold'>
+          EM BREVE
+        </TextComponent>
+      </View>
     </View>
   );
 }

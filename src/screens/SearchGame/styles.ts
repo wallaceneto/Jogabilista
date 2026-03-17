@@ -33,6 +33,15 @@ const useStyles = () => {
       color: colors.commonColors.baseWhite,
       fontSize: 30,
     },
+    content: {
+      flex: 1,
+      justifyContent: 'center',
+    },
+    title: {
+      fontSize: 24,
+      textAlign: 'center',
+      marginBottom: 80,
+    },
   });
 };
 

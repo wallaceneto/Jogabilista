@@ -62,6 +62,7 @@ const useStyles = () => {
     tabContainer: {
       flexDirection: 'row',
       marginTop: 24,
+      marginBottom: 16,
     },
     tabButton: {
       width: '50%',

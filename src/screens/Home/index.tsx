@@ -33,7 +33,7 @@ const Home: React.FC = () => {
   const [scoreFilter, setScoreFilter] = useState<IScoreFilter[]>([]);
   const [statusFilter, setStatusFilter] = useState<IStatusFilter[]>([]);
 
-  const fetchFilter = async () => {
+  const fetchFilter = () => {
     setLoading(true);
 
     let gameList: Game[] = [];
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
     setLoading(false);
   }
 
-  const fetchData = async () => {
+  const fetchData = () => {
     setLoading(true);
 
     let gameList: Game[] = [];
@@ -80,7 +80,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [allGames]);
 
   return (
     <View style={styles.container}>

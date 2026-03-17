@@ -8,13 +8,17 @@ const useStyles = () => {
 
   return StyleSheet.create({
     container: {
-      backgroundColor: colors.primaryColor,
-      paddingVertical: 40,
-      borderEndEndRadius: 58,
+      flex: 1,
+      backgroundColor: colors.commonColors.backgroundColor,
+    },
+    content: {
+      flex: 1,
+      justifyContent: 'center',
     },
     title: {
-      fontSize: 36,
-      marginLeft: 12,
+      fontSize: 32,
+      textAlign: 'center',
+      marginBottom: 80,
     },
   });
 };

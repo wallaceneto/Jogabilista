@@ -3,7 +3,7 @@
     "name": "Jogabilista",
     "slug": "Jogabilista",
     "version": "0.1.0",
-    "scheme": "Jogabilista",
+    "scheme": "jogabilista",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -27,6 +27,9 @@
       "eas": {
         "projectId": "3aea3a59-5c7f-4368-989f-2f39f29c85b2"
       }
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

@@ -1,0 +1,43 @@
+[
+  {
+    "id": "0",
+    "name": "Abandonados em 2025",
+    "create_date": "12/03/2026",
+    "favorite": false,
+    "games": [
+      "1415",
+      "1617",
+      "1819",
+      "2021",
+      "2223",
+      "2425"
+    ]
+  },
+  {
+    "id": "1",
+    "name": "Favoritos",
+    "create_date": "12/03/2026",
+    "favorite": false,
+    "games": [
+      "1234",
+      "5678",
+      "91011"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Jogados em 2024",
+    "create_date": "17/03/2026",
+    "favorite": false,
+    "games": [
+      "1213"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Mais aguardados",
+    "create_date": "19/03/2026",
+    "favorite": false,
+    "games": []
+  }
+]

@@ -8,7 +8,6 @@ const useStyles = () => {
 
   return StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: colors.commonColors.backgroundColor,
     },
     loading: {
@@ -25,8 +24,8 @@ const useStyles = () => {
       marginBottom: 16,
     },
     content: {
+      height: '75%',
       paddingHorizontal: 12,
-      marginBottom: 220
     },
   });
 };

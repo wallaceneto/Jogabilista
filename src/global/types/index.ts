@@ -7,3 +7,4 @@ export * from './IApiGames';
 export * from './IApiCover';
 export * from './NavigationProps';
 export * from './StackParamList';
+export * from './IGroup';

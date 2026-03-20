@@ -14,8 +14,7 @@ import RoundedButton from '../../components/RoundedButton';
 import Button from '../../components/Button';
 import ScoreTag from '../../components/ScoreTag';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import { searchGame } from '../../services/getData';
-import { IApiGames, NavigationProps } from '../../global/types';
+import { NavigationProps } from '../../global/types';
 
 const MyGame: React.FC<IMyGameProps> = ({ route }) => {
   const game = route.params.game;
@@ -28,29 +27,17 @@ const MyGame: React.FC<IMyGameProps> = ({ route }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const [tabs, setTabs] = useState<ITabType[]>();
 
-  const handleSyncGame = async (gameName: string) => {
-    const response = await searchGame(gameName);
-
-    if (response) {
-      if (response.status === 200) {
-        const games: IApiGames[] = response.data;
-
-        games.forEach(game => console.log(game.name));
-      } else {
-        console.log('Error ' + response.status);
-      }
-    }
-  }
-
   useEffect(() => {
     setLoading(true);
 
+    console.log(game);
+    
     if (game) {
       setTabs([
         { item: <LocalDataTab game={game} />, index: 0 },
         { item: <RemoteDataTab sync_game_id={game.getSyncGame} />, index: 1 }
       ]);
-    } 
+    }
 
     setLoading(false);
   }, []);
@@ -78,7 +65,7 @@ const MyGame: React.FC<IMyGameProps> = ({ route }) => {
                   :
                   <Button
                     style={styles.syncGame}
-                    onPress={() => 
+                    onPress={() =>
                       navigation.push('SearchGame', { gameName: game.getName })
                     }
                   >

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Modal, View } from 'react-native';
 import { useSelector } from 'react-redux';
-
 import useStyles from './styles';
 import { IPlatformFilter, IScoreFilter, IStatusFilter } from './types';
-import { cleanSearch, fetchSearch } from './lib';
+import { cleanSearch, fetchData, fetchFilter, fetchSearch } from './lib';
 import TextComponent from '../../components/Text';
 import GameCard from '../../components/GameCard';
 import Game from '../../global/classes/Game';
@@ -14,11 +13,8 @@ import FilterButton from '../../components/FilterButton';
 import FilterModal from '../../modals/FilterModal';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { RootState } from '../../reducers/store';
-import { useNavigation } from '@react-navigation/native';
-import { NavigationProps } from '../../global/types';
 
 const Home: React.FC = () => {
-  const navigation = useNavigation<NavigationProps>();
   const styles = useStyles();
   const allGames = useSelector((state: RootState) => state.user.allGames);
 
@@ -33,53 +29,8 @@ const Home: React.FC = () => {
   const [scoreFilter, setScoreFilter] = useState<IScoreFilter[]>([]);
   const [statusFilter, setStatusFilter] = useState<IStatusFilter[]>([]);
 
-  const fetchFilter = () => {
-    setLoading(true);
-
-    let gameList: Game[] = [];
-    const data = games;
-
-    data.forEach((item) => {
-      const applyPlatformFilter
-        = platformFilter.length > 0 ? platformFilter.includes(item.getPlatform) : true;
-      const applyStatusFilter
-        = statusFilter.length > 0 ? statusFilter.includes(item.getStatus) : true;
-      const applyScoreFilter
-        = scoreFilter.length > 0 ? scoreFilter.includes(item.getScoreQuadrant()) : true;
-
-      if (applyPlatformFilter && applyStatusFilter && applyScoreFilter) {
-        gameList.push(item);
-      }
-
-    });
-
-    setFilterGames(gameList);
-    setLoading(false);
-  }
-
-  const fetchData = () => {
-    setLoading(true);
-
-    let gameList: Game[] = [];
-
-    const data = allGames;
-    data.forEach((item) => {
-      try {
-        const game = new Game(item);
-        gameList.push(game);
-      } catch (e) {
-        console.error(e)
-      }
-    });
-
-    setGames(gameList);
-    setFilterGames(gameList);
-
-    setLoading(false);
-  }
-
   useEffect(() => {
-    fetchData();
+    fetchData(allGames, setLoading, setGames, setFilterGames);
   }, [allGames]);
 
   return (
@@ -89,8 +40,11 @@ const Home: React.FC = () => {
         animationType='fade'
         visible={modalVisible}
         onRequestClose={() => {
-          cleanSearch(onChangeSearchText, fetchFilter);
-          fetchFilter();
+          cleanSearch(
+            onChangeSearchText,
+            () => fetchFilter(games, platformFilter, statusFilter, scoreFilter, setLoading, setFilterGames)
+          );
+          fetchFilter(games, platformFilter, statusFilter, scoreFilter, setLoading, setFilterGames);
           setModalVisible(false);
         }}
       >
@@ -102,8 +56,11 @@ const Home: React.FC = () => {
           statusFilters={statusFilter}
           setStatusFilters={setStatusFilter}
           applyFilter={() => {
-            cleanSearch(onChangeSearchText, fetchFilter);
-            fetchFilter();
+            cleanSearch(
+              onChangeSearchText,
+              () => fetchFilter(games, platformFilter, statusFilter, scoreFilter, setLoading, setFilterGames)
+            );
+            fetchFilter(games, platformFilter, statusFilter, scoreFilter, setLoading, setFilterGames);
             setModalVisible(false);
           }}
         />
@@ -112,11 +69,7 @@ const Home: React.FC = () => {
       <PageHeader />
 
       <View style={styles.container}>
-        {loading ?
-          <View style={styles.loading}>
-            <LoadingIndicator />
-          </View>
-          :
+        {loading ? <LoadingIndicator style={styles.loading} /> :
           <View>
             <View style={styles.search}>
               <FilterButton
@@ -127,28 +80,32 @@ const Home: React.FC = () => {
               <SearchBar
                 text={searchText}
                 onChangeText={onChangeSearchText}
-                cleanSearch={() => cleanSearch(onChangeSearchText, fetchFilter)}
+                cleanSearch={
+                  () => cleanSearch(
+                    onChangeSearchText,
+                    () => fetchFilter(games, platformFilter, statusFilter, scoreFilter, setLoading, setFilterGames)
+                  )
+                }
                 handleSearch={() =>
                   fetchSearch(filterGames, searchText, setLoading, setFilterGames)
                 }
               />
             </View>
 
-            <View style={styles.content}>
-              <FlatList
-                data={filterGames}
-                keyExtractor={game => game.getId}
-                renderItem={({ item }) => <GameCard game={item} />}
-                showsVerticalScrollIndicator={false}
-                ListEmptyComponent={() =>
-                  <TextComponent weight='bold' style={styles.title}>
-                    Nenhum jogo encontrado
-                  </TextComponent>
-                }
-                refreshing={loading}
-                onRefresh={() => fetchData()}
-              />
-            </View>
+            <FlatList
+              style={styles.content}
+              data={filterGames}
+              keyExtractor={game => game.getId}
+              renderItem={({ item }) => <GameCard game={item} />}
+              showsVerticalScrollIndicator={false}
+              ListEmptyComponent={() =>
+                <TextComponent weight='bold' style={styles.title}>
+                  Nenhum jogo encontrado
+                </TextComponent>
+              }
+              refreshing={loading}
+              onRefresh={() => fetchData(allGames, setLoading, setGames, setFilterGames)}
+            />
           </View>
         }
       </View>

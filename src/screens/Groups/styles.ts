@@ -21,7 +21,8 @@ const useStyles = () => {
     button: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginVertical: 16,
+      marginTop: 16,
+      marginBottom: 8,
     },
     buttonText: {
       color: colors.commonColors.baseWhite,
@@ -33,8 +34,18 @@ const useStyles = () => {
       marginHorizontal: 16,
     },
     groupList: {
-      height: '72%',
-    }
+      height: '80%',
+    },
+    emptyList: {
+      marginTop: 108,
+      alignItems: 'center'
+    },
+    emptyListIcon: {
+      fontSize: 60,
+    },
+    emptyListText: {
+      fontSize: 24,
+    },
   });
 };
 

@@ -14,8 +14,8 @@ const GroupCard: React.FC<IGroupCardProps> = ({ group }) => {
       <View style={styles.topContent}>
         {group.games.length > 0 &&
           <View style={styles.covers}>
-            {group.games.map((value, index) => 
-              <Cover key={index} title={value} platform='Playstation' />
+            {group.games.map((value) => 
+              <Cover key={value.id} title={value.name} platform='Playstation' />
             )}
           </View>
         }

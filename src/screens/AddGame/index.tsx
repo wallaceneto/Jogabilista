@@ -3,13 +3,11 @@ import { ScrollView, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-
 import useStyles from './styles';
 import { IAddGameProps } from './types';
 import { convertPlayTime } from './lib';
 import { ITimeUnit } from './types';
 import TimeField from './components/TimeField';
-
 import { platforms, status, quality, interest, NavigationProps } from '../../global/types';
 import TextComponent from '../../components/Text';
 import Button from '../../components/Button';
@@ -31,7 +29,7 @@ const AddGame: React.FC<IAddGameProps> = ({ route }) => {
 
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const [game, setGame] = useState<Game | undefined>(previouGame);
   const [gameName, setGameName] = useState('');
   const [platformValue, setPlatformValue] = useState<IPlatform | ''>('');

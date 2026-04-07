@@ -6,10 +6,12 @@ import TextComponent from '../Text';
 import TextField from '../TextField';
 import Button from '../Button';
 import Divider from '../Divider';
+import { IGame } from '../../global/types';
 
 const SearchableList: React.FC<ISearchableListProps> = ({ list, onItemSelect }) => {
   const styles = useStyles();
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchableGames, setSearchableGames] = useState<IGame[]>([]);
   const [showItems, setShowItems] = useState(false);
 
   const selectItem = (item: any) => {
@@ -18,11 +20,22 @@ const SearchableList: React.FC<ISearchableListProps> = ({ list, onItemSelect }) 
     setSearchQuery('');
   }
 
+  const searchGameQuery = (searchQuery: string) => {
+    let games: IGame[] = [];
+    games = list.filter((item) => item.name.startsWith(searchQuery));
+    setSearchableGames(games);
+  }
+
+  const handleTextChange = (text: string) => {
+    setSearchQuery(text);
+    searchGameQuery(text);
+  }
+
   return (
     <View style={styles.container}>
       <TextField
         value={searchQuery}
-        onTextChange={setSearchQuery}
+        onTextChange={handleTextChange}
         placeholder='Digite para pesquisar'
         onFocus={() => setShowItems(true)}
       />
@@ -30,8 +43,8 @@ const SearchableList: React.FC<ISearchableListProps> = ({ list, onItemSelect }) 
       {showItems && searchQuery.length > 2 &&
         <FlatList
           style={styles.searchList}
-          data={list}
-          keyExtractor={(item) => item.id}
+          data={searchableGames}
+          keyExtractor={(item, index) => item.id || index.toString()}
           renderItem={({ item }) =>
             <Button
               style={styles.itemButton}
@@ -39,6 +52,11 @@ const SearchableList: React.FC<ISearchableListProps> = ({ list, onItemSelect }) 
             >
               <TextComponent>{item.name}</TextComponent>
             </Button>
+          }
+          ListEmptyComponent={() =>
+            <TextComponent style={styles.emptyText}>
+              Nenhum jogo encontrado
+            </TextComponent>
           }
           ItemSeparatorComponent={() => <Divider />}
         />

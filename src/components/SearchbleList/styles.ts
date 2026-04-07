@@ -9,7 +9,7 @@ const useStyles = () => {
     container: {
     },
     searchList: {
-      height: 120,
+      maxHeight: 120,
       borderBottomLeftRadius: 4,
       borderBottomRightRadius: 4,
       borderWidth: 1,
@@ -19,6 +19,10 @@ const useStyles = () => {
     itemButton: {
       paddingVertical: 8,
       paddingLeft: 4,
+    },
+    emptyText: {
+      margin: 8,
+      textAlign: 'center',
     },
   });
 };

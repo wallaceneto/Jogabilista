@@ -9,8 +9,7 @@ import TextComponent from '../../../../components/Text';
 import Button from '../../../../components/Button';
 import TextField from '../../../../components/TextField';
 import StyledButton from '../../../../components/StyledButton';
-import { IGame, IGroup } from '../../../../global/types';
-import { addGroup } from '../../../../reducers/user/userSlice';
+import { IGame } from '../../../../global/types';
 import { RootState } from '../../../../reducers/store';
 import SearchableList from '../../../../components/SearchbleList';
 import SelectedGame from '../../components/SelectedGame';
@@ -22,6 +21,7 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
 
   const [name, setName] = useState<string>('');
   const [selectedGames, setSelectedGames] = useState<IGame[]>([]);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const addGameToList = (game: IGame) => {
     if (!selectedGames.includes(game)) {
@@ -32,13 +32,21 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
   const removeGameFromList = (game: IGame) => {
     let updatedList: IGame[] = [];
 
-    selectedGames.forEach((item, index) => {
+    selectedGames.forEach((item) => {
       if (item.id !== game.id) {
         updatedList.push(item);
       }
     })
 
     setSelectedGames(updatedList);
+  }
+
+  const handleSubmit = () => {
+    if (name.trim() === '') {
+      setErrorMsg('Nome obrigatório')
+    } else {
+      submitGroup(name, selectedGames, onClose, dispatch);
+    }
   }
 
   return (
@@ -64,14 +72,13 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
           Informações do grupo
         </TextComponent>
 
-        <View style={styles.field}>
-          <TextField
-            value={name}
-            onTextChange={setName}
-            placeholder='Nome do grupo'
-            maxCharacters={40}
-          />
-        </View>
+        <TextField
+          value={name}
+          onTextChange={setName}
+          placeholder='Nome do grupo'
+          maxCharacters={40}
+          errorMsg={errorMsg}
+        />
 
         <TextComponent
           weight='semibold'
@@ -79,36 +86,36 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
         >
           Buscar jogo
         </TextComponent>
+
         <SearchableList list={allGames} onItemSelect={addGameToList} />
 
-        <TextComponent
-          weight='semibold'
-          style={styles.label}
-        >
-          Jogos selecionados
-        </TextComponent>
-        <FlatList
-          style={styles.selectedGamesContainer}
-          data={selectedGames}
-          keyExtractor={(game, index) => game.id || index.toString()}
-          renderItem={({ item }) =>
-            <SelectedGame
-              key={item.id}
-              game={item}
-              deleteItem={removeGameFromList}
-            />
-          }
-        />
+        <View style={styles.selectedGamesContainer}>
+          <TextComponent
+            weight='semibold'
+            style={styles.label}
+          >
+            Jogos selecionados
+          </TextComponent>
+          <FlatList
+            style={styles.selectedGames}
+            data={selectedGames}
+            keyExtractor={(game, index) => game.id || index.toString()}
+            renderItem={({ item }) =>
+              <SelectedGame
+                key={item.id}
+                game={item}
+                deleteItem={removeGameFromList}
+              />
+            }
+            ListEmptyComponent={() =>
+              <TextComponent>
+                Sem jogos
+              </TextComponent>
+            }
+          />
+        </View>
 
-        <StyledButton
-          onPress={() =>
-            submitGroup(
-              name,
-              selectedGames,
-              onClose,
-              (group: IGroup) => dispatch(addGroup(group)))
-          }
-        >
+        <StyledButton onPress={() => handleSubmit()}>
           <TextComponent light weight='bold'>
             Criar
           </TextComponent>

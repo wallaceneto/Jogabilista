@@ -20,7 +20,7 @@ const Groups: React.FC = () => {
 
   const fetchData = () => {
     setLoading(true);
-    setGroups([...allGroups]);
+    setGroups(allGroups);
     setLoading(false);
   }
 

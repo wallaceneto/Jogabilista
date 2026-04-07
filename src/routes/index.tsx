@@ -12,8 +12,9 @@ import { useDispatch } from 'react-redux';
 import { StackRoutes } from './stack.routes';
 import { ThemeContext } from '../storage/context';
 import { getAllGames, getTheme } from '../storage/asyncStorage';
-import { addFullGameList } from '../reducers/user/userSlice';
+import { addFullGameList, addFullGroupList } from '../reducers/user/userSlice';
 import { View } from 'react-native';
+import { getAllGroups } from '../storage/asyncStorage/getAllGroups';
 
 const Routes: React.FC = () => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -32,10 +33,13 @@ const Routes: React.FC = () => {
       try {
         const theme = await getTheme();
         toggleTheme(theme || 'yellow');
-    
+
         const games = await getAllGames();
         dispatch(addFullGameList(games));
-  
+
+        const groups = await getAllGroups();
+        dispatch(addFullGroupList(groups));
+
         fontsLoaded;
       } catch (error) {
         console.warn(error);

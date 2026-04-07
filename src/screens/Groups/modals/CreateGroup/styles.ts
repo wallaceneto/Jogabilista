@@ -38,10 +38,10 @@ const useStyles = () => {
       marginVertical: 16,
       fontSize: 18,
     },
-    field: {
-      marginBottom: 24,
-    },
     selectedGamesContainer: {
+      marginVertical: 24,
+    },
+    selectedGames: {
       marginBottom: 24,
       maxHeight: 180,
     },

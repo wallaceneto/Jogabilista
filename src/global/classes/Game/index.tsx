@@ -21,11 +21,11 @@ export default class Game {
     }
 
     this.name = game.name;
-    this.id = game.id || uuid.v4(); 
-    this.create_date = game.create_date || (new Date()).toString();
+    this.id = game.id || uuid.v4();
+    this.create_date = game.create_date || (new Date()).toLocaleDateString();
 
-    if(game.platform) this.platform = game.platform;
-    if(game.play_time) this.play_time = game.play_time;
+    if (game.platform) this.platform = game.platform;
+    if (game.play_time) this.play_time = game.play_time;
 
     this.status = game.status;
     this.interest_score = game.interest_score;
@@ -41,8 +41,8 @@ export default class Game {
   public get getCreateDate(): string { return this.create_date }
   public get getPlatform(): IPlatform { return this.platform }
   public get getStatus(): IStatus | 'Não informado' { return this.status || 'Não informado' }
-  public get getInterestScore(): number | undefined  { return this.interest_score }
-  public get getQualityScore(): number | undefined  { return this.quality_score }
+  public get getInterestScore(): number | undefined { return this.interest_score }
+  public get getQualityScore(): number | undefined { return this.quality_score }
   public get getPlayTime(): number { return this.play_time }
   public get getFinishDate(): string | undefined { return this.finish_date }
   public get getSyncGame(): string | undefined { return this.sync_game }
@@ -50,8 +50,8 @@ export default class Game {
   //setters
   public set setPlatform(platform: IPlatform) { this.platform = platform }
   public set setStatus(status: IStatus) { this.status = status }
-  public set setPlayTime(playTime: number){ this.play_time = playTime }
-  public set setFinishDate(date: string){ this.finish_date = date }
+  public set setPlayTime(playTime: number) { this.play_time = playTime }
+  public set setFinishDate(date: string) { this.finish_date = date }
   public set setSyncGame(sync_game: string) { this.sync_game = sync_game }
   public set setName(name: string) {
     if (!name.trim()) {
@@ -96,7 +96,7 @@ export default class Game {
     return `${hours} hora${plural}`;
   }
   public getPlaytimeInMinutes(): string {
-    const minutes = this.play_time%60;
+    const minutes = this.play_time % 60;
     const plural = minutes > 1 ? 's' : '';
 
     return `${minutes} minuto${plural}`;
@@ -105,14 +105,14 @@ export default class Game {
     const time = this.play_time;
 
     if (time === 0) return 'não jogado';
-    
+
     let totalPlaytime = '';
 
     if (time < 60) {
       totalPlaytime = this.getPlaytimeInMinutes();
     } else {
       totalPlaytime = this.getPlaytimeInHours();
-      if (time%60 > 0) {
+      if (time % 60 > 0) {
         totalPlaytime += ' e ' + this.getPlaytimeInMinutes();
       }
     }
@@ -123,7 +123,7 @@ export default class Game {
     if (this.quality_score === undefined || this.interest_score === undefined) {
       return undefined;
     }
-    
+
     const goodQuality = (this.quality_score > 5);
     const goodInterest = (this.interest_score > 5);
 
@@ -145,7 +145,7 @@ export default class Game {
     if (this.quality_score === undefined || this.interest_score === undefined) {
       return 'N/A';
     }
-    
+
     return this.getQualityLetter() + this.interest_score.toString();
   }
 };

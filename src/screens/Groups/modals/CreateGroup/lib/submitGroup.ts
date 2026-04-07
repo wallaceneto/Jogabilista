@@ -9,7 +9,6 @@ const submitGroup = (
   onClose: () => void,
   dispatch: Dispatch<UnknownAction>,
 ) => {
-  const date = new Date();
   let gameList: { id: string, name: string }[] = [];
 
   games.forEach((game) => {
@@ -19,10 +18,10 @@ const submitGroup = (
   const group: IGroup = {
     name,
     id: uuid.v4(),
-    create_date: date.toDateString(),
+    create_date: (new Date()).toLocaleDateString(),
     games: gameList,
   }
-  
+
   dispatch(addGroup(group));
   onClose();
 }

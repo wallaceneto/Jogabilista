@@ -32,7 +32,7 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
         </TextComponent>
 
         <TextComponent>
-          {formatDate(game.getCreateDate, 'withhour')}
+          {game.getCreateDate}
         </TextComponent>
       </View>
 
@@ -91,7 +91,7 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
         :
         <StyledButton
           style={styles.deleteButton}
-          onPress={() => 
+          onPress={() =>
             handleDelete(game.getId, dispatch, setLoading, () => navigation.replace('Homepage'))
           }
         >

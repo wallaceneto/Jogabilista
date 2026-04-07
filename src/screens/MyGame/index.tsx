@@ -29,9 +29,6 @@ const MyGame: React.FC<IMyGameProps> = ({ route }) => {
 
   useEffect(() => {
     setLoading(true);
-
-    console.log(game);
-    
     if (game) {
       setTabs([
         { item: <LocalDataTab game={game} />, index: 0 },

@@ -3,7 +3,7 @@ import { FlatList, Modal, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import useStyles from './styles';
 import { IPlatformFilter, IScoreFilter, IStatusFilter } from './types';
-import { cleanSearch, fetchData, fetchFilter, fetchSearch } from './lib';
+import { cleanSearch, fetchFilter, fetchSearch } from './lib';
 import TextComponent from '../../components/Text';
 import GameCard from '../../components/GameCard';
 import Game from '../../global/classes/Game';
@@ -13,6 +13,7 @@ import FilterButton from '../../components/FilterButton';
 import FilterModal from '../../modals/FilterModal';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { RootState } from '../../reducers/store';
+import { fetchGames } from '../../global/lib';
 
 const Home: React.FC = () => {
   const styles = useStyles();
@@ -30,7 +31,7 @@ const Home: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<IStatusFilter[]>([]);
 
   useEffect(() => {
-    fetchData(allGames, setLoading, setGames, setFilterGames);
+    fetchGames(allGames, setLoading, setGames, setFilterGames);
   }, [allGames]);
 
   return (
@@ -104,7 +105,7 @@ const Home: React.FC = () => {
                 </TextComponent>
               }
               refreshing={loading}
-              onRefresh={() => fetchData(allGames, setLoading, setGames, setFilterGames)}
+              onRefresh={() => fetchGames(allGames, setLoading, setGames, setFilterGames)}
             />
           </View>
         }

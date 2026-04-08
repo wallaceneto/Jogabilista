@@ -19,7 +19,7 @@ const submitGroup = (
   const group: IGroup = {
     name,
     id: uuid.v4(),
-    create_date: moment(new Date()).format('L'),
+    create_date: moment(new Date()).format('DD/MM/YYYY'),
     games: gameList,
   }
 

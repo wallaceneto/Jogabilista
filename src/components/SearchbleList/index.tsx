@@ -22,7 +22,11 @@ const SearchableList: React.FC<ISearchableListProps> = ({ list, onItemSelect }) 
 
   const searchGameQuery = (searchQuery: string) => {
     let games: IGame[] = [];
-    games = list.filter((item) => item.name.startsWith(searchQuery));
+
+    games = list.filter((item: IGame) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     setSearchableGames(games);
   }
 

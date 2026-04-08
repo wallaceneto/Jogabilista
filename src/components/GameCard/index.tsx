@@ -12,7 +12,7 @@ import ScoreTag from '../ScoreTag';
 import { NavigationProps } from '../../global/types';
 
 const GameCard: React.FC<IGameCardProps> = ({ game }) => {
-  const navigation = useNavigation<NavigationProps>()
+  const navigation = useNavigation<NavigationProps>();
   const styles = useStyles();
 
   return (

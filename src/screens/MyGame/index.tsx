@@ -62,9 +62,7 @@ const MyGame: React.FC<IMyGameProps> = ({ route }) => {
                   :
                   <Button
                     style={styles.syncGame}
-                    onPress={() =>
-                      navigation.push('SearchGame', { gameName: game.getName })
-                    }
+                    onPress={() => { }}
                   >
                     <Ionicons
                       name='add'

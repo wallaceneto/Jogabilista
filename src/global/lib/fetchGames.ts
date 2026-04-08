@@ -1,7 +1,8 @@
-import Game from "../../../global/classes/Game";
-import { IGame } from "../../../global/types";
+import Game from "../classes/Game";
+import { IGame } from "../types";
 
-const fetchData = (
+
+const fetchGames = (
   allGames: IGame[],
   setLoading: (value: boolean) => void,
   setGames: (value: Game[]) => void,
@@ -27,4 +28,4 @@ const fetchData = (
   setLoading(false);
 }
 
-export { fetchData }
+export { fetchGames }

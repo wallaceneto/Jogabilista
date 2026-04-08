@@ -5,11 +5,12 @@ import SwitchTheme from "../screens/SwitchTheme";
 import AddGame from "../screens/AddGame";
 import MyGame from "../screens/MyGame";
 import SearchGame from "../screens/SearchGame";
+import GroupPage from "../screens/GroupPage";
 
 const Stack = createStackNavigator();
 
 function StackRoutes() {
-  const screenOptions = {headerShown: false};
+  const screenOptions = { headerShown: false };
 
   return (
     <Stack.Navigator>
@@ -32,6 +33,14 @@ function StackRoutes() {
         name="SearchGame"
         component={SearchGame}
         options={screenOptions}
+      />
+      <Stack.Screen
+        name="GroupPage"
+        component={GroupPage}
+        options={{
+          animation: 'scale_from_center',
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="Settings"

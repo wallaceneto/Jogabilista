@@ -1,5 +1,5 @@
 export type IDatePickerProps = {
   label: string,
-  value: string,
-  setValue: (value: string) => void,
+  setValue: (value: Date | undefined) => void,
+  value?: Date,
 };

@@ -69,7 +69,7 @@ const userSlice = createSlice({
       });
 
       state.allGroups = groups;
-      storeAllGames(state.allGroups);
+      storeAllGroups(state.allGroups);
     },
   },
 });

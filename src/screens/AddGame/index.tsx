@@ -19,6 +19,7 @@ import DatePicker from '../../components/DatePicker';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { addGameToList, updateGame } from '../../reducers/user/userSlice';
 import Game from '../../global/classes/Game';
+import moment from 'moment';
 
 const AddGame: React.FC<IAddGameProps> = ({ route }) => {
   const previouGame = route.params ? route.params.game : undefined;
@@ -34,7 +35,7 @@ const AddGame: React.FC<IAddGameProps> = ({ route }) => {
   const [gameName, setGameName] = useState('');
   const [platformValue, setPlatformValue] = useState<IPlatform | ''>('');
   const [statusValue, setStatusValue] = useState<IStatus | ''>('');
-  const [playDate, setPlayDate] = useState('');
+  const [playDate, setPlayDate] = useState<Date | undefined>();
   const [qualityScore, setQualityScore] = useState('');
   const [interestScore, setInterestScore] = useState('');
   const [playTime, setPlaytime] = useState('');
@@ -60,7 +61,7 @@ const AddGame: React.FC<IAddGameProps> = ({ route }) => {
         platform: platformValue || undefined,
         play_time: convertPlayTime(playTime, timeUnit),
         status: statusValue || undefined,
-        finish_date: playDate || undefined,
+        finish_date: moment(playDate).format('DD/MM/YYYY'),
         quality_score: gameQuality,
         interest_score: gameInterest,
       });
@@ -87,7 +88,7 @@ const AddGame: React.FC<IAddGameProps> = ({ route }) => {
       setGameName(previouGame.getName);
       setPlatformValue(previouGame.getPlatform);
       setStatusValue(previouGame.getStatus === 'Não informado' ? '' : previouGame.getStatus);
-      setPlayDate(previouGame.getFinishDate || '');
+      if (previouGame.getFinishDate) setPlayDate(new Date(previouGame.getFinishDate));
       setQualityScore(previouGame.getQualityLetter() === 'N/A' ? '' : previouGame.getQualityLetter());
       setInterestScore(previouGame.getInterestScore ? previouGame.getInterestScore.toString() : '');
       setPlaytime(previouGame.getPlayTime.toString());

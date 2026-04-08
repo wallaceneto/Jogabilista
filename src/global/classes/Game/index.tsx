@@ -1,4 +1,5 @@
 import uuid from 'react-native-uuid';
+import moment from 'moment';
 import { IGame, IPlatform, IScore, IStatus } from '../../types';
 
 export default class Game {
@@ -22,7 +23,7 @@ export default class Game {
 
     this.name = game.name;
     this.id = game.id || uuid.v4();
-    this.create_date = game.create_date || (new Date()).toLocaleDateString();
+    this.create_date = game.create_date || moment().format('DD/MM/YYYY');
 
     if (game.platform) this.platform = game.platform;
     if (game.play_time) this.play_time = game.play_time;

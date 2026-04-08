@@ -1,6 +1,7 @@
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
-import { IGame, IGroup } from "../../../../../global/types";
+import moment from "moment";
 import uuid from 'react-native-uuid';
+import { IGame, IGroup } from "../../../../../global/types";
 import { addGroup } from "../../../../../reducers/user/userSlice";
 
 const submitGroup = (
@@ -18,7 +19,7 @@ const submitGroup = (
   const group: IGroup = {
     name,
     id: uuid.v4(),
-    create_date: (new Date()).toLocaleDateString(),
+    create_date: moment(new Date()).format('L'),
     games: gameList,
   }
 

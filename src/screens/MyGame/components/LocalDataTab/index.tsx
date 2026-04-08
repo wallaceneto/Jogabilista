@@ -12,7 +12,7 @@ import TextComponent from '../../../../components/Text';
 import StyledButton from '../../../../components/StyledButton';
 import LoadingIndicator from '../../../../components/LoadingIndicator';
 import { NavigationProps } from '../../../../global/types';
-import { formatDate, getPlatformColor } from '../../../../global/lib';
+import { getPlatformColor } from '../../../../global/lib';
 
 const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
   const navigation = useNavigation<NavigationProps>();
@@ -56,7 +56,7 @@ const LocalDataTab: React.FC<ILocalDataTabProps> = ({ game }) => {
         </TextComponent>
         <TextComponent>
           {game.getFinishDate
-            ? ` em ${formatDate(game.getFinishDate, 'default')}`
+            ? ` em ${game.getFinishDate}`
             : null
           }
         </TextComponent>

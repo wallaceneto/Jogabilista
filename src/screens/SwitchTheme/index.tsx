@@ -17,7 +17,7 @@ import { NavigationProps } from '../../global/types';
 const SwitchTheme: React.FC = () => {
   const styles = useStyles();
   const navigation = useNavigation<NavigationProps>();
-  const {toggleTheme, currentTheme} = useContext(ThemeContext);
+  const { toggleTheme, currentTheme } = useContext(ThemeContext);
   const [current, setCurrent] = useState(currentTheme);
   const [loading, setLoading] = useState(false);
 
@@ -45,15 +45,15 @@ const SwitchTheme: React.FC = () => {
 
         <View style={styles.content}>
           <ThemeButton
-            text='Jogabiliamarelo'
-            color={yellow}
+            text='Jogabiliroxo'
+            color={purple}
             current={current}
             setCurrent={setCurrent}
           />
 
           <ThemeButton
-            text='Jogabiliroxo'
-            color={purple}
+            text='Jogabiliamarelo'
+            color={yellow}
             current={current}
             setCurrent={setCurrent}
           />
@@ -74,11 +74,11 @@ const SwitchTheme: React.FC = () => {
         </View>
       </View>
 
-      { loading ? 
-        <LoadingIndicator style={styles.button} /> 
-      : 
+      {loading ?
+        <LoadingIndicator style={styles.button} />
+        :
         <StyledButton
-          onPress={() => 
+          onPress={() =>
             handleToggleTheme(current, setLoading, toggleTheme, navigation)
           }
           style={styles.button}

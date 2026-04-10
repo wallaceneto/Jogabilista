@@ -6,8 +6,6 @@ const useStyles = () => {
   const {colors} = useContext(ThemeContext);
 
   return StyleSheet.create({
-    container: {
-    },
     searchList: {
       maxHeight: 120,
       borderBottomLeftRadius: 4,

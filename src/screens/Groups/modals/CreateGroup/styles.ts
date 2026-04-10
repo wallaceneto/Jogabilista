@@ -39,11 +39,20 @@ const useStyles = () => {
       fontSize: 18,
     },
     selectedGamesContainer: {
-      marginVertical: 24,
+      marginVertical: 16,
     },
     selectedGames: {
-      marginBottom: 24,
+      marginBottom: 16,
       maxHeight: 180,
+    },
+    deleteButton: {
+      marginVertical: 24,
+      backgroundColor: colors.commonColors.backgroundColor,
+      borderWidth: 3,
+      borderColor: colors.commonColors.score.bad,
+    },
+    deleteText: {
+      color: colors.commonColors.score.bad,
     },
   });
 };

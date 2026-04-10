@@ -6,7 +6,7 @@ const fetchGames = (
   allGames: IGame[],
   setLoading: (value: boolean) => void,
   setGames: (value: Game[]) => void,
-  setFilterGames: (value: Game[]) => void
+  setFilterGames?: (value: Game[]) => void
 ) => {
   setLoading(true);
 
@@ -23,7 +23,7 @@ const fetchGames = (
   });
 
   setGames(gameList);
-  setFilterGames(gameList);
+  if (setFilterGames) setFilterGames(gameList);
 
   setLoading(false);
 }

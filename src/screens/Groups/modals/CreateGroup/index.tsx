@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import useStyles from './styles';
 import { ICreateGroupProps } from './types';
-import { submitGroup } from './lib';
+import { addGameToList, handleDelete, handleSubmit, removeGameFromList } from './lib';
 import TextComponent from '../../../../components/Text';
 import Button from '../../../../components/Button';
 import TextField from '../../../../components/TextField';
@@ -13,47 +13,30 @@ import { IGame } from '../../../../global/types';
 import { RootState } from '../../../../reducers/store';
 import SearchableList from '../../../../components/SearchbleList';
 import SelectedGame from '../../components/SelectedGame';
+import { useNavigation } from '@react-navigation/native';
 
-const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
+const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose, group }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const allGames = useSelector((state: RootState) => state.user.allGames);
 
   const [name, setName] = useState<string>('');
   const [selectedGames, setSelectedGames] = useState<IGame[]>([]);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const addGameToList = (game: IGame) => {
-    if (!selectedGames.includes(game)) {
-      setSelectedGames([...selectedGames, game]);
+  useEffect(() => {
+    if (group) {
+      setName(group.name);
+      setSelectedGames(group.games);
     }
-  }
-
-  const removeGameFromList = (game: IGame) => {
-    let updatedList: IGame[] = [];
-
-    selectedGames.forEach((item) => {
-      if (item.id !== game.id) {
-        updatedList.push(item);
-      }
-    })
-
-    setSelectedGames(updatedList);
-  }
-
-  const handleSubmit = () => {
-    if (name.trim() === '') {
-      setErrorMsg('Nome obrigatório')
-    } else {
-      submitGroup(name, selectedGames, onClose, dispatch);
-    }
-  }
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <TextComponent weight='bold' style={styles.headerTitle}>
-          Criar grupo
+          {group ? 'Editar' : 'Criar'} grupo
         </TextComponent>
 
         <Button onPress={onClose}>
@@ -87,7 +70,10 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
           Buscar jogo
         </TextComponent>
 
-        <SearchableList list={allGames} onItemSelect={addGameToList} />
+        <SearchableList
+          list={allGames}
+          onItemSelect={(game: IGame) => addGameToList(game, selectedGames, setSelectedGames)}
+        />
 
         <View style={styles.selectedGamesContainer}>
           <TextComponent
@@ -97,6 +83,7 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
             Jogos selecionados
           </TextComponent>
           <FlatList
+            showsHorizontalScrollIndicator={false}
             style={styles.selectedGames}
             data={selectedGames}
             keyExtractor={(game, index) => game.id || index.toString()}
@@ -104,7 +91,7 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
               <SelectedGame
                 key={item.id}
                 game={item}
-                deleteItem={removeGameFromList}
+                deleteItem={() => removeGameFromList(item, selectedGames, setSelectedGames)}
               />
             }
             ListEmptyComponent={() =>
@@ -115,9 +102,29 @@ const CreateGroup: React.FC<ICreateGroupProps> = ({ onClose }) => {
           />
         </View>
 
-        <StyledButton onPress={() => handleSubmit()}>
+        {group &&
+          <StyledButton
+            style={styles.deleteButton}
+            onPress={() => handleDelete(group.id, onClose, dispatch, () => navigation.goBack())}
+          >
+            <TextComponent style={styles.deleteText} weight='bold'>
+              Deletar grupo
+            </TextComponent>
+          </StyledButton>
+        }
+
+        <StyledButton
+          onPress={() => handleSubmit(
+            name,
+            setErrorMsg,
+            selectedGames,
+            onClose,
+            dispatch,
+            group
+          )}
+        >
           <TextComponent light weight='bold'>
-            Criar
+            {group ? 'Salvar edição' : 'Criar'}
           </TextComponent>
         </StyledButton>
       </View>

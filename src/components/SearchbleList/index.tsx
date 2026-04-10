@@ -36,7 +36,7 @@ const SearchableList: React.FC<ISearchableListProps> = ({ list, onItemSelect }) 
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       <TextField
         value={searchQuery}
         onTextChange={handleTextChange}

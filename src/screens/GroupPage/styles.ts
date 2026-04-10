@@ -14,9 +14,17 @@ const useStyles = () => {
     content: {
       paddingHorizontal: 16, 
     },
+    goBackButton: {
+      marginTop: 24,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 16,
+    },
+    goBackIcon: {
+      fontSize: 24,
+    },
     title: {
       fontSize: 24,
-      marginTop: 24,
     },
     actionContainer: {
       marginVertical: 24,
@@ -36,10 +44,8 @@ const useStyles = () => {
     flatButtonIcon: {
       fontSize: 18,
     },
-    flatButtonText: {
-      
-    },
     list: {
+      height: '65%',
     },
     emptyText: {
       fontSize: 20,

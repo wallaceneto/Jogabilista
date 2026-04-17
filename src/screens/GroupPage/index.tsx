@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import useStyles from './styles';
 import { IGroupPageProps } from './types';
+import { exportDataToExcel } from './utils';
 import TextComponent from '../../components/Text';
 import PageHeader from '../../components/PageHeader';
 import { RootState } from '../../reducers/store';
@@ -14,6 +15,7 @@ import Game from '../../global/classes/Game';
 import { fetchGames } from '../../global/lib';
 import { NavigationProps } from '../../global/types';
 import CreateGroup from '../Groups/modals/CreateGroup';
+import { formatGameXlsx } from './utils/formatGameXlsx';
 
 const GroupPage: React.FC<IGroupPageProps> = ({ route }) => {
   const navigation = useNavigation<NavigationProps>();
@@ -67,7 +69,10 @@ const GroupPage: React.FC<IGroupPageProps> = ({ route }) => {
             <TextComponent weight='semibold'>Editar grupo</TextComponent>
           </Button>
 
-          <Button style={styles.flatButton} onPress={() => { }}>
+          <Button
+            style={styles.flatButton}
+            onPress={() => exportDataToExcel(formatGameXlsx(games), group.name)}
+          >
             <Ionicons name='download-outline' style={styles.flatButtonIcon} />
             <TextComponent weight='semibold'>Exportar planilha</TextComponent>
           </Button>

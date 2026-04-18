@@ -69,9 +69,9 @@ const Home: React.FC = () => {
 
       <PageHeader />
 
-      <View style={styles.container}>
+      <View style={styles.content}>
         {loading ? <LoadingIndicator style={styles.loading} /> :
-          <View>
+          <>
             <View style={styles.search}>
               <FilterButton
                 amount={platformFilter.length + scoreFilter.length + statusFilter.length}
@@ -94,7 +94,7 @@ const Home: React.FC = () => {
             </View>
 
             <FlatList
-              style={styles.content}
+              style={styles.list}
               data={filterGames}
               keyExtractor={game => game.getId}
               renderItem={({ item }) => <GameCard game={item} />}
@@ -107,7 +107,7 @@ const Home: React.FC = () => {
               refreshing={loading}
               onRefresh={() => fetchGames(allGames, setLoading, setGames, setFilterGames)}
             />
-          </View>
+          </>
         }
       </View>
     </View>

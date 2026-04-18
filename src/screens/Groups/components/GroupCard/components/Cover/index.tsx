@@ -8,7 +8,7 @@ import TextComponent from '../../../../../../components/Text';
 
 const Cover: React.FC<ICoverProps> = ({ title, platform }) => {
   const { colors } = useContext(ThemeContext);
-  const styles = useStyles(getCoverColor(platform, colors));
+  const styles = useStyles(getCoverColor(colors, platform));
 
   return (
     <View style={styles.container}>

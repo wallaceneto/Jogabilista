@@ -1,12 +1,13 @@
+import { IPlatform } from "../../../../../../../global/types";
 import { ITheme } from "../../../../../../../themes";
 
-const getCoverColor = (platform: string, colors: ITheme) => {
+const getCoverColor = (colors: ITheme, platform?: IPlatform) => {
   switch (platform) {
     case 'Xbox':
       return colors.commonColors.tag.xbox;
     case 'Playstation':
       return colors.commonColors.tag.playstation;
-    case 'Pc':
+    case 'PC':
       return colors.commonColors.tag.pc;
     case 'Nintendo':
       return colors.commonColors.tag.nintendo;

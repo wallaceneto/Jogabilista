@@ -18,7 +18,8 @@ const useStyles = () => {
       padding: 16,
     },
     covers: {
-      flexDirection: 'row',
+      flexDirection: 'row-reverse',
+      justifyContent: 'flex-end',
       marginBottom: 16,
     },
     title: {

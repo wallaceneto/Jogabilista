@@ -1,7 +1,7 @@
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import uuid from 'react-native-uuid';
-import { IGame, IGroup } from "../../../../../global/types";
+import { IGame, IGroup, IPlatform } from "../../../../../global/types";
 import { addGroup, updateGroup } from "../../../../../reducers/user/userSlice";
 
 const submitGroup = (
@@ -12,10 +12,10 @@ const submitGroup = (
   previous_create_date?: string,
   previous_id?: string,
 ) => {
-  let gameList: { id: string, name: string }[] = [];
+  let gameList: { id: string, name: string, platform?: IPlatform }[] = [];
 
   games.forEach((game) => {
-    if (game.id !== undefined) gameList.push({ id: game.id, name: game.name });
+    if (game.id !== undefined) gameList.push({ id: game.id, name: game.name, platform: game.platform });
   });
 
   const group: IGroup = {

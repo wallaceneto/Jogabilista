@@ -18,7 +18,7 @@ const handleDelete = (
         text: "Confirmar",
         onPress: () => deleteGame(
           () => dispatch(removeGroup(groupId)),
-          onClose
+          () => { onClose(); goBack(); }
         )
       },
     ]

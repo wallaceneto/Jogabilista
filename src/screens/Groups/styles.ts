@@ -8,11 +8,12 @@ const useStyles = () => {
 
   return StyleSheet.create({
     container: {
+      flex: 1,
       backgroundColor: colors.commonColors.backgroundColor,
     },
     content: {
+      flex: 1,
       paddingHorizontal: 12,
-      marginBottom: 220
     },
     title: {
       fontSize: 20,
@@ -34,7 +35,8 @@ const useStyles = () => {
       marginHorizontal: 16,
     },
     groupList: {
-      height: '80%',
+      flex: 1,
+      marginBottom: 80,
     },
     emptyList: {
       marginTop: 108,

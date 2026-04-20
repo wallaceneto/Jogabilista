@@ -13,6 +13,7 @@ const useStyles = () => {
       borderRadius: 4,
       borderColor: colors.commonColors.dividerColor,
       paddingLeft: 8,
+      height: 50,
     },
     text: {
       fontSize: 18,

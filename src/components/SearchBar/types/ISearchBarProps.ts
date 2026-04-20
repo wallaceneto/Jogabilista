@@ -3,4 +3,5 @@ export type ISearchBarProps = {
   onChangeText: (value: string) => void,
   cleanSearch: () => void,
   handleSearch: (value: string) => void,
+  borderless?: boolean,
 }

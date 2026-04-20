@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { router } from 'expo-router';
 
 import useStyles from './style';
 
@@ -17,7 +16,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBar
       <View style={styles.bar}>
         <Button
           style={styles.tabButton}
-          onPress={() => navigation.navigate('index')}
+          onPress={() => navigation.navigate('Home')}
         >
           <Ionicons
             name='home-sharp'
@@ -34,7 +33,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBar
 
         <Button
           style={styles.tabButton}
-          onPress={() => navigation.navigate('Groups/index')}
+          onPress={() => navigation.navigate('Groups')}
         >
           <Ionicons
             name='grid'
@@ -50,14 +49,14 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBar
 
         <Button
           style={styles.addButton}
-          onPress={() => router.push('/AddGame')}>
+          onPress={() => navigation.navigate('AddGame')}>
           <Ionicons name='add' style={styles.addIcon} />
         </Button>
 
 
         <Button
           style={styles.tabButton}
-          onPress={() => navigation.navigate('Games/index')}
+          onPress={() => navigation.navigate('Games')}
         >
           <Ionicons
             name='search'
@@ -73,7 +72,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, navigation }: BottomTabBar
 
         <Button
           style={styles.tabButton}
-          onPress={() => router.push('/Settings')}
+          onPress={() => navigation.navigate('Settings')}
         >
           <Ionicons
             name='settings-outline'

@@ -1,10 +1,10 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from 'expo-secure-store';
 import { IGame } from "../../global/types";
 
 const storeAllGames = async (allGames: IGame[]) => {
   try {
     const jsonValue = JSON.stringify(allGames);
-    await AsyncStorage.setItem('all-games', jsonValue);
+    await SecureStore.setItemAsync('all-games', jsonValue);
   } catch (error) {
     console.error('Error in store game list', error);
   }

@@ -3,3 +3,8 @@ export * from './IPlatform';
 export * from './IStatus';
 export * from './IScore';
 export * from './commons';
+export * from './IApiGames';
+export * from './IApiCover';
+export * from './NavigationProps';
+export * from './StackParamList';
+export * from './IGroup';

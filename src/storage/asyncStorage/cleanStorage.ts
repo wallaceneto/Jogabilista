@@ -1,8 +1,11 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as SecureStore from 'expo-secure-store';
 
 const cleanStorage = async () => {
   try {
-    await AsyncStorage.multiRemove(['theme', 'all-games'])
+    await SecureStore.deleteItemAsync('theme');
+    await SecureStore.deleteItemAsync('all-games');
+    await SecureStore.deleteItemAsync('all-groups');
+    console.log('Dados deletados com sucesso!')
   } catch (error) {
     console.error('Failed to clean storage', error);
   }

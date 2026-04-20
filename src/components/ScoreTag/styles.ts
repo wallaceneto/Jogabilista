@@ -7,10 +7,14 @@ const useStyles = (color: string) => {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      height: 40,
-      width: 40,
+      height: 50,
+      width: 50,
       borderRadius: 30,
     },
+    text: {
+      color: '#fff',
+      fontSize: 18,
+    }
   });
 };
 

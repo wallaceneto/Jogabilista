@@ -1,7 +1,6 @@
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import moment from 'moment';
-import 'moment/locale/pt-br';
 
 import useStyles from './styles';
 import { IDatePickerProps } from './types';
@@ -16,14 +15,14 @@ const DatePicker: React.FC<IDatePickerProps> = ({ label, value, setValue }) => {
   return (
     <Button
       style={styles.container}
-      onPress={() => showMode(value, setValue)}
+      onPress={() => showMode(setValue, value)}
     >
       <TextComponent style={styles.label} weight='medium'>
         {label}
       </TextComponent>
 
       <TextComponent size={18}>
-        {value ? moment(value).format('L') : 'Inserir data'}
+        {value ? moment(value).format('DD/MM/YYYY') : 'Inserir data'}
       </TextComponent>
 
       {!value ?
@@ -33,7 +32,7 @@ const DatePicker: React.FC<IDatePickerProps> = ({ label, value, setValue }) => {
           style={styles.icon}
         />
         :
-        <Button onPress={() => setValue('')}>
+        <Button onPress={() => setValue(undefined)}>
           <Ionicons
             name='close'
             style={styles.icon}

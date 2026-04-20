@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
 import useStyles from './styles';
 import { IPlatformTagProps } from './types';
-import { getPlatformColor } from './lib';
 
-import { ThemeContext } from '../../storage/context';
 import TextComponent from '../Text';
+import { getPlatformColor } from '../../global/lib';
 
 const PlatformTag: React.FC<IPlatformTagProps> = ({ platform }) => {
-  const {colors} = useContext(ThemeContext);
-  const styles = useStyles(getPlatformColor(platform, colors));
+  const styles = useStyles(getPlatformColor(platform));
 
   return (
     <View style={styles.tag}>

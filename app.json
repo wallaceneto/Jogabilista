@@ -2,14 +2,14 @@
   "expo": {
     "name": "Jogabilista",
     "slug": "Jogabilista",
-    "version": "0.1.0",
-    "scheme": "Jogabilista",
+    "version": "1.0.1",
+    "scheme": "jogabilista",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFCD0E"
     },
@@ -21,12 +21,27 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.wallaceneto.Jogabilista"
+      "package": "com.wallaceneto.Jogabilista",
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "extra": {
       "eas": {
         "projectId": "3aea3a59-5c7f-4368-989f-2f39f29c85b2"
       }
-    }
+    },
+    "plugins": [
+      "expo-font",
+      [
+        "expo-file-system",
+        {
+          "supportsOpeningDocumentsInPlace": true,
+          "enableFileSharing": true
+        }
+      ],
+      "expo-secure-store"
+    ]
   }
 }

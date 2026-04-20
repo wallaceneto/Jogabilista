@@ -13,6 +13,8 @@ const TextField: React.FC<ITextFieldProps> = ({
   maxCharacters,
   type,
   errorMsg,
+  onFocus,
+  onBlur
 }) => {
   const styles = useStyles();
   const { colors } = useContext(ThemeContext);
@@ -28,6 +30,8 @@ const TextField: React.FC<ITextFieldProps> = ({
           placeholder={placeholder}
           maxLength={maxCharacters}
           keyboardType={type}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
       </View>
 

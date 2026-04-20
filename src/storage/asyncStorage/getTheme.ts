@@ -1,9 +1,9 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from 'expo-secure-store';
 
 const getTheme = async () => {
   try {
-    const value = await AsyncStorage.getItem('theme');
-    return value !== null ? value : 'yellow';
+    const value = await SecureStore.getItemAsync('theme');
+    return value !== null ? value : 'purple';
   } catch (error) {
     console.error('Error in get theme from storage', error);
   }

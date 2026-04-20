@@ -16,7 +16,7 @@ const ScoreTag: React.FC<IScoreTagProps> = ({ score, quadrant }) => {
     <View
       style={styles.container}
     >
-      <TextComponent light weight='semibold'>
+      <TextComponent weight='semibold' style={styles.text}>
         {score}
       </TextComponent>
     </View>

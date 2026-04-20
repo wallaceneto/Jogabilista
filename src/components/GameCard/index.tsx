@@ -1,20 +1,25 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import useStyles from './styles';
 import { IGameCardProps } from './types';
-import { displayTime } from './lib';
 
 import TextComponent from '../Text';
 import Button from '../Button';
 import PlatformTag from '../PlatformTag';
 import ScoreTag from '../ScoreTag';
+import { NavigationProps } from '../../global/types';
 
 const GameCard: React.FC<IGameCardProps> = ({ game }) => {
+  const navigation = useNavigation<NavigationProps>();
   const styles = useStyles();
 
   return (
-    <Button style={styles.card} onPress={() => console.log(game)}>
+    <Button
+      style={styles.card}
+      onPress={() => navigation.push('MyGame', { game })}
+    >
       <View style={styles.cardTop}>
         <PlatformTag platform={game.getPlatform} />
 
@@ -31,7 +36,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
       <View style={styles.infos}>
         <View style={styles.status}>
           <TextComponent weight='semibold'>
-            Status:
+            {'Status: '}
           </TextComponent>
           <TextComponent>
             {game.getStatus}
@@ -40,10 +45,10 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
 
         <View style={styles.status}>
           <TextComponent weight='semibold'>
-            Tempo:
+            {'Tempo: '}
           </TextComponent>
           <TextComponent>
-            {displayTime(game)}
+            {game.getPlaytimeInHours()}
           </TextComponent>
         </View>
       </View>

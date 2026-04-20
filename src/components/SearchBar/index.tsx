@@ -11,12 +11,13 @@ const SearchBar: React.FC<ISearchBarProps> = ({
   text,
   onChangeText,
   handleSearch,
-  cleanSearch
+  cleanSearch,
+  borderless
 }) => {
   const styles = useStyles();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, borderless ? null : styles.containerBorder]}>
       <Button onPress={() => handleSearch(text)}>
         <Ionicons
           name='search'

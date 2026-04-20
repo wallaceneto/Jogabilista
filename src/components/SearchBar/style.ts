@@ -9,11 +9,13 @@ const useStyles = () => {
     container: {
       flexDirection: 'row',
       backgroundColor: colors.commonColors.backgroundColor,
-      borderWidth: 1,
-      borderColor: colors.commonColors.darkGrey,
-      borderRadius: 8,
       paddingHorizontal: 8,
       alignItems: 'center',
+      borderRadius: 8,
+    },
+    containerBorder: {
+      borderWidth: 1,
+      borderColor: colors.commonColors.darkGrey,
     },
     searchIcon: {
       fontSize: 23,

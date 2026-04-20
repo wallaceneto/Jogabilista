@@ -11,4 +11,7 @@ export type IGame = {
   quality_score?: number, // Eixo y = qualidade (0 representando 'J' e 10 representando 'A')
   play_time?: number,
   finish_date?: string,
+  
+  sync_game?: string,
+  cover?: string,
 };
